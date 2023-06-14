@@ -1,9 +1,9 @@
-using Juice.Utils;
+using Uice.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomEditor(typeof(InteractionBlockingTracker))]
 	public class InteractionBlockingTrackerEditor : UnityEditor.Editor

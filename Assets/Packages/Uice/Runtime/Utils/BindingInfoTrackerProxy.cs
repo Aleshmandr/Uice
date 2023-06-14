@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juice.Utils
+namespace Uice.Utils
 {
 	public class BindingInfoTrackerProxy
 	{

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class BoolToMaterialOperator : MapOperator<bool, Material>
 	{

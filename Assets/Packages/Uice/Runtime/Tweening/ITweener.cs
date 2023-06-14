@@ -1,4 +1,4 @@
-﻿namespace Juice.Tweening
+﻿namespace Uice.Tweening
 {
 	public delegate void TweenerIdChangedHandler(Tweener tweener, object lastId, object newId);
 	public delegate void TweenerLifecycleEventHandler(Tweener tweener);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public static class BindingInfoTracker
 	{

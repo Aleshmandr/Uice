@@ -1,13 +1,13 @@
 using System;
-using Juice.Plugins.Juice.Runtime.Utils;
+using Uice.Plugins.Juice.Runtime.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public struct BindingEntry
 	{
-		public ViewModelComponent ViewModelComponent { get; }
+		public ContextComponent ContextComponent { get; }
 		public string PropertyName { get; }
-		public BindingPath Path => path ?? (path = new BindingPath(ViewModelComponent.Id, PropertyName)).Value;
+		public BindingPath Path => path ?? (path = new BindingPath(ContextComponent.Id, PropertyName)).Value;
 		public bool NeedsToBeBoxed { get; }
 		public Type ObservableType { get; }
 		public Type GenericArgument { get; }
@@ -15,13 +15,13 @@ namespace Juice
 		private BindingPath? path;
 
 		public BindingEntry(
-			ViewModelComponent viewModelComponent,
+			ContextComponent contextComponent,
 			string propertyName,
 			bool needsToBeBoxed,
 			Type observableType,
 			Type genericArgument)
 		{
-			ViewModelComponent = viewModelComponent;
+			ContextComponent = contextComponent;
 			PropertyName = propertyName;
 			NeedsToBeBoxed = needsToBeBoxed;
 			ObservableType = observableType;

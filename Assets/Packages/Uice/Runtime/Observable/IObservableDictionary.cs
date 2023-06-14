@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public interface IObservableDictionary<TKey, TValue> : IReadOnlyObservableDictionary<TKey, TValue>, IDictionary<TKey, TValue>
 	{

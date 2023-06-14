@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace Juice.Tests
+namespace Uice.Tests
 {
 	public class ObservableCollectionTests
 	{

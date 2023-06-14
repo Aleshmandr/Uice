@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class DecorateCommandOperator<T> : Operator
 	{
@@ -18,7 +18,7 @@ namespace Juice
 
 			exposedCommand = new ObservableCommand();
 			exposedCommand.ExecuteRequested += OnExposedCommandExecuteRequested;
-			ViewModel = new CommandViewModel(exposedCommand);
+			Context = new CommandContext(exposedCommand);
 
 			commandBinding = RegisterCommand<T>(command).OnCanExecuteChanged(OnCommandCanExecuteChanged).GetBinding();
 			decorationBinding = RegisterVariable<T>(decoration).GetBinding();
@@ -40,7 +40,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(CommandViewModel);
+			return typeof(CommandContext);
 		}
 
 		private void OnExposedCommandExecuteRequested()

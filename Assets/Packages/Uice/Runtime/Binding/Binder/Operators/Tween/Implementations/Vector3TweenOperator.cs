@@ -1,7 +1,7 @@
-﻿using Juice.Tweening;
+﻿using Uice.Tweening;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class Vector3TweenOperator : TweenOperator<Vector3>
 	{

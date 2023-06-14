@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
-	public class StringFormatOperator : ViewModelComponent, IViewModelInjector
+	public class StringFormatOperator : ContextComponent, IContextInjector
 	{
-		public Type InjectionType => typeof(OperatorVariableViewModel<string>);
-		public ViewModelComponent Target => this;
+		public Type InjectionType => typeof(OperatorVariableContext<string>);
+		public ContextComponent Target => this;
 
 		[SerializeField] private ConstantBindingInfo<string> format = new ConstantBindingInfo<string>();
 		[SerializeField] private BindingInfoList parameters = new BindingInfoList(typeof(IReadOnlyObservableVariable<object>));
@@ -21,7 +21,7 @@ namespace Juice
 			base.Awake();
 
 			exposedProperty = new ObservableVariable<string>();
-			ViewModel = new OperatorVariableViewModel<string>(exposedProperty);
+			Context = new OperatorVariableContext<string>(exposedProperty);
 
 			formatBinding = new VariableBinding<string>(format, this);
 			formatBinding.Property.Changed += OnFormatChanged;

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(DrawIfAttribute))]
 	public class DrawIfPropertyDrawer : PropertyDrawer

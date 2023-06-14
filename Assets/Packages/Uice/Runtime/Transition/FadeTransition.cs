@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Juice.Tweening;
-using Juice.Utils;
+using Uice.Utils;
+using Uice.Tweening;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class FadeTransition : ComponentTransition
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class ViewRegisterer : MonoBehaviour
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice.Pooling
+namespace Uice.Pooling
 {
 	public class PoolItem : MonoBehaviour, IPoolable
 	{

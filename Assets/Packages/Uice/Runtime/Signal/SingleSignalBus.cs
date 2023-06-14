@@ -1,6 +1,6 @@
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public class SingleSignalBus : Singleton<SingleSignalBus>
 	{

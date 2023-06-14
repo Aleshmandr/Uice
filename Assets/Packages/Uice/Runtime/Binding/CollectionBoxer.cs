@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public class CollectionBoxer<TExposed, TBoxed> : IReadOnlyObservableCollection<TExposed> where TBoxed : struct, TExposed
 	{

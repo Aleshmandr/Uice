@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class PanelLayer : Layer<IPanel, PanelShowSettings, PanelHideSettings>
 	{
@@ -28,7 +28,7 @@ namespace Juice
 			{
 				visiblePanels[current.GetType()] = current;
 				visiblePanelsSet.Add(current.Panel);
-				current.Panel.SetViewModel(current.Settings.ViewModel);
+				current.Panel.SetContext(current.Settings.Context);
 			}
 
 			foreach (var kvp in registeredViews)
@@ -40,7 +40,7 @@ namespace Juice
 				else
 				{
 					kvp.Value.Hide(Transition.Null);
-					kvp.Value.SetViewModel(default);
+					kvp.Value.SetContext(default);
 				}
 			}
 		}
@@ -74,7 +74,7 @@ namespace Juice
 			visiblePanels[view.GetType()] = new PanelStateEntry(view, settings);
 			PanelPriority finalPriority = settings.Priority ?? view.Priority;
 			ReparentToParaLayer(finalPriority, ((Component)view).transform);
-			view.SetViewModel(settings.ViewModel);
+			view.SetContext(settings.Context);
 
 			await view.Show(settings.ShowTransition);
 		}
@@ -85,7 +85,7 @@ namespace Juice
 
 			await view.Hide(settings?.HideTransition);
 
-			view.SetViewModel(default);
+			view.SetContext(default);
 		}
 
 		private void ReparentToParaLayer(PanelPriority priority, Transform viewTransform)

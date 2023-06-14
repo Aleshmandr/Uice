@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice.Pooling
+namespace Uice.Pooling
 {
 	internal class PoolData
 	{

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Juice
+namespace Uice
 {
 	[Serializable]
 	public class WidgetEvents

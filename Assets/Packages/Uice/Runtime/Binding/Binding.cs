@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Juice.Plugins.Juice.Runtime.Utils;
-using Juice.Plugins.Juice.Runtime.Utils.ExtensionMethods;
+using Uice.Plugins.Juice.Runtime.Utils.ExtensionMethods;
+using Uice.Plugins.Juice.Runtime.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class Binding : IBinding
 	{
@@ -36,9 +36,9 @@ namespace Juice
 		{
 			UnbindProperty();
 
-			if (bindingInfo.ViewModelContainer)
+			if (bindingInfo.ContextContainer)
 			{
-				bindingInfo.ViewModelContainer.ViewModelChanged -= OnViewModelChanged;
+				bindingInfo.ContextContainer.ContextChanged -= OnContextChanged;
 			}
 		}
 
@@ -62,17 +62,17 @@ namespace Juice
 		{
 			if (HasToBeDynamicallyBound())
 			{
-				bindingInfo.ViewModelContainer = ViewModelComponentTree.FindBindableComponent(
+				bindingInfo.ContextContainer = ContextComponentTree.FindBindableComponent(
 					bindingInfo.Path,
 					GetBindingType(),
 					context.transform);
 			}
 
-			if (bindingInfo.ViewModelContainer)
+			if (bindingInfo.ContextContainer)
 			{
-				if (bindingInfo.ViewModelContainer.ViewModel != null)
+				if (bindingInfo.ContextContainer.Context != null)
 				{
-					object value = ViewModelComponentTree.Bind(bindingInfo.Path, bindingInfo.ViewModelContainer);
+					object value = ContextComponentTree.Bind(bindingInfo.Path, bindingInfo.ContextContainer);
 
 					if (value != null)
 					{
@@ -80,17 +80,17 @@ namespace Juice
 					}
 					else
 					{
-						Debug.LogError($"Property \"{bindingInfo.Path.PropertyName}\" not found in {bindingInfo.ViewModelContainer.ViewModel.GetType()} class.", context);
+						Debug.LogError($"Property \"{bindingInfo.Path.PropertyName}\" not found in {bindingInfo.ContextContainer.Context.GetType()} class.", context);
 					}
 				}
 
-				bindingInfo.ViewModelContainer.ViewModelChanged += OnViewModelChanged;
+				bindingInfo.ContextContainer.ContextChanged += OnContextChanged;
 			}
 		}
 
-		private static ViewModelComponent FindViewModelComponent(Transform context, Type targetType, string propertyPath)
+		private static ContextComponent FindContextComponent(Transform context, Type targetType, string propertyPath)
 		{
-			ViewModelComponent result = null;
+			ContextComponent result = null;
 
 			BindingPath path = new BindingPath(propertyPath);
 
@@ -105,7 +105,7 @@ namespace Juice
 
 					if (match)
 					{
-						result = iterator.Current.ViewModelComponent;
+						result = iterator.Current.ContextComponent;
 					}
 				}
 			}
@@ -115,10 +115,10 @@ namespace Juice
 
 		private bool HasToBeDynamicallyBound()
 		{
-			return bindingInfo.ForceDynamicBinding || !bindingInfo.ViewModelContainer && string.IsNullOrEmpty(bindingInfo.PropertyName) == false;
+			return bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer && string.IsNullOrEmpty(bindingInfo.PropertyName) == false;
 		}
 
-		private void OnViewModelChanged(object sender, IViewModel lastViewModel, IViewModel newViewModel)
+		private void OnContextChanged(object sender, IContext lastContext, IContext newContext)
 		{
 			Unbind();
 			Bind();

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEditor;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public class SerializableTypeDrawerCache
 	{

@@ -1,7 +1,7 @@
-﻿using Juice.Collections;
+﻿using Uice.Collections;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class MapOperator<TFrom, TTo> : ToOperator<TFrom, TTo>
 	{

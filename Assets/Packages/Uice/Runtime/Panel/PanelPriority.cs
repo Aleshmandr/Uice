@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public enum PanelPriority
 	{

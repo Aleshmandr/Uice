@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Juice.Tweening;
+using Uice.Tweening;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class MoveTransition : ComponentTransition
 	{

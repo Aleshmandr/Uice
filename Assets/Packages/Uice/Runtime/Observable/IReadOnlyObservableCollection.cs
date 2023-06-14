@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public delegate void CollectionAddEventHandler<in T>(int index, T value);
 	public delegate void CollectionCountChangeEventHandler(int oldCount, int newCount);

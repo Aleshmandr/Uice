@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public delegate void ObservableCommandEventHandler<in T>(T parameter);
 	public delegate void ObservableCommandEventHandler();

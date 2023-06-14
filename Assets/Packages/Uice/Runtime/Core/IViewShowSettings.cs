@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Juice
+namespace Uice
 {
 	public interface IViewShowSettings
 	{
 		Type ViewType { get; }
-		IViewModel ViewModel { get; }
+		IContext Context { get; }
 		ITransition ShowTransition { get; }
 		ITransition HideTransition { get; }
 	}

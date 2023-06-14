@@ -1,16 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	[RequireComponent(typeof(RectTransform))]
-	[RequireComponent(typeof(ViewModelComponent))]
+	[RequireComponent(typeof(ContextComponent))]
 	[RequireComponent(typeof(InteractionBlockingTracker))]
-	public abstract class View<T> : Widget, IView, IViewModelInjector, IViewModelProvider<T> where T : IViewModel
+	public abstract class View<T> : Widget, IView, IContextInjector, IContextProvider<T> where T : IContext
 	{
 		public event ViewEventHandler CloseRequested;
 		public event ViewEventHandler ViewDestroyed;
-		public event ViewModelChangeEventHandler<T> ViewModelChanged;
+		public event ContextChangeEventHandler<T> ContextChanged;
 
 		public bool IsInteractable
 		{
@@ -28,10 +28,10 @@ namespace Juice
 		}
 
 		public Type InjectionType => typeof(T);
-		public ViewModelComponent Target => targetComponent;
-		public T ViewModel => (T)(Target ? Target.ViewModel : default);
+		public ContextComponent Target => targetComponent;
+		public T Context => (T)(Target ? Target.Context : default);
 
-		[SerializeField, HideInInspector] private ViewModelComponent targetComponent;
+		[SerializeField, HideInInspector] private ContextComponent targetComponent;
 		[SerializeField, HideInInspector] private InteractionBlockingTracker blockingTracker;
 
 		protected virtual void Reset()
@@ -44,17 +44,17 @@ namespace Juice
 			ViewDestroyed?.Invoke(this);
 		}
 
-		public virtual void SetViewModel(IViewModel viewModel)
+		public virtual void SetContext(IContext context)
 		{
-			if (viewModel != null)
+			if (context != null)
 			{
-				if (viewModel is T typedViewModel)
+				if (context is T typedContext)
 				{
-					SetViewModel(typedViewModel);
+					SetContext(typedContext);
 				}
 				else
 				{
-					Debug.LogError($"ViewModel passed have wrong type! ({viewModel.GetType()} instead of {typeof(T)})", this);
+					Debug.LogError($"Context passed have wrong type! ({context.GetType()} instead of {typeof(T)})", this);
 				}
 			}
 		}
@@ -70,29 +70,29 @@ namespace Juice
 
 			RetrieveRequiredComponents();
 
-			Target.ViewModelChanged += OnTargetComponentViewModelChanged;
+			Target.ContextChanged += OnTargetComponentContextChanged;
 		}
 
-		protected virtual void SetViewModel(T viewModel)
+		protected virtual void SetContext(T context)
 		{
 			EnsureInitialState();
 
 			if (targetComponent)
 			{
-				targetComponent.ViewModel = viewModel;
+				targetComponent.Context = context;
 			}
 		}
 
-		protected virtual void OnViewModelChanged(T lastViewModel, T newViewModel)
+		protected virtual void OnContextChanged(T lastContext, T newContext)
 		{
-			ViewModelChanged?.Invoke(this, lastViewModel, newViewModel);
+			ContextChanged?.Invoke(this, lastContext, newContext);
 		}
 
 		private void RetrieveRequiredComponents()
 		{
 			if (!targetComponent)
 			{
-				targetComponent = GetComponent<ViewModelComponent>();
+				targetComponent = GetComponent<ContextComponent>();
 			}
 
 			if (!blockingTracker)
@@ -101,9 +101,9 @@ namespace Juice
 			}
 		}
 
-		private void OnTargetComponentViewModelChanged(IViewModelProvider<IViewModel> source, IViewModel lastViewModel, IViewModel newViewModel)
+		private void OnTargetComponentContextChanged(IContextProvider<IContext> source, IContext lastContext, IContext newContext)
 		{
-			OnViewModelChanged((T)lastViewModel, (T)newViewModel);
+			OnContextChanged((T)lastContext, (T)newContext);
 		}
 	}
 }

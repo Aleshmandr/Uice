@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public class PanelShowLauncher : IPanelShowLauncher
 	{
 		private readonly Type panelType;
 		private readonly Func<PanelShowSettings, Task> showCallback;
 
-		private IViewModel viewModel;
+		private IContext context;
 		private PanelPriority? priority;
 		private ITransition showTransition;
 		private ITransition hideTransition;
@@ -20,9 +20,9 @@ namespace Juice
 			this.panelType = panelType;
 		}
 
-		public IPanelShowLauncher WithViewModel(IViewModel viewModel)
+		public IPanelShowLauncher WithContext(IContext context)
 		{
-			this.viewModel = viewModel;
+			this.context = context;
 			return this;
 		}
 
@@ -58,7 +58,7 @@ namespace Juice
 		{
 			return new PanelShowSettings(
 				panelType,
-				viewModel,
+				context,
 				priority,
 				showTransition,
 				hideTransition);

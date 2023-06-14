@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	[Serializable]
 	public abstract class ConstantBindingInfo : BindingInfo

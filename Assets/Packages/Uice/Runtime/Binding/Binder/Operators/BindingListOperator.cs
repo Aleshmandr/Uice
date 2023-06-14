@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
-	public abstract class BindingListOperator<TFrom, TTo> : ViewModelComponent, IViewModelInjector
+	public abstract class BindingListOperator<TFrom, TTo> : ContextComponent, IContextInjector
 	{
-		public Type InjectionType => typeof(OperatorVariableViewModel<TTo>);
+		public Type InjectionType => typeof(OperatorVariableContext<TTo>);
 
-		public ViewModelComponent Target => this;
+		public ContextComponent Target => this;
 
 		[SerializeField] private BindingInfoList fromBinding = new BindingInfoList(typeof(IReadOnlyObservableVariable<TFrom>));
 
@@ -20,7 +20,7 @@ namespace Juice
 			base.Awake();
 
 			exposedProperty = new ObservableVariable<TTo>();
-			ViewModel = new OperatorVariableViewModel<TTo>(exposedProperty);
+			Context = new OperatorVariableContext<TTo>(exposedProperty);
 
 			bindingList = new BindingList<TFrom>(this, fromBinding);
 			bindingList.VariableChanged += BindingListVariableChangedHandler;

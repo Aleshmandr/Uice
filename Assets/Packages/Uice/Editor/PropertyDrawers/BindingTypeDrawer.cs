@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(BindingType))]
 	public class BindingTypeDrawer : PropertyDrawer

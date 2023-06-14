@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Juice.Utils
+namespace Uice.Utils
 {
 	public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
@@ -18,7 +18,7 @@ namespace Juice.Utils
 
 						if (!instance)
 						{
-							GameObject go = new GameObject($"[jUIce] {typeof(T).Name}");
+							GameObject go = new GameObject($"[Uice] {typeof(T).Name}");
 							instance = go.AddComponent<T>();
 							DontDestroyOnLoad(go);
 						}

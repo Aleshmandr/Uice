@@ -1,9 +1,9 @@
 ﻿using System;
-using Juice.Collections;
+using Uice.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Juice
+namespace Uice
 {
     public class EnumToSpriteOperator<T> : MapOperator<T, Sprite> where T : Enum
     {

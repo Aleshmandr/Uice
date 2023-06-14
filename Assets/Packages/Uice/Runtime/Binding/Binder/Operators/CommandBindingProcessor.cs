@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class CommandBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IViewModel ViewModel { get; }
+		public IContext Context { get; }
 
 		protected readonly CommandBinding<TTo> commandBinding;
 
@@ -12,7 +12,7 @@ namespace Juice
 		{
 			commandBinding = new CommandBinding<TTo>(bindingInfo, context);
 			ObservableCommand<TFrom> convertedCommand = new ObservableCommand<TFrom>(commandBinding.Property.CanExecute);
-			ViewModel = new OperatorCommandViewModel<TFrom>(convertedCommand);
+			Context = new OperatorCommandContext<TFrom>(convertedCommand);
 			convertedCommand.ExecuteRequested += ProcessedCommandExecuteRequestedHandler;
 		}
 

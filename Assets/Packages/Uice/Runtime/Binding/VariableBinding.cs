@@ -1,8 +1,8 @@
 ﻿using System;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class VariableBinding<T> : Binding
 	{

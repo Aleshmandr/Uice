@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public delegate void BindingListEventHandler<in T>(int index, T newValue);
 	

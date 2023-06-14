@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class Layer<TView, TShowSettings, THideSettings> : MonoBehaviour
 		where TView : IView

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(DisableAtRuntimeAttribute))]
 	public class DisableAtRuntimeAttributeDrawer : PropertyDrawer

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-namespace Juice
+namespace Uice
 {
-	public class PrefabPicker<T> where T : ViewModelComponent
+	public class PrefabPicker<T> where T : ContextComponent
 	{
-		private static readonly Type ExpectedViewModelType = typeof(IBindableViewModel<>);
+		private static readonly Type ExpectedContextType = typeof(IBindableContext<>);
 
 		private List<T> prefabs;
 		private readonly Dictionary<Type, T> prefabResolutionCache;
@@ -24,7 +24,7 @@ namespace Juice
 
 		public void SetPrefabs(List<T> prefabs)
 		{
-			prefabs?.ForEach(x => Assert.IsNotNull(GetViewModelType(x.ExpectedType), $"{x.name}'s expected type is not valid. It must derive {ExpectedViewModelType}."));
+			prefabs?.ForEach(x => Assert.IsNotNull(GetContextType(x.ExpectedType), $"{x.name}'s expected type is not valid. It must derive {ExpectedContextType}."));
 
 			this.prefabs = prefabs;
 			prefabResolutionCache.Clear();
@@ -55,13 +55,13 @@ namespace Juice
 			foreach (T prefab in prefabs)
 			{
 				Type expectedType = prefab.ExpectedType;
-				Type viewModelType;
+				Type contextType;
 
 				if (expectedType != null
-					&& (viewModelType = GetViewModelType(expectedType)) != null
-					&& viewModelType.GenericTypeArguments[0].IsAssignableFrom(valueType))
+					&& (contextType = GetContextType(expectedType)) != null
+					&& contextType.GenericTypeArguments[0].IsAssignableFrom(valueType))
 				{
-					Type dataType = viewModelType.GenericTypeArguments[0];
+					Type dataType = contextType.GenericTypeArguments[0];
 					Type baseType = dataType.BaseType;
 					int depth = 0;
 
@@ -82,7 +82,7 @@ namespace Juice
 			return result;
 		}
 
-		private Type GetViewModelType(Type runtimeType)
+		private Type GetContextType(Type runtimeType)
 		{
 			Type result = null;
 
@@ -93,7 +93,7 @@ namespace Juice
 				genericType = runtimeType.GetGenericTypeDefinition();
 			}
 
-			if (genericType != null && genericType == ExpectedViewModelType)
+			if (genericType != null && genericType == ExpectedContextType)
 			{
 				result = runtimeType;
 			}
@@ -101,7 +101,7 @@ namespace Juice
 			{
 				foreach (Type current in runtimeType.GetInterfaces())
 				{
-					result = GetViewModelType(current);
+					result = GetContextType(current);
 
 					if (result != null)
 					{
@@ -111,7 +111,7 @@ namespace Juice
 
 				if (result == null && runtimeType.BaseType != null)
 				{
-					result = GetViewModelType(runtimeType.BaseType);
+					result = GetContextType(runtimeType.BaseType);
 				}
 			}
 

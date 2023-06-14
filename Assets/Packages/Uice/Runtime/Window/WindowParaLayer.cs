@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowParaLayer : MonoBehaviour
 	{

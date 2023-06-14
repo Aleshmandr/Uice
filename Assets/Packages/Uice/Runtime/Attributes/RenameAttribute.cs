@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 	public class RenameAttribute : PropertyAttribute

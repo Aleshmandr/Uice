@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Juice
+namespace Uice
 {
 	public class IntToRomanOperator : ToOperator<int, string>
 	{

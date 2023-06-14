@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowHideSettings : IViewHideSettings
 	{

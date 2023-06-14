@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowLayer : Layer<IWindow, WindowShowSettings, WindowHideSettings>
 	{
@@ -60,7 +60,7 @@ namespace Juice
 				WindowHistoryEntry entry = new WindowHistoryEntry(current.Window, current.Settings);
 				current.Window.Hide(Transition.Null);
 				current.Window.SetPayload(default);
-				current.Window.SetViewModel(default);
+				current.Window.SetContext(default);
 				windowQueue.Enqueue(entry);
 			}
 
@@ -72,14 +72,14 @@ namespace Juice
 				if (current.IsVisible)
 				{
 					current.Window.SetPayload(current.Settings.Payload);
-					current.Window.SetViewModel(current.Settings.ViewModel);
+					current.Window.SetContext(current.Settings.Context);
 					current.Window.Show(Transition.Null);
 				}
 				else
 				{
 					current.Window.Hide(Transition.Null);
 					current.Window.SetPayload(default);
-					current.Window.SetViewModel(default);
+					current.Window.SetContext(default);
 				}
 			}
 
@@ -462,7 +462,7 @@ namespace Juice
 
 			windowHistory.Push(windowEntry);
 			windowEntry.View.SetPayload(windowEntry.Settings.Payload);
-			windowEntry.View.SetViewModel(ResolveViewModel(windowEntry));
+			windowEntry.View.SetContext(ResolveContext(windowEntry));
 			SetCurrentWindow(windowEntry.View, fromBack);
 			
 			ITransition transition = overrideTransition ?? windowEntry.Settings.ShowTransition;
@@ -470,14 +470,14 @@ namespace Juice
 			await windowEntry.View.Show(transition);
 		}
 		
-		private IViewModel ResolveViewModel(WindowHistoryEntry windowEntry)
+		private IContext ResolveContext(WindowHistoryEntry windowEntry)
 		{
-			IViewModel result = windowEntry.Settings.ViewModel;
+			IContext result = windowEntry.Settings.Context;
 
-			if (windowEntry.Settings.ViewModel == null)
+			if (windowEntry.Settings.Context == null)
 			{
-				result = windowEntry.View.GetNewViewModel();
-				windowEntry.Settings.ViewModel = result;
+				result = windowEntry.View.GetNewContext();
+				windowEntry.Settings.Context = result;
 			}
 
 			return result;

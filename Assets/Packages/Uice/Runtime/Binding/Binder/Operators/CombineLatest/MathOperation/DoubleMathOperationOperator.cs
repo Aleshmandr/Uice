@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Juice
+namespace Uice
 {
 	public class DoubleMathOperationOperator : MathOperationOperator<double>
 	{

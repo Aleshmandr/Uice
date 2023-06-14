@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public class CommandBoxer<TExposed, TBoxed> : IObservableCommand<TExposed> where TBoxed : struct, TExposed
 	{

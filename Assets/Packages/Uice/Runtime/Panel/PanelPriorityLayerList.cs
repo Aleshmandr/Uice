@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	[Serializable]
 	public class PanelPriorityLayerList

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class CollectionBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IViewModel ViewModel { get; }
+		public IContext Context { get; }
 
 		protected readonly CollectionBinding<TFrom> collectionBinding;
 		protected readonly ObservableCollection<TTo> processedCollection;
@@ -12,7 +12,7 @@ namespace Juice
 		protected CollectionBindingProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedCollection = new ObservableCollection<TTo>();
-			ViewModel = new OperatorCollectionViewModel<TTo>(processedCollection);
+			Context = new OperatorCollectionContext<TTo>(processedCollection);
 			collectionBinding = new CollectionBinding<TFrom>(bindingInfo, context);
 			collectionBinding.Property.Reset += OnBoundCollectionReset;
 			collectionBinding.Property.ItemAdded += OnBoundCollectionItemAdded;

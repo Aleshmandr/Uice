@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice.Tweening
+namespace Uice.Tweening
 {
 	public abstract class Tweener : ITweener
 	{

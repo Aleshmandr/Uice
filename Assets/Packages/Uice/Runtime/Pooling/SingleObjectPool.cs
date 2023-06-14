@@ -1,6 +1,6 @@
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice.Pooling
+namespace Uice.Pooling
 {
 	public class SingleObjectPool : Singleton<SingleObjectPool>
 	{

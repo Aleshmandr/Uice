@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Juice
+namespace Uice
 {
 	public interface IWindowShowLauncher
 	{
-		IWindowShowLauncher WithViewModel(IViewModel viewModel);
+		IWindowShowLauncher WithContext(IContext context);
 		IWindowShowLauncher AddPayload(string key, object value);
 		IWindowShowLauncher WithShowTransition(ITransition transition);
 		IWindowShowLauncher WithHideTransition(ITransition transition);

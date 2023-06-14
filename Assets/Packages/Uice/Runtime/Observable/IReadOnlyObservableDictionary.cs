@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public delegate void DictionaryAddEventHandler<TKey, TValue>(TKey key, TValue value);
 

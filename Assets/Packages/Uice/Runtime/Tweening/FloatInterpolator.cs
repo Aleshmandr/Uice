@@ -1,4 +1,4 @@
-﻿namespace Juice.Tweening
+﻿namespace Uice.Tweening
 {
 	public class FloatInterpolator : Interpolator<float>
 	{

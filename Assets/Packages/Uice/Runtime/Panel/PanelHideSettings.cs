@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juice
+namespace Uice
 {
 	public class PanelHideSettings : IViewHideSettings
 	{

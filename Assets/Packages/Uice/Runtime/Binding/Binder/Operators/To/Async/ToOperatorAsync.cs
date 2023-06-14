@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class ToOperatorAsync<TFrom, TTo> : ProcessorOperator<TFrom, TTo>
 	{

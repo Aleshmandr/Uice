@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-namespace Juice.Pooling
+namespace Uice.Pooling
 {
 	public class PooledList<T> : List<T>, IDisposable
 	{

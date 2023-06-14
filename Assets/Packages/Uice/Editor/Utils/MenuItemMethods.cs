@@ -1,10 +1,10 @@
 ﻿using UnityEditor;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public static class MenuItemMethods
 	{
-		private const string CreateMenuBasePath = "Assets/Create/jUIce/";
+		private const string CreateMenuBasePath = "Assets/Create/Uice/";
 
 		[MenuItem(CreateMenuBasePath + "Window")]
 		public static void CreateWindow()
@@ -18,7 +18,7 @@ namespace Juice.Editor
 			ViewCreationWizardEditorWindow.ShowForPanel();
 		}
 
-		[MenuItem("GameObject/UI/jUIce/Default UI Frame")]
+		[MenuItem("GameObject/UI/Uice/Default UI Frame")]
 		public static void CreateDefaultUIFrame()
 		{
 			UIFrameUtility.CreateDefaultUIFrame();

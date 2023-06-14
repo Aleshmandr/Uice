@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class DelayOperator<T> : ProcessorOperator<T, T>
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	/// <summary>
 	/// From: https://gist.github.com/CDillinger/2aa02128f840bdca90340ce08ee71bc2

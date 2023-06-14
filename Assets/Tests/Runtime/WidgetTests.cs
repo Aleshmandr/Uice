@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Juice.Tests
+namespace Uice.Tests
 {
 	public class WidgetTests
 	{

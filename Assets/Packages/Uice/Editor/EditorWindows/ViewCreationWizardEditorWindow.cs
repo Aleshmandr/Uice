@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public class ViewCreationWizardEditorWindow : EditorWindow
 	{
@@ -19,14 +19,14 @@ namespace Juice.Editor
 
 		[SerializeField] private string @namespace;
 		[SerializeField] [TypeConstraint(typeof(IView))] private SerializableType supertype;
-		[SerializeField] [TypeConstraint(typeof(IViewModel))] private SerializableType viewModelType;
+		[SerializeField] [TypeConstraint(typeof(IContext))] private SerializableType contextType;
 		[SerializeField] private string className;
 		[SerializeField] private string uri;
 
 		private SerializedObject serializedObject;
 		private SerializedProperty namespaceProp;
 		private SerializedProperty supertypeProp;
-		private SerializedProperty viewModelTypeProp;
+		private SerializedProperty contextTypeProp;
 		private SerializedProperty classNameProp;
 		private SerializedProperty uriProp;
 
@@ -35,7 +35,7 @@ namespace Juice.Editor
 			serializedObject = new SerializedObject(this);
 			namespaceProp = serializedObject.FindProperty(nameof(@namespace));
 			supertypeProp = serializedObject.FindProperty(nameof(supertype));
-			viewModelTypeProp = serializedObject.FindProperty(nameof(viewModelType));
+			contextTypeProp = serializedObject.FindProperty(nameof(contextType));
 			classNameProp = serializedObject.FindProperty(nameof(className));
 			uriProp = serializedObject.FindProperty(nameof(uri));
 		}
@@ -64,7 +64,7 @@ namespace Juice.Editor
 
 			window.SetupNamespace();
 			window.SetupSupertype(supertype);
-			window.SetupViewModelType(typeof(IViewModel));
+			window.SetupContextType(typeof(IContext));
 			window.SetupClassName(DefaultViewName);
 			window.SetupUri(saveDirectory);
 
@@ -88,7 +88,7 @@ namespace Juice.Editor
 
 			DrawNamespace();
 			DrawSuperType();
-			DrawViewModelType();
+			DrawContextType();
 			DrawName();
 			DrawUri();
 			DrawCreateButton();
@@ -111,9 +111,9 @@ namespace Juice.Editor
 			supertype.Type = targetType;
 		}
 
-		private void SetupViewModelType(Type targetType)
+		private void SetupContextType(Type targetType)
 		{
-			viewModelType.Type = targetType;
+			contextType.Type = targetType;
 		}
 
 		private void SetupClassName(string value)
@@ -136,9 +136,9 @@ namespace Juice.Editor
 			EditorGUILayout.PropertyField(supertypeProp);
 		}
 
-		private void DrawViewModelType()
+		private void DrawContextType()
 		{
-			EditorGUILayout.PropertyField(viewModelTypeProp);
+			EditorGUILayout.PropertyField(contextTypeProp);
 		}
 
 		private void DrawName()
@@ -186,10 +186,10 @@ namespace Juice.Editor
 				ClassFileWriter.ClassDefinition classDefinition = new ClassFileWriter.ClassDefinition
 				{
 					Namespace = @namespace,
-					Imports = new List<string> (new HashSet<string> {viewModelType.Type.Namespace, supertype.Type.Namespace}),
+					Imports = new List<string> (new HashSet<string> {contextType.Type.Namespace, supertype.Type.Namespace}),
 					Name = className,
 					Superclass = supertype.Type.Name,
-					SuperclassGenerics = new List<string> {viewModelType.Type.Name}
+					SuperclassGenerics = new List<string> {contextType.Type.Name}
 				};
 
 				ClassFileWriter.WriteClassFile(fileInfo, classDefinition);

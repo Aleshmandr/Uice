@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(SerializableType))]
 	public class SerializableTypeDrawer : PropertyDrawer

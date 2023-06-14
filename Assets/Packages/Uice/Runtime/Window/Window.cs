@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Juice
+namespace Uice
 {
-	public abstract class Window : Window<NullViewModel>
+	public abstract class Window : Window<NullContext>
 	{
 
 	}
@@ -18,7 +18,7 @@ namespace Juice
 		public UnityEvent OnFocusLost = new UnityEvent();
 	}
 
-	public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
+	public abstract class Window<T> : View<T>, IWindow where T : IContext, new()
 	{
 		public delegate void FocusEventHandler(IWindow window);
 
@@ -56,13 +56,13 @@ namespace Juice
 			}
 		}
 
-		public override void SetViewModel(IViewModel viewModel)
+		public override void SetContext(IContext context)
 		{
-			base.SetViewModel(viewModel);
+			base.SetContext(context);
 
-			if (viewModel == null)
+			if (context == null)
 			{
-				SetViewModel(new T());
+				SetContext(new T());
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace Juice
 			currentLayer = layer;
 		}
 		
-		public IViewModel GetNewViewModel()
+		public IContext GetNewContext()
 		{
 			return new T();
 		}
@@ -140,16 +140,18 @@ namespace Juice
 		{
 			HasFocus = ReferenceEquals(newWindow, this);
 
-			if (oldWindow != newWindow)
+			if (oldWindow == newWindow)
 			{
-				if (ReferenceEquals(oldWindow, this))
-				{
-					OnFocusLost();
-				}
-				else if (ReferenceEquals(newWindow, this))
-				{
-					OnFocusGained();
-				}
+				return;
+			}
+			
+			if (ReferenceEquals(oldWindow, this))
+			{
+				OnFocusLost();
+			}
+			else if (ReferenceEquals(newWindow, this))
+			{
+				OnFocusGained();
 			}
 		}
 	}

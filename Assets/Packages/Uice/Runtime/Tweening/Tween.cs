@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice.Tweening
+namespace Uice.Tweening
 {
 	public class Tween : Singleton<Tween>
 	{

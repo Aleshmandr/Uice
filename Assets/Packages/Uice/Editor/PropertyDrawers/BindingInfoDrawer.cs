@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(BindingInfo))]
 	[CustomPropertyDrawer(typeof(BindingInfo<>))]
@@ -13,7 +13,7 @@ namespace Juice.Editor
 		private class BindingEntry
 		{
 			public readonly int Index;
-			public readonly ViewModelComponent Component;
+			public readonly ContextComponent Component;
 			public readonly string PropertyName;
 			public readonly Type ObservableType;
 			public readonly Type ArgumentType;
@@ -21,7 +21,7 @@ namespace Juice.Editor
 
 			public BindingEntry(
 				int index,
-				ViewModelComponent component,
+				ContextComponent component,
 				string propertyName,
 				Type observableType,
 				Type argumentType,
@@ -46,7 +46,7 @@ namespace Juice.Editor
 			public int CurrentIndex;
 		}
 
-		private const string ViewModelContainerId = "viewModelContainer";
+		private const string ContextContainerId = "contextContainer";
 		private const string PropertyNameId = "propertyName";
 		private const string ForceDynamicBindingId = "forceDynamicBinding";
 
@@ -137,7 +137,7 @@ namespace Juice.Editor
 				var menu = new GenericMenu();
 
 				menu.AddItem(
-					new GUIContent("Force dynamic binding", JuiceEditorGuiUtility.Icons.Unlink),
+					new GUIContent("Force dynamic binding", UiceEditorGuiUtility.Icons.Unlink),
 					GetForceDynamicBinding(property),
 					() =>
 					{
@@ -153,20 +153,20 @@ namespace Juice.Editor
 			return position;
 		}
 
-		private static void SetBinding(SerializedProperty property, ViewModelComponent viewModelComponent, string propertyName)
+		private static void SetBinding(SerializedProperty property, ContextComponent contextComponent, string propertyName)
 		{
-			SetViewModelContainer(property, viewModelComponent);
+			SetContextContainer(property, contextComponent);
 			SetPropertyName(property, propertyName);
 		}
 
-		private static ViewModelComponent GetViewModelContainer(SerializedProperty bindingInfoProperty)
+		private static ContextComponent GetContextContainer(SerializedProperty bindingInfoProperty)
 		{
-			return bindingInfoProperty.FindPropertyRelative(ViewModelContainerId).objectReferenceValue as ViewModelComponent;
+			return bindingInfoProperty.FindPropertyRelative(ContextContainerId).objectReferenceValue as ContextComponent;
 		}
 
-		private static void SetViewModelContainer(SerializedProperty bindingInfoProperty, ViewModelComponent value)
+		private static void SetContextContainer(SerializedProperty bindingInfoProperty, ContextComponent value)
 		{
-			bindingInfoProperty.FindPropertyRelative(ViewModelContainerId).objectReferenceValue = value;
+			bindingInfoProperty.FindPropertyRelative(ContextContainerId).objectReferenceValue = value;
 		}
 
 		private static string GetPropertyName(SerializedProperty bindingInfoProperty)
@@ -189,7 +189,7 @@ namespace Juice.Editor
 			bindingInfoProperty.FindPropertyRelative(ForceDynamicBindingId).boolValue = value;
 		}
 
-		private static string GenerateBindingId(ViewModelComponent component, string propertyName)
+		private static string GenerateBindingId(ContextComponent component, string propertyName)
 		{
 			return $"{component.gameObject.name}.{component.Id}/{propertyName}";
 		}
@@ -239,14 +239,14 @@ namespace Juice.Editor
 			optionIds.Add("None");
 			options.Add("None");
 
-			foreach (Juice.BindingEntry current in BindingUtils.GetBindings(cache.BaseComponent.transform, ResolveTarget(property).Type))
+			foreach (Uice.BindingEntry current in BindingUtils.GetBindings(cache.BaseComponent.transform, ResolveTarget(property).Type))
 			{
-				if (current.ViewModelComponent != cache.BaseComponent)
+				if (current.ContextComponent != cache.BaseComponent)
 				{
-					string id = GenerateBindingId(current.ViewModelComponent, current.PropertyName);
+					string id = GenerateBindingId(current.ContextComponent, current.PropertyName);
 					BindingEntry entry = new BindingEntry(
 						optionIds.Count,
-						current.ViewModelComponent,
+						current.ContextComponent,
 						current.PropertyName,
 						current.ObservableType,
 						current.GenericArgument,
@@ -268,9 +268,9 @@ namespace Juice.Editor
 
 		private void RefreshCurrentIndex(SerializedProperty property)
 		{
-			if (GetViewModelContainer(property) && string.IsNullOrEmpty(GetPropertyName(property)) == false)
+			if (GetContextContainer(property) && string.IsNullOrEmpty(GetPropertyName(property)) == false)
 			{
-				string bindingId = GenerateBindingId(GetViewModelContainer(property), GetPropertyName(property));
+				string bindingId = GenerateBindingId(GetContextContainer(property), GetPropertyName(property));
 
 				if (cache.BindingMap.TryGetValue(bindingId, out BindingEntry entry))
 				{
@@ -326,7 +326,7 @@ namespace Juice.Editor
 			iconRect.width -= 6;
 			iconRect.height -= 6;
 
-			EditorGUI.LabelField(iconRect, JuiceEditorGuiUtility.ContentIcons.Unlink);
+			EditorGUI.LabelField(iconRect, UiceEditorGuiUtility.ContentIcons.Unlink);
 
 			position.x += indicatorRect.width;
 			position.width -= indicatorRect.width;

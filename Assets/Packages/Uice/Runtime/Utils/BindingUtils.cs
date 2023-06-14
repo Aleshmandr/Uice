@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public static class BindingUtils
 	{
@@ -114,20 +114,20 @@ namespace Juice
 		{
 			Checker.TargetType = targetType;
 
-			foreach (var viewModel in GetComponentsInParents<ViewModelComponent>(context, true))
+			foreach (var contextComponent in GetComponentsInParents<ContextComponent>(context, true))
 			{
-				Type viewModelType = viewModel.ExpectedType;
+				Type contextType = contextComponent.ExpectedType;
 
-				if (viewModelType != null)
+				if (contextType != null)
 				{
-					foreach (PropertyInfo propertyInfo in viewModelType.GetProperties(PropertyBindingFlags))
+					foreach (PropertyInfo propertyInfo in contextType.GetProperties(PropertyBindingFlags))
 					{
 						if (Checker.CanBeBound(propertyInfo.PropertyType))
 						{
 							bool needsToBeBoxed = Checker.NeedsToBeBoxed(propertyInfo.PropertyType);
 
 							yield return new BindingEntry(
-								viewModel,
+								contextComponent,
 								propertyInfo.Name,
 								needsToBeBoxed,
 								Checker.LastObservableType,
@@ -138,9 +138,9 @@ namespace Juice
 			}
 		}
 
-		public static IEnumerable<BindingEntry> GetAllBindings(Type viewModelType, ViewModelComponent viewModelComponent = null)
+		public static IEnumerable<BindingEntry> GetAllBindings(Type contextType, ContextComponent contextComponent = null)
 		{
-			foreach (PropertyInfo propertyInfo in viewModelType.GetProperties(PropertyBindingFlags))
+			foreach (PropertyInfo propertyInfo in contextType.GetProperties(PropertyBindingFlags))
 			{
 				Checker.TargetType = propertyInfo.PropertyType;
 
@@ -149,7 +149,7 @@ namespace Juice
 					bool needsToBeBoxed = Checker.NeedsToBeBoxed(propertyInfo.PropertyType);
 
 					yield return new BindingEntry(
-						viewModelComponent,
+						contextComponent,
 						propertyInfo.Name,
 						needsToBeBoxed,
 						Checker.LastObservableType,

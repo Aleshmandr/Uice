@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class IntComparerOperator : Operator
 	{
@@ -21,7 +21,7 @@ namespace Juice
 			base.Awake();
 
 			result = new ObservableVariable<bool>();
-			ViewModel = new OperatorVariableViewModel<bool>(result);;
+			Context = new OperatorVariableContext<bool>(result);;
 
 			operandABinding = RegisterVariable<int>(operandA).OnChanged(OnOperandChanged).GetBinding();
 			operandBBinding = RegisterVariable<int>(operandB).OnChanged(OnOperandChanged).GetBinding();
@@ -29,7 +29,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableViewModel<bool>);
+			return typeof(OperatorVariableContext<bool>);
 		}
 
 		private void OnOperandChanged(int newValue)

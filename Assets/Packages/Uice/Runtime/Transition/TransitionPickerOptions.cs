@@ -1,7 +1,7 @@
-﻿using Juice.Collections;
+﻿using Uice.Collections;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class TransitionPickerOptions : MonoBehaviour
 	{

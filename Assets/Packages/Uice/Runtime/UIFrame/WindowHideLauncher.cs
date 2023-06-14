@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowHideLauncher : IWindowHideLauncher
 	{

@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public class VariableBoxer<TExposed, TBoxed> : IReadOnlyObservableVariable<TExposed> where TBoxed : struct, TExposed
 	{

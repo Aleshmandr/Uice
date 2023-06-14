@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class DelayVariableBindingProcessor<T> : VariableBindingProcessor<T, T>
 	{

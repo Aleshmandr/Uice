@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-namespace Juice
+namespace Uice
 {
 	public interface IPanelShowLauncher
 	{
-		IPanelShowLauncher WithViewModel(IViewModel viewModel);
+		IPanelShowLauncher WithContext(IContext context);
 		IPanelShowLauncher WithPriority(PanelPriority priority);
 		IPanelShowLauncher WithShowTransition(ITransition transition);
 		IPanelShowLauncher WithHideTransition(ITransition transition);

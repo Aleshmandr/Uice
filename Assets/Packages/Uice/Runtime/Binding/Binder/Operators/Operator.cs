@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Juice
+namespace Uice
 {
-	public abstract class Operator : ViewModelComponent, IViewModelInjector
+	public abstract class Operator : ContextComponent, IContextInjector
 	{
 		public Type InjectionType => GetInjectionType();
-		public ViewModelComponent Target => this;
+		public ContextComponent Target => this;
 
 		protected abstract Type GetInjectionType();
 

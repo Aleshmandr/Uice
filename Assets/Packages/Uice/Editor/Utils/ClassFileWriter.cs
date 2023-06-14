@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public static class ClassFileWriter
 	{

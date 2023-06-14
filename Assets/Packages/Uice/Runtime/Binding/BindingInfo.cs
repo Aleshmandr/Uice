@@ -1,18 +1,18 @@
 ﻿using System;
-using Juice.Plugins.Juice.Runtime.Utils;
+using Uice.Plugins.Juice.Runtime.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	[Serializable]
 	public class BindingInfo : ISerializationCallbackReceiver
 	{
 		public Type Type => type.Type;
 
-		public ViewModelComponent ViewModelContainer
+		public ContextComponent ContextContainer
 		{
-			get => viewModelContainer;
-			set => viewModelContainer = value;
+			get => contextContainer;
+			set => contextContainer = value;
 		}
 
 		public string PropertyName => propertyName;
@@ -20,7 +20,7 @@ namespace Juice
 		public BindingPath Path => path;
 
 		[SerializeField] protected SerializableType type;
-		[SerializeField] private ViewModelComponent viewModelContainer;
+		[SerializeField] private ContextComponent contextContainer;
 		[SerializeField] private string propertyName;
 		[SerializeField] private bool forceDynamicBinding;
 		[SerializeField] private BindingPath path;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public interface IObservableCollection<T> : IList<T>, IReadOnlyObservableCollection<T>
 	{

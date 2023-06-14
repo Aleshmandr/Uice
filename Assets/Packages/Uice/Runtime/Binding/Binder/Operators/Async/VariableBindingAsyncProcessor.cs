@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class VariableBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IViewModel ViewModel { get; }
+		public IContext Context { get; }
 
 		protected readonly VariableBinding<TFrom> variableBinding;
 		protected readonly ObservableVariable<TTo> processedVariable;
@@ -13,7 +13,7 @@ namespace Juice
 		protected VariableBindingAsyncProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedVariable = new ObservableVariable<TTo>();
-			ViewModel = new OperatorVariableViewModel<TTo>(processedVariable);
+			Context = new OperatorVariableContext<TTo>(processedVariable);
 			variableBinding = new VariableBinding<TFrom>(bindingInfo, context);
 			variableBinding.Property.Changed += BoundVariableChangedHandler;
 		}

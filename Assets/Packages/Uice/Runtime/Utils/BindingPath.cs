@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Juice.Plugins.Juice.Runtime.Utils
+namespace Uice.Plugins.Juice.Runtime.Utils
 {
 	[Serializable]
 	public struct BindingPath

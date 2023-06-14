@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Events;
 
-namespace Juice
+namespace Uice
 {
 	public class CommandBindingSubscriber
 	{

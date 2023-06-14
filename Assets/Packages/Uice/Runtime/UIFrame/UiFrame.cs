@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class UiFrame : MonoBehaviour
 	{

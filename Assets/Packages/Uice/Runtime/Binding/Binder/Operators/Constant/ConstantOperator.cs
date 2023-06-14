@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class ConstantOperator<T> : Operator
 	{
@@ -14,7 +14,7 @@ namespace Juice
 			base.Awake();
 
 			exposedVariable = new ObservableVariable<T>();
-			ViewModel = new OperatorVariableViewModel<T>(exposedVariable);
+			Context = new OperatorVariableContext<T>(exposedVariable);
 
 			RegisterVariable<T>(value)
 				.OnChanged(OnChanged)
@@ -23,7 +23,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableViewModel<T>);
+			return typeof(OperatorVariableContext<T>);
 		}
 
 		private void OnChanged(T newValue)

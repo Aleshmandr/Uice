@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Juice.Tests
+namespace Uice.Tests
 {
 	public class BindingUtilsTests
 	{

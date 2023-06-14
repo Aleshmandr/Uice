@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public interface IObservableVariable<T> : IReadOnlyObservableVariable<T>
 	{

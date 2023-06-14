@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class EventBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IViewModel ViewModel { get; }
+		public IContext Context { get; }
 
 		protected readonly EventBinding<TFrom> eventBinding;
 		protected readonly ObservableEvent<TTo> processedEvent;
@@ -13,7 +13,7 @@ namespace Juice
 		public EventBindingAsyncProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedEvent = new ObservableEvent<TTo>();
-			ViewModel = new OperatorEventViewModel<TTo>(processedEvent);
+			Context = new OperatorEventContext<TTo>(processedEvent);
 			eventBinding = new EventBinding<TFrom>(bindingInfo, context);
 			eventBinding.Property.Raised += BoundEventRaisedHandler;
 		}

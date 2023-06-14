@@ -1,10 +1,10 @@
 using System;
-using Juice.Tweening;
+using Uice.Tweening;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
 
-namespace Juice
+namespace Uice
 {
 	public static class AotHelper
 	{

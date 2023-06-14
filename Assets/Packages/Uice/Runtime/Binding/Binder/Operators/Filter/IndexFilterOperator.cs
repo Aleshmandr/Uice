@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class IndexFilterOperator<T> : Operator
 	{
@@ -15,7 +15,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableViewModel<T>);
+			return typeof(OperatorVariableContext<T>);
 		}
 
 		protected override void Awake()
@@ -23,7 +23,7 @@ namespace Juice
 			base.Awake();
 
 			exposedVariable = new ObservableVariable<T>();
-			ViewModel = new OperatorVariableViewModel<T>(exposedVariable);
+			Context = new OperatorVariableContext<T>(exposedVariable);
 
 			indexBinding = RegisterVariable<int>(index)
 				.OnChanged(OnIndexChanged)

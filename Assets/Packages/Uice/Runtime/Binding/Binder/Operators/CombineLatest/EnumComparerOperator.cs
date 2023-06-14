@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class EnumComparerOperator<T> : Operator
 	{
@@ -17,7 +17,7 @@ namespace Juice
 			base.Awake();
 			
 			result = new ObservableVariable<bool>();
-			ViewModel = new OperatorVariableViewModel<bool>(result);
+			Context = new OperatorVariableContext<bool>(result);
 
 			operandABinding = RegisterVariable<T>(operandA).OnChanged(OperandChangedHandler).GetBinding();
 			operandBBinding = RegisterVariable<T>(operandB).OnChanged(OperandChangedHandler).GetBinding();
@@ -25,7 +25,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableViewModel<bool>);
+			return typeof(OperatorVariableContext<bool>);
 		}
 		
 		private  void OperandChangedHandler(T newValue)

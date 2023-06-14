@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Juice
+namespace Uice
 {
 	public class DateTimeToStringOperator : ToOperator<DateTime, string>
 	{

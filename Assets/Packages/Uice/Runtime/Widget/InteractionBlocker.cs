@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Juice
+namespace Uice
 {
 	[RequireComponent(typeof(GraphicRaycaster))]
 	public class InteractionBlocker : MonoBehaviour

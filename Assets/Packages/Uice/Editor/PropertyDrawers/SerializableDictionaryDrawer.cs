@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Juice.Collections;
+using Uice.Collections;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(SerializableDictionary), true)]
 	public class SerializableDictionaryDrawer : PropertyDrawer

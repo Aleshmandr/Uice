@@ -1,4 +1,4 @@
-﻿namespace Juice.Pooling
+﻿namespace Uice.Pooling
 {
 	public interface IPoolable
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Juice
+namespace Uice
 {
 	public interface IWindowHideLauncher
 	{

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Juice
+namespace Uice
 {
 	public static class UIFrameUtility
 	{

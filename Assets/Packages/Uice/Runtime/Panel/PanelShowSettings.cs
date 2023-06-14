@@ -1,19 +1,19 @@
 ﻿using System;
 
-namespace Juice
+namespace Uice
 {
 	public class PanelShowSettings : IViewShowSettings
 	{
 		public Type ViewType { get; }
-		public IViewModel ViewModel { get; }
+		public IContext Context { get; }
 		public PanelPriority? Priority { get; }
 		public ITransition ShowTransition { get; }
 		public ITransition HideTransition { get; }
 
-		public PanelShowSettings(Type viewType, IViewModel viewModel, PanelPriority? priority,ITransition showTransition, ITransition hideTransition)
+		public PanelShowSettings(Type viewType, IContext context, PanelPriority? priority,ITransition showTransition, ITransition hideTransition)
 		{
 			ViewType = viewType;
-			ViewModel = viewModel;
+			Context = context;
 			Priority = priority;
 			ShowTransition = showTransition;
 			HideTransition = hideTransition;

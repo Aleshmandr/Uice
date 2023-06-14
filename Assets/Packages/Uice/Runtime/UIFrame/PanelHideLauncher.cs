@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public class PanelHideLauncher : IPanelHideLauncher
 	{

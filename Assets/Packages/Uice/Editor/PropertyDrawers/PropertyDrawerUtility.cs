@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public class PropertyDrawerUtility
 	{

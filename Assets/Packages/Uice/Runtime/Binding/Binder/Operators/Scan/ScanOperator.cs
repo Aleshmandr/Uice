@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public abstract class ScanOperator<T> : ProcessorOperator<T, T>
 	{

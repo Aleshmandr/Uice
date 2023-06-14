@@ -1,8 +1,8 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public interface IBindingProcessor
 	{
-		IViewModel ViewModel { get; }
+		IContext Context { get; }
 
 		void Bind();
 		void Unbind();

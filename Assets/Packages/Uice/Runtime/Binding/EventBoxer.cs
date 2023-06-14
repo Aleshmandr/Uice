@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public class EventBoxer<TExposed, TBoxed> : IObservableEvent<TExposed> where TBoxed : struct, TExposed
 	{

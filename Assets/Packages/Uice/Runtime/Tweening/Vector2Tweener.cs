@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juice.Tweening
+namespace Uice.Tweening
 {
 	public class Vector2Tweener : Tweener<Vector2>
 	{

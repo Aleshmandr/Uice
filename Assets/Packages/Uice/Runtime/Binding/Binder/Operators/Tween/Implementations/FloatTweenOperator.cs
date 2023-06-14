@@ -1,6 +1,6 @@
-﻿using Juice.Tweening;
+﻿using Uice.Tweening;
 
-namespace Juice
+namespace Uice
 {
 	public class FloatTweenOperator : TweenOperator<float>
 	{

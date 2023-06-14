@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class ToCollectionBindingProcessor<TFrom, TTo> : CollectionBindingProcessor<TFrom, TTo>
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public delegate void SignalDelegate<T>(T signal) where T : ISignal;
 

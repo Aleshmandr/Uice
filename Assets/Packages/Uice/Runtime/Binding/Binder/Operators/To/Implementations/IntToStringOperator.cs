@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public class IntToStringOperator : ToOperator<int, string>
 	{

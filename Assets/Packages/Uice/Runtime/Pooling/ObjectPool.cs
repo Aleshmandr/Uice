@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace Juice.Pooling
+namespace Uice.Pooling
 {
 	public class ObjectPool : MonoBehaviour
 	{

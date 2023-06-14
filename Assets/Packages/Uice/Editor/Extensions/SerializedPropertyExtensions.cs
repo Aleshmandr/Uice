@@ -5,7 +5,7 @@
  using UnityEditor;
  using UnityEngine;
 
- namespace Juice.Editor 
+ namespace Uice.Editor 
  {
 	 /// <summary>
 	 /// Extension class for SerializedProperties

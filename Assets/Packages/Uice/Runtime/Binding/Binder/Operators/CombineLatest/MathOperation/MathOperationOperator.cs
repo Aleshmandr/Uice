@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class MathOperationOperator<T> : BindingListOperator<T, T>
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Juice.Pooling;
+using Uice.Pooling;
 
-namespace Juice
+namespace Uice
 {
 	public class ObservableCollection<T> : Collection<T>, IObservableCollection<T>
 	{

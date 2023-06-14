@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Juice.Utils
+namespace Uice.Utils
 {
 	public static class TypeExtensions
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class MergeOperator<T> : BindingListOperator<T, T>
 	{

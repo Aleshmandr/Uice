@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using UnityEngine;
 using TMPro;
-using Juice.Utils;
+using Uice.Utils;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace Juice
+namespace Uice
 {
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class TextMeshProDropdownBinder : ComponentBinder

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Juice.Utils;
+using Uice.Utils;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowShowLauncher : IWindowShowLauncher
 	{
@@ -11,7 +11,7 @@ namespace Juice
 		private readonly Func<WindowShowSettings, Task> showCallback;
 		private readonly Dictionary<string, object> payload;
 
-		private IViewModel viewModel;
+		private IContext context;
 		private ITransition showTransition;
 		private ITransition hideTransition;
 		private WindowPriority? priority;
@@ -25,9 +25,9 @@ namespace Juice
 			payload = new Dictionary<string, object>();
 		}
 
-		public IWindowShowLauncher WithViewModel(IViewModel viewModel)
+		public IWindowShowLauncher WithContext(IContext context)
 		{
-			this.viewModel = viewModel;
+			this.context = context;
 			return this;
 		}
 		
@@ -99,7 +99,7 @@ namespace Juice
 		{
 			return new WindowShowSettings(
 				windowType,
-				viewModel,
+				context,
 				payload,
 				showTransition,
 				hideTransition,

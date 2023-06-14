@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Juice
+namespace Uice
 {
 	public class WindowShowSettings : IViewShowSettings
 	{
 		public Type ViewType { get; }
-		public IViewModel ViewModel { get; set; }
+		public IContext Context { get; set; }
 		public Dictionary<string, object> Payload { get; }
 		public ITransition ShowTransition { get; }
 		public ITransition HideTransition { get; }
@@ -16,7 +16,7 @@ namespace Juice
 
 		public WindowShowSettings(
 			Type windowType,
-			IViewModel viewModel,
+			IContext context,
 			Dictionary<string, object> payload,
 			ITransition showTransition,
 			ITransition hideTransition,
@@ -25,7 +25,7 @@ namespace Juice
 			Type stubViewType)
 		{
 			ViewType = windowType;
-			ViewModel = viewModel;
+			Context = context;
 			Payload = payload;
 			ShowTransition = showTransition;
 			HideTransition = hideTransition;

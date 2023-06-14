@@ -1,11 +1,11 @@
 using System.Linq;
 using UnityEditor;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	public static class AssetDatabaseUtils
 	{
-		public static string EditorPath => PathUp(FindAssetPath("Juice.Editor"));
+		public static string EditorPath => PathUp(FindAssetPath("Uice.Editor"));
 		public static string IconsPath => $"{EditorPath}Icons/";
 
 		public static string FindAssetPath(string assetName)

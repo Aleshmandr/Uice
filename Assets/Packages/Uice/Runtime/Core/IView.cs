@@ -1,4 +1,4 @@
-﻿namespace Juice
+﻿namespace Uice
 {
 	public delegate void ViewEventHandler(IView controller);
 
@@ -9,6 +9,6 @@
 
 		bool IsInteractable { get; set; }
 
-		void SetViewModel(IViewModel viewModel);
+		void SetContext(IContext context);
 	}
 }

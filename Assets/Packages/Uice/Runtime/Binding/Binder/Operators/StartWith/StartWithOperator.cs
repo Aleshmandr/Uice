@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public abstract class StartWithOperator<T> : Operator
 	{
@@ -22,7 +22,7 @@ namespace Juice
 			initialBinding = new VariableBinding<T>(initialValue, this);
 			
 			exposedProperty = new ObservableVariable<T>();
-			ViewModel = new OperatorVariableViewModel<T>(exposedProperty);
+			Context = new OperatorVariableContext<T>(exposedProperty);
 		}
 
 		protected override void OnEnable()
@@ -46,7 +46,7 @@ namespace Juice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableViewModel<T>);
+			return typeof(OperatorVariableContext<T>);
 		}
 
 		private void OnBoundPropertyChanged(T newValue)

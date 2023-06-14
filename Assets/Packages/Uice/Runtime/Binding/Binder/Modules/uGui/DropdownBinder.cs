@@ -1,11 +1,11 @@
-using Juice.Utils;
+using Uice.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace Juice
+namespace Uice
 {
 	[RequireComponent(typeof(Dropdown))]
 	public class DropdownBinder : ComponentBinder

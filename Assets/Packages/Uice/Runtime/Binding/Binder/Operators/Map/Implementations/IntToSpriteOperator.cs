@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class IntToSpriteOperator : MapOperator<int, Sprite>
 	{

@@ -1,22 +1,22 @@
 using System;
 using System.Collections.Generic;
-using Juice.Pooling;
-using Juice.Utils;
+using Uice.Utils;
+using Uice.Pooling;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class SpawnPrefabBinder: ComponentBinder
 	{
 		private Transform Parent => parent ? parent : transform;
 
 		[SerializeField] private BindingInfo objectToInstantiate = BindingInfo.Variable<object>();
-		[SerializeField] private List<BindableViewModelComponent> prefabs;
+		[SerializeField] private List<BindableContextComponent> prefabs;
 		[SerializeField] private Transform parent;
 		[SerializeField] private ObjectPool pool;
 
-		private PrefabPicker<BindableViewModelComponent> prefabPicker;
-		private BindableViewModelComponent currentItem;
+		private PrefabPicker<BindableContextComponent> prefabPicker;
+		private BindableContextComponent currentItem;
 
 		protected void Reset()
 		{
@@ -39,7 +39,7 @@ namespace Juice
 				.OnChanged(OnObjectChanged)
 				.OnCleared(OnObjectCleared);
 
-			prefabPicker = new PrefabPicker<BindableViewModelComponent>(prefabs);
+			prefabPicker = new PrefabPicker<BindableContextComponent>(prefabs);
 			currentItem = null;
 
 			if (!pool)
@@ -47,7 +47,7 @@ namespace Juice
 				pool = this.GetOrAddComponent<ObjectPool>();
 			}
 
-			foreach (BindableViewModelComponent prefab in prefabs)
+			foreach (BindableContextComponent prefab in prefabs)
 			{
 				pool.CreatePool(prefab, 1);
 			}
@@ -55,7 +55,7 @@ namespace Juice
 
 		private void OnObjectChanged(object value)
 		{
-			BindableViewModelComponent bestPrefab = prefabPicker.FindBestPrefab(value);
+			BindableContextComponent bestPrefab = prefabPicker.FindBestPrefab(value);
 
 			if (bestPrefab)
 			{
@@ -79,7 +79,7 @@ namespace Juice
 			Clear();
 		}
 
-		private BindableViewModelComponent SpawnItem(BindableViewModelComponent prefab, Transform parent)
+		private BindableContextComponent SpawnItem(BindableContextComponent prefab, Transform parent)
 		{
 			Clear();
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice.Utils
+namespace Uice.Utils
 {
 	public static class TaskExtensions
 	{

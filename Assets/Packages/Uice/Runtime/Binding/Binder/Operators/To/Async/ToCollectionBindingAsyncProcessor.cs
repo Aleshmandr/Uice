@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juice
+namespace Uice
 {
 	public class ToCollectionBindingAsyncProcessor<TFrom, TTo> : CollectionBindingAsyncProcessor<TFrom, TTo>
 	{

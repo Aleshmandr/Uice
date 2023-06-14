@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Juice.Editor
+namespace Uice.Editor
 {
 	[CustomPropertyDrawer(typeof(ConstantBindingInfo), true)]
 	public class ConstantBindingInfoDrawer : BindingInfoDrawer
