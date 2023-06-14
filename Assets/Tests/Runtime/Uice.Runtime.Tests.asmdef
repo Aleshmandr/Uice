@@ -1,9 +1,10 @@
 {
-    "name": "Juice.Runtime.Tests",
+    "name": "Uice.Runtime.Tests",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Juice.Runtime"
+        "Uice.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

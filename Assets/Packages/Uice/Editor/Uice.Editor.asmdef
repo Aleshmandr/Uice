@@ -1,5 +1,6 @@
 {
-    "name": "Juice.Editor",
+    "name": "Uice.Editor",
+    "rootNamespace": "",
     "references": [
         "GUID:6640779ff9805d44f99b6eadf414d408"
     ],
