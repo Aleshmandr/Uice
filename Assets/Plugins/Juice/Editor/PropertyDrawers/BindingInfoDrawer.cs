@@ -207,7 +207,7 @@ namespace Juice.Editor
 
 			CacheMap.TryGetValue(cacheId, out cache);
 
-			if (cache != null && (cache.BaseComponent || cache.BaseComponent.transform.parent != cache.LastParent))
+			if (cache != null && (cache.BaseComponent == null || cache.BaseComponent.transform.parent != cache.LastParent))
 			{
 				cache = null;
 			}
