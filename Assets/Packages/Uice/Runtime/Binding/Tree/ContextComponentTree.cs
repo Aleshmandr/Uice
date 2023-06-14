@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Uice.Plugins.Juice.Runtime.Utils;
+using Uice.Utils;
 using UnityEngine;
 
 namespace Uice

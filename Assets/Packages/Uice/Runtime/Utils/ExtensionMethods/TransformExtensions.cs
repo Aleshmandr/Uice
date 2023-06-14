@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace Uice.Plugins.Juice.Runtime.Utils.ExtensionMethods
+namespace Uice.Utils
 {
 	public static class TransformExtensions
 	{

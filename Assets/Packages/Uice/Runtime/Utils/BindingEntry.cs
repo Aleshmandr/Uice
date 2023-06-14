@@ -1,5 +1,5 @@
 using System;
-using Uice.Plugins.Juice.Runtime.Utils;
+using Uice.Utils;
 
 namespace Uice
 {
