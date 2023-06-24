@@ -1,29 +1,23 @@
 ﻿namespace Uice
 {
-	public abstract class Context : IContext
-	{
-		public bool IsEnabled { get; private set; }
+    public abstract class Context : IContext
+    {
+        public bool IsEnabled { get; private set; }
 
-		public void Enable()
-		{
-			IsEnabled = true;
-			OnEnable();
-		}
+        public void Enable()
+        {
+            IsEnabled = true;
+            OnEnable();
+        }
 
-		public void Disable()
-		{
-			IsEnabled = false;
-			OnDisable();
-		}
+        public void Disable()
+        {
+            IsEnabled = false;
+            OnDisable();
+        }
 
-		protected virtual void OnEnable()
-		{
+        protected virtual void OnEnable() { }
 
-		}
-
-		protected virtual void OnDisable()
-		{
-
-		}
-	}
+        protected virtual void OnDisable() { }
+    }
 }

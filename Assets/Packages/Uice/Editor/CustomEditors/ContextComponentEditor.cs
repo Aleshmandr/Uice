@@ -131,7 +131,7 @@ namespace Uice.Editor
 
 				if (showContextInfo)
 				{
-					GUILayout.Box("", new[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
+					GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(1));
 
 					foreach (BindingEntry entry in BindingUtils.GetAllBindings(ContextComponent.ExpectedType, ContextComponent))
 					{
@@ -140,9 +140,33 @@ namespace Uice.Editor
 					}
 				}
 
+				DrawContextEdit();
+				
 				EditorGUI.indentLevel--;
 
 				GUILayout.EndVertical();
+			}
+		}
+		
+		private void DrawContextEdit()
+		{
+			if (GUILayout.Button("Edit")) {
+				var scriptName = ContextComponent.ExpectedType.Name;
+				string[] guids = AssetDatabase.FindAssets($"t:script {scriptName}");
+				if (guids.Length > 0)
+				{
+					foreach (var guid in guids)
+					{
+						string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+						MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(assetPath);
+						if (script != null && script.GetClass() == ContextComponent.ExpectedType)
+						{
+							AssetDatabase.OpenAsset(script);
+							return;
+						}
+					}
+				} 
+				Debug.LogError($"Can't find {scriptName}.cs to edit. Does the class name match the file name?");
 			}
 		}
 
