@@ -5,7 +5,7 @@ namespace Uice
 {
 	public class ViewRegisterer : MonoBehaviour
 	{
-		[SerializeField] private UiFrame uiFrame;
+		[SerializeField] private UIFrame uiFrame;
 
 		private void Start()
 		{

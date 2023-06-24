@@ -8,6 +8,9 @@ namespace Uice
 	{
 		public event ObservableVariableEventHandler<T> Changed;
 		public event ObservableVariableClearEventHandler Cleared;
+		
+		private T value;
+		private EqualityComparer<T> equalityComparer;
 
 		public bool HasValue { get; protected set; }
 
@@ -24,10 +27,7 @@ namespace Uice
 				}
 			}
 		}
-
-		private T value;
-		private EqualityComparer<T> equalityComparer;
-
+		
 		public ObservableVariable()
 		{
 			equalityComparer = EqualityComparer<T>.Default;
@@ -41,6 +41,16 @@ namespace Uice
 		public ObservableVariable(EqualityComparer<T> equalityComparer) : this()
 		{
 			this.equalityComparer = equalityComparer;
+		}
+		
+		public static implicit operator T(ObservableVariable<T> value)
+		{
+			return value.Value;
+		}
+
+		public static implicit operator ObservableVariable<T>(T value)
+		{
+			return new ObservableVariable<T> { Value = value };
 		}
 		
 		public void Clear()

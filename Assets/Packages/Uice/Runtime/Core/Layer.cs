@@ -12,9 +12,9 @@ namespace Uice
 	{
 		protected readonly Dictionary<Type, TView> registeredViews = new Dictionary<Type, TView>();
 
-		protected UiFrame uiFrame;
+		protected UIFrame uiFrame;
 
-		public virtual void Initialize(UiFrame uiFrame)
+		public virtual void Initialize(UIFrame uiFrame)
 		{
 			this.uiFrame = uiFrame;
 		}

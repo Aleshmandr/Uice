@@ -11,7 +11,7 @@ namespace Uice.Tests
 	{
 		private static readonly string PanelAPath = "Assets/Tests/Runtime/Prefabs/Panel A.prefab";
 
-		private UiFrame uiFrame;
+		private UIFrame uiFrame;
 
 		[SetUp]
 		public void Setup()

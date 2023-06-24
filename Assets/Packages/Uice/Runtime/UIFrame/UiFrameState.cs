@@ -1,11 +1,11 @@
 ﻿namespace Uice
 {
-	public class UiFrameState
+	public class UIFrameState
 	{
 		public WindowLayerState WindowLayerState { get; }
 		public PanelLayerState PanelLayerState { get; }
 
-		public UiFrameState(WindowLayerState windowLayerState, PanelLayerState panelLayerState)
+		public UIFrameState(WindowLayerState windowLayerState, PanelLayerState panelLayerState)
 		{
 			WindowLayerState = windowLayerState;
 			PanelLayerState = panelLayerState;

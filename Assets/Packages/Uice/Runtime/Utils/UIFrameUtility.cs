@@ -9,10 +9,10 @@ namespace Uice
 	{
 		private static readonly string UIMaskName = "UI";
 
-		public static UiFrame CreateDefaultUIFrame()
+		public static UIFrame CreateDefaultUIFrame()
 		{
 			GameObject uiFrame = new GameObject("UI Frame");
-			UiFrame result = uiFrame.AddComponent<UiFrame>();
+			UIFrame result = uiFrame.AddComponent<UIFrame>();
 
 			Camera camera = CreateCamera();
 			camera.transform.SetParent(uiFrame.transform);

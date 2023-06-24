@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Uice
 {
-	public class UiFrame : MonoBehaviour
+	public class UIFrame : MonoBehaviour
 	{
 		public event WindowLayer.WindowChangeHandler CurrentWindowChanged;
 		public event WindowLayer.HistoryEntryDiscardHandler HistoryEntryDiscarded;
@@ -91,12 +91,12 @@ namespace Uice
 			mainBlockingTracker.IsInteractableChanged += OnIsInteractableChanged;
 		}
 
-		public UiFrameState GetCurrentState()
+		public UIFrameState GetCurrentState()
 		{
-			return new UiFrameState(windowLayer.GetCurrentState(), panelLayer.GetCurrentState());
+			return new UIFrameState(windowLayer.GetCurrentState(), panelLayer.GetCurrentState());
 		}
 
-		public void SetState(UiFrameState state)
+		public void SetState(UIFrameState state)
 		{
 			IEnumerable<IView> allViews = state.WindowLayerState.WindowHistory.Select(x => x.Window as IView)
 				.Concat(state.WindowLayerState.WindowQueue.Select(x => x.Window as IView))

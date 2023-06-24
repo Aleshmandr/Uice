@@ -7,10 +7,10 @@ namespace Uice
 		[SerializeField] private ConstantBindingInfo<Transform> target = new ConstantBindingInfo<Transform>();
 		[SerializeField] private ConstantBindingInfo<Vector2> offset = new ConstantBindingInfo<Vector2>();
 		
-		private UiFrame UIFrame => GetUIFrameCache();
+		private UIFrame UIFrame => GetUIFrameCache();
 
 		private Camera mainCamera;
-		private UiFrame uiFrameCache;
+		private UIFrame uiFrameCache;
 		private RectTransform referenceTransform;
 		private VariableBinding<Transform> targetBinding;
 		private VariableBinding<Vector2> offsetBinding;
@@ -40,11 +40,11 @@ namespace Uice
 			}
 		}
 
-		private UiFrame GetUIFrameCache()
+		private UIFrame GetUIFrameCache()
 		{
 			if (!uiFrameCache)
 			{
-				uiFrameCache = GetComponentInParent<UiFrame>();
+				uiFrameCache = GetComponentInParent<UIFrame>();
 			}
 
 			return uiFrameCache;
