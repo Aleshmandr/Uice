@@ -60,10 +60,7 @@ namespace Uice
 		{
 			if (HasToBeDynamicallyBound())
 			{
-				bindingInfo.ContextContainer = ContextComponentTree.FindBindableComponent(
-					bindingInfo.Path,
-					GetBindingType(),
-					context.transform);
+				bindingInfo.ContextContainer = ContextComponentTree.FindBindableComponent(bindingInfo.Path, GetBindingType(), context.transform);
 			}
 
 			if (bindingInfo.ContextContainer)
@@ -113,7 +110,7 @@ namespace Uice
 
 		private bool HasToBeDynamicallyBound()
 		{
-			return bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer && string.IsNullOrEmpty(bindingInfo.PropertyName) == false;
+			return (bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer) && !string.IsNullOrEmpty(bindingInfo.PropertyName);
 		}
 
 		private void OnContextChanged(object sender, IContext lastContext, IContext newContext)

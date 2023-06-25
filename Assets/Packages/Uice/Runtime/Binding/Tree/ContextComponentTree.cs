@@ -146,7 +146,7 @@ namespace Uice
 			ContextComponentTreeNode result = null;
 			Transform currentTransform = context;
 
-			while (currentTransform != null && NodesByTransform.TryGetValue(currentTransform, out result))
+			while (currentTransform != null && !NodesByTransform.TryGetValue(currentTransform, out result))
 			{
 				currentTransform = currentTransform.parent;
 			}
