@@ -47,7 +47,7 @@ namespace Uice.Editor
 		}
 
 		private const string ContextContainerId = "contextContainer";
-		private const string PropertyNameId = "propertyName";
+		private const string PropertyPathId = "path";
 		private const string ForceDynamicBindingId = "forceDynamicBinding";
 
 		private static readonly float MoreMenuWidth = EditorGUIUtility.singleLineHeight;
@@ -171,12 +171,12 @@ namespace Uice.Editor
 
 		private static string GetPropertyName(SerializedProperty bindingInfoProperty)
 		{
-			return bindingInfoProperty.FindPropertyRelative(PropertyNameId).stringValue;
+			return bindingInfoProperty.FindPropertyRelative(PropertyPathId).stringValue;
 		}
 
 		private static void SetPropertyName(SerializedProperty bindingInfoProperty, string value)
 		{
-			bindingInfoProperty.FindPropertyRelative(PropertyNameId).stringValue = value;
+			bindingInfoProperty.FindPropertyRelative(PropertyPathId).stringValue = value;
 		}
 
 		private static bool GetForceDynamicBinding(SerializedProperty bindingInfoProperty)
@@ -331,7 +331,7 @@ namespace Uice.Editor
 			position.x += indicatorRect.width;
 			position.width -= indicatorRect.width;
 
-			EditorGUI.PropertyField(position, property.FindPropertyRelative(PropertyNameId), GUIContent.none);
+			EditorGUI.PropertyField(position, property.FindPropertyRelative(PropertyPathId), GUIContent.none);
 		}
 	}
 }

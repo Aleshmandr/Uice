@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Uice.Utils;
 using UnityEngine;
 
@@ -75,7 +74,7 @@ namespace Uice
 					}
 					else
 					{
-						Debug.LogError($"Property \"{bindingInfo.Path.PropertyName}\" not found in {bindingInfo.ContextContainer.Context.GetType()} class.", context);
+						Debug.LogError($"Property \"{bindingInfo.Path}\" not found in {bindingInfo.ContextContainer.Context.GetType()} class.", context);
 					}
 				}
 
@@ -83,34 +82,9 @@ namespace Uice
 			}
 		}
 
-		private static ContextComponent FindContextComponent(Transform context, Type targetType, string propertyPath)
-		{
-			ContextComponent result = null;
-
-			BindingPath path = new BindingPath(propertyPath);
-
-			using (IEnumerator<BindingEntry> iterator = BindingUtils.GetBindings(context, targetType).GetEnumerator())
-			{
-				while (!result && iterator.MoveNext())
-				{
-					BindingEntry current = iterator.Current;
-
-					bool match = string.IsNullOrEmpty(path.ComponentId) || path.ComponentId == current.Path.ComponentId;
-					match &= path.PropertyName == current.Path.PropertyName;
-
-					if (match)
-					{
-						result = iterator.Current.ContextComponent;
-					}
-				}
-			}
-
-			return result;
-		}
-
 		private bool HasToBeDynamicallyBound()
 		{
-			return (bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer) && !string.IsNullOrEmpty(bindingInfo.PropertyName);
+			return (bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer) && !string.IsNullOrEmpty(bindingInfo.Path);
 		}
 
 		private void OnContextChanged(object sender, IContext lastContext, IContext newContext)

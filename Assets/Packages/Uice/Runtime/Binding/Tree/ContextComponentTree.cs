@@ -60,7 +60,7 @@ namespace Uice
 			}
 		}
 
-		public static ContextComponent FindBindableComponent(BindingPath path, Type targetType, Transform context)
+		public static ContextComponent FindBindableComponent(string path, Type targetType, Transform context)
 		{
 			ContextComponent result = null;
 			Transform currentTransform = context;
@@ -68,23 +68,15 @@ namespace Uice
 
 			while (result == null && (currentNode = GetNextNodeTowardsRoot(currentTransform)) != null)
 			{
-				if (string.IsNullOrEmpty(path.ComponentId))
+				using (var components = currentNode.Components.Values.GetEnumerator())
 				{
-					using (var components = currentNode.Components.Values.GetEnumerator())
+					while (result == null && components.MoveNext())
 					{
-						while (result == null && components.MoveNext())
+						if (CanBeBound(components.Current, path, targetType))
 						{
-							if (CanBeBound(components.Current, path.PropertyName, targetType))
-							{
-								result = components.Current?.Component;
-							}
+							result = components.Current?.Component;
 						}
 					}
-				}
-				else if (currentNode.Components.TryGetValue(path.ComponentId, out var componentInfo)
-					&& CanBeBound(componentInfo, path.PropertyName, targetType))
-				{
-					result = componentInfo.Component;
 				}
 
 				currentTransform = currentNode.Transform.parent;
@@ -93,11 +85,11 @@ namespace Uice
 			return result;
 		}
 
-		public static object Bind(BindingPath path, ContextComponent component)
+		public static object Bind(string path, ContextComponent component)
 		{
 			Register(component);
 			ContextComponentTreeNode node = NodesByComponent[component];
-			return node.Components[component.Id].GetProperty(path.PropertyName);
+			return node.Components[component.Id].GetProperty(path);
 		}
 
 		private static void AddComponent(ContextComponent component)
