@@ -187,8 +187,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1554529544}
+  m_Children: []
   m_Father: {fileID: 1904225518}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,143 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priorityParaLayer: {fileID: 741518921}
---- !u!1 &325417422
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 325417423}
-  - component: {fileID: 325417426}
-  - component: {fileID: 325417425}
-  - component: {fileID: 325417424}
-  m_Layer: 5
-  m_Name: Header
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &325417423
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325417422}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1554529544}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -122}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &325417424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325417422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ccde638fa0461fb2e6431bffd61b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color:
-    type:
-      typeReference: Uice.IReadOnlyObservableVariable`1[[UnityEngine.Color, UnityEngine.CoreModule,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Uice.Runtime, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    contextContainer: {fileID: 0}
-    propertyName: 
-    forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: 
-  material:
-    type:
-      typeReference: Uice.IReadOnlyObservableVariable`1[[UnityEngine.Material, UnityEngine.CoreModule,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Uice.Runtime, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    contextContainer: {fileID: 0}
-    propertyName: 
-    forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: 
-  raycastTarget:
-    type:
-      typeReference: Uice.IReadOnlyObservableVariable`1[[System.Boolean, mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Uice.Runtime,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    contextContainer: {fileID: 0}
-    propertyName: 
-    forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: 
-  text:
-    type:
-      typeReference: Uice.IReadOnlyObservableVariable`1[[System.Object, mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Uice.Runtime,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    contextContainer: {fileID: 1554529547}
-    propertyName: Header
-    forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: Header
---- !u!114 &325417425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325417422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 120
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 201
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: Header
---- !u!222 &325417426
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325417422}
-  m_CullTransparentMesh: 1
 --- !u!1 &552212223
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1430952823}
   - component: {fileID: 1430952822}
+  - component: {fileID: 1430952824}
   m_Layer: 0
   m_Name: UI Frame
   m_TagString: Untagged
@@ -852,6 +715,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1430952824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430952821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20661181ba5472fae37c272c7a9cb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiFrame: {fileID: 1430952822}
+  myWindowPrefab: {fileID: 3541647119656925903, guid: 2641b5fa38a19c946aedc111511fcacd,
+    type: 3}
 --- !u!1 &1534902510
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,114 +798,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!1 &1554529543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1554529544}
-  - component: {fileID: 1554529547}
-  - component: {fileID: 1554529546}
-  - component: {fileID: 1554529545}
-  m_Layer: 5
-  m_Name: MyWindow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1554529544
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554529543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 325417423}
-  m_Father: {fileID: 125176855}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1554529545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554529543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46da2937788519543a537bbbabc011a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showTransition: {fileID: 0}
-  hideTransition: {fileID: 0}
-  transitionEvents:
-    OnShowing:
-      m_PersistentCalls:
-        m_Calls: []
-    OnShown:
-      m_PersistentCalls:
-        m_Calls: []
-    OnHiding:
-      m_PersistentCalls:
-        m_Calls: []
-    OnHidden:
-      m_PersistentCalls:
-        m_Calls: []
-  targetComponent: {fileID: 1554529547}
-  blockingTracker: {fileID: 1554529546}
-  isPopup: 0
-  windowQueuePriority: 0
-  hideOnForegroundLost: 1
-  closeOnShadowClick: 1
-  windowEvents:
-    OnFocusGained:
-      m_PersistentCalls:
-        m_Calls: []
-    OnFocusLost:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &1554529546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554529543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f9844d110b4842bd21aefe356367f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1554529547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554529543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b828154df54eadba5032357e3b21a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  expectedType:
-    typeReference: Uice.Examples.MyContext, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  id: 9997
 --- !u!1 &1778367663
 GameObject:
   m_ObjectHideFlags: 0
