@@ -15,7 +15,8 @@ namespace Uice.Examples
             {
                 Header = "Window Header",
                 Text = "Window Text",
-                Items = new ObservableCollection<MyItemContext>(new []{new MyItemContext("Item 1"), new MyItemContext("Item 2")})
+                Items = new ObservableCollection<MyItemContext>(new []{new MyItemContext("Item 1"), new MyItemContext("Item 2")}),
+                TestItem = new MyItemContext("Item Panel")
             };
             uiFrame.ShowWindow<MyWindow>().WithContext(myContext).Execute();
         }
