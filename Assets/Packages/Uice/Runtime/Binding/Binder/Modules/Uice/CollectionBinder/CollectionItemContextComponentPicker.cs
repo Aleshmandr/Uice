@@ -8,10 +8,10 @@ namespace Uice
 {
 	public class CollectionItemContextComponentPicker : ItemPicker
 	{
-		[SerializeField] private List<CollectionItemContextComponent> prefabs;
+		[SerializeField] private List<ContextComponent> prefabs;
 		[SerializeField] private ObjectPool pool;
 
-		private PrefabPicker<CollectionItemContextComponent> prefabPicker;
+		private PrefabPicker<ContextComponent> prefabPicker;
 		private bool isInitialized;
 
 		protected virtual void Awake()
@@ -19,38 +19,35 @@ namespace Uice
 			EnsureInitialState();
 		}
 
-		public override GameObject SpawnItem(int index, object value, Transform parent)
+		public override ContextComponent SpawnItem(int index, IContext value, Transform parent)
 		{
 			EnsureInitialState();
 
-			GameObject result;
-			CollectionItemContextComponent bestPrefab = prefabPicker.FindBestPrefab(value);
+			ContextComponent bestPrefab = prefabPicker.FindBestPrefab(value);
 
 			Assert.IsNotNull(bestPrefab, $"A suitable prefab could not be found for {value} ({value.GetType().GetPrettifiedName()}).");
 
-			result = SpawnItem(bestPrefab, parent);
-
-			return result;
+			return SpawnItem(bestPrefab, parent);
 		}
 
-		public override GameObject ReplaceItem(int index, object oldValue, object newValue, GameObject currentItem, Transform parent)
+		public override ContextComponent ReplaceItem(int index, IContext oldValue, IContext newValue, ContextComponent currentItem, Transform parent)
 		{
 			EnsureInitialState();
 
-			GameObject result = currentItem;
+			ContextComponent result = currentItem;
 
 			var prefabForOldValue = prefabPicker.FindBestPrefab(oldValue);
 			var prefabForNewValue = prefabPicker.FindBestPrefab(newValue);
 
 			if (ReferenceEquals(prefabForOldValue, prefabForNewValue) == false)
 			{
-				result = SpawnItem(prefabForNewValue, parent).gameObject;
+				result = SpawnItem(prefabForNewValue, parent);
 			}
 
 			return result;
 		}
 
-		public override void DisposeItem(int index, GameObject item)
+		public override void DisposeItem(int index, ContextComponent item)
 		{
 			EnsureInitialState();
 
@@ -60,7 +57,7 @@ namespace Uice
 			}
 			else
 			{
-				Destroy(item);
+				Destroy(item.gameObject);
 			}
 		}
 
@@ -70,21 +67,21 @@ namespace Uice
 			{
 				isInitialized = true;
 
-				prefabPicker = new PrefabPicker<CollectionItemContextComponent>(prefabs);
+				prefabPicker = new PrefabPicker<ContextComponent>(prefabs);
 			}
 		}
 
-		private GameObject SpawnItem(CollectionItemContextComponent bestPrefab, Transform parent)
+		private ContextComponent SpawnItem(ContextComponent bestPrefab, Transform parent)
 		{
-			GameObject result;
+			ContextComponent result;
 
 			if (pool)
 			{
-				result = pool.Spawn(bestPrefab, parent).gameObject;
+				result = pool.Spawn(bestPrefab, parent);
 			}
 			else
 			{
-				result = Instantiate(bestPrefab, parent).gameObject;
+				result = Instantiate(bestPrefab, parent);
 			}
 
 			return result;

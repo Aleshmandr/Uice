@@ -6,17 +6,16 @@ namespace Uice
 {
 	public class CollectionBinder : ComponentBinder
 	{
-		public IReadOnlyList<GameObject> Items => currentItems;
+		public IReadOnlyList<ContextComponent> Items => currentItems;
 
 		[SerializeField] private BindingInfo collection = BindingInfo.Collection<object>();
 		[SerializeField] private Transform itemsContainer = default;
 		[Header("Dependencies")]
 		[SerializeField] protected ItemPicker itemPicker = default;
-		[SerializeField] protected ItemSetter itemSetter = default;
 
 		private Transform Container => itemsContainer ? itemsContainer : transform;
 
-		private readonly List<GameObject> currentItems = new List<GameObject>();
+		private readonly List<ContextComponent> currentItems = new();
 
 		protected virtual void OnValidate()
 		{
@@ -31,9 +30,8 @@ namespace Uice
 			base.Awake();
 
 			Assert.IsNotNull(itemPicker, $"A {nameof(CollectionBinder)} needs an {nameof(ItemPicker)} to work.");
-			Assert.IsNotNull(itemSetter, $"A {nameof(CollectionBinder)} needs an {nameof(ItemSetter)} to work.");
 
-			RegisterCollection<object>(collection)
+			RegisterCollection<IContext>(collection)
 				.OnReset(OnCollectionReset)
 				.OnItemAdded(OnCollectionItemAdded)
 				.OnItemMoved(OnCollectionItemMoved)
@@ -46,22 +44,22 @@ namespace Uice
 			ClearItems();
 		}
 
-		protected virtual void OnCollectionItemAdded(int index, object value)
+		protected virtual void OnCollectionItemAdded(int index, IContext value)
 		{
 			InsertItem(index, value);
 		}
 
-		protected virtual void OnCollectionItemMoved(int oldIndex, int newIndex, object value)
+		protected virtual void OnCollectionItemMoved(int oldIndex, int newIndex, IContext value)
 		{
 			MoveItem(oldIndex, newIndex);
 		}
 
-		protected virtual void OnCollectionItemRemoved(int index, object value)
+		protected virtual void OnCollectionItemRemoved(int index, IContext value)
 		{
 			RemoveItem(index);
 		}
 
-		protected virtual void OnCollectionItemReplaced(int index, object oldValue, object newValue)
+		protected virtual void OnCollectionItemReplaced(int index, IContext oldValue, IContext newValue)
 		{
 			currentItems[index] = itemPicker.ReplaceItem(
 				index,
@@ -81,22 +79,22 @@ namespace Uice
 
 		private void RemoveItem(int index)
 		{
-			GameObject item = currentItems[index];
+			ContextComponent item = currentItems[index];
 			currentItems.RemoveAt(index);
 			itemPicker.DisposeItem(index, item);
 		}
 
-		private void InsertItem(int index, object value)
+		private void InsertItem(int index, IContext value)
 		{
-			GameObject newItem = itemPicker.SpawnItem(index, value, Container);
+			ContextComponent newItem = itemPicker.SpawnItem(index, value, Container);
 			currentItems.Insert(index, newItem);
 			newItem.transform.SetSiblingIndex(index);
-			itemSetter.SetData(index, currentItems[index], value);
+			newItem.Context = value;
 		}
 
 		private void MoveItem(int oldIndex, int newIndex)
 		{
-			GameObject item = currentItems[oldIndex];
+			ContextComponent item = currentItems[oldIndex];
 			currentItems.RemoveAt(oldIndex);
 			currentItems.Insert(newIndex, item);
 			item.transform.SetSiblingIndex(newIndex);

@@ -6,7 +6,7 @@ namespace Uice
 {
 	public class PrefabPicker<T> where T : ContextComponent
 	{
-		private static readonly Type ExpectedContextType = typeof(IBindableContext<>);
+		private static readonly Type ExpectedContextType = typeof(IContext);
 
 		private List<T> prefabs;
 		private readonly Dictionary<Type, T> prefabResolutionCache;
@@ -24,7 +24,7 @@ namespace Uice
 
 		public void SetPrefabs(List<T> prefabs)
 		{
-			prefabs?.ForEach(x => Assert.IsNotNull(GetContextType(x.ExpectedType), $"{x.name}'s expected type is not valid. It must derive {ExpectedContextType}."));
+			prefabs?.ForEach(x => Assert.IsNotNull(x.ExpectedType, $"{x.name}'s expected type is not valid. It must derive {ExpectedContextType}."));
 
 			this.prefabs = prefabs;
 			prefabResolutionCache.Clear();
@@ -54,15 +54,11 @@ namespace Uice
 
 			foreach (T prefab in prefabs)
 			{
-				Type expectedType = prefab.ExpectedType;
-				Type contextType;
+				Type prefabExpectedType = prefab.ExpectedType;
 
-				if (expectedType != null
-					&& (contextType = GetContextType(expectedType)) != null
-					&& contextType.GenericTypeArguments[0].IsAssignableFrom(valueType))
+				if (prefabExpectedType != null && prefabExpectedType.IsAssignableFrom(valueType))
 				{
-					Type dataType = contextType.GenericTypeArguments[0];
-					Type baseType = dataType.BaseType;
+					Type baseType = prefabExpectedType.BaseType;
 					int depth = 0;
 
 					while (baseType != null)
@@ -76,42 +72,6 @@ namespace Uice
 						bestDepth = depth;
 						result = prefab;
 					}
-				}
-			}
-
-			return result;
-		}
-
-		private Type GetContextType(Type runtimeType)
-		{
-			Type result = null;
-
-			Type genericType = null;
-
-			if (runtimeType.IsGenericType)
-			{
-				genericType = runtimeType.GetGenericTypeDefinition();
-			}
-
-			if (genericType != null && genericType == ExpectedContextType)
-			{
-				result = runtimeType;
-			}
-			else
-			{
-				foreach (Type current in runtimeType.GetInterfaces())
-				{
-					result = GetContextType(current);
-
-					if (result != null)
-					{
-						break;
-					}
-				}
-
-				if (result == null && runtimeType.BaseType != null)
-				{
-					result = GetContextType(runtimeType.BaseType);
 				}
 			}
 

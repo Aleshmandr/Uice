@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7808661205444279319}
   - component: {fileID: 327912399005626795}
   - component: {fileID: 5523694748703114570}
-  - component: {fileID: 3224974403796718563}
+  - component: {fileID: 8198145886196652465}
   m_Layer: 5
   m_Name: MyItem
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3224974403796718563
+--- !u!114 &8198145886196652465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,14 +87,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 111866700980069328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a43148b1213244ea50f5ec06d59d40, type: 3}
+  m_Script: {fileID: 11500000, guid: d3b828154df54eadba5032357e3b21a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   expectedType:
-    typeReference: 
-  id: fb6d
-  expectedContextType:
-    typeReference: 
+    typeReference: Uice.Examples.MyItemContext, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  id: 228d
 --- !u!1 &4465140047611816683
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,41 +193,29 @@ MonoBehaviour:
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Uice.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     contextContainer: {fileID: 0}
-    propertyName: 
+    path: 
     forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: 
   material:
     type:
       typeReference: Uice.IReadOnlyObservableVariable`1[[UnityEngine.Material, UnityEngine.CoreModule,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Uice.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     contextContainer: {fileID: 0}
-    propertyName: 
+    path: 
     forceDynamicBinding: 1
-    path:
-      componentId: 
-      propertyName: 
   raycastTarget:
     type:
       typeReference: Uice.IReadOnlyObservableVariable`1[[System.Boolean, mscorlib,
         Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Uice.Runtime,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     contextContainer: {fileID: 0}
-    propertyName: 
+    path: 
     forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: 
   text:
     type:
       typeReference: Uice.IReadOnlyObservableVariable`1[[System.Object, mscorlib,
         Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Uice.Runtime,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    contextContainer: {fileID: 0}
-    propertyName: Header
+    contextContainer: {fileID: 8198145886196652465}
+    path: Name
     forceDynamicBinding: 0
-    path:
-      componentId: 
-      propertyName: Header
