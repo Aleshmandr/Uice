@@ -11,13 +11,13 @@ namespace Uice
 		[SerializeField] private float duration;
 		[SerializeField] private Ease ease;
 
-		protected override void PrepareInternal(RectTransform target)
+		protected override void PrepareInternal(Transform target)
 		{
 			Tween.Kill(target);
 			target.localScale = origin;
 		}
 
-		protected override async Task AnimateInternal(RectTransform target)
+		protected override async Task AnimateInternal(Transform target)
 		{
 			bool isTweenDone = false;
 
@@ -31,7 +31,7 @@ namespace Uice
 			}
 		}
 
-		protected override void CleanupInternal(RectTransform target)
+		protected override void CleanupInternal(Transform target)
 		{
 			
 		}

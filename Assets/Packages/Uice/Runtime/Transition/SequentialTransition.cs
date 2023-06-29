@@ -8,7 +8,7 @@ namespace Uice
 	{
 		[SerializeField] private List<ComponentTransition> transitions;
 
-		protected override void PrepareInternal(RectTransform target)
+		protected override void PrepareInternal(Transform target)
 		{
 			foreach (ComponentTransition current in transitions)
 			{
@@ -16,7 +16,7 @@ namespace Uice
 			}
 		}
 
-		protected override async Task AnimateInternal(RectTransform target)
+		protected override async Task AnimateInternal(Transform target)
 		{
 			foreach (ComponentTransition current in transitions)
 			{
@@ -24,7 +24,7 @@ namespace Uice
 			}
 		}
 
-		protected override void CleanupInternal(RectTransform target)
+		protected override void CleanupInternal(Transform target)
 		{
 			foreach (ComponentTransition current in transitions)
 			{

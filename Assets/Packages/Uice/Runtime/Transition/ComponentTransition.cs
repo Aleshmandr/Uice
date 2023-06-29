@@ -5,32 +5,32 @@ namespace Uice
 {
 	public abstract class ComponentTransition : ComponentBinder, ITransition
 	{
-		public RectTransform OverrideTarget => overrideTarget;
+		public Transform OverrideTarget => overrideTarget;
 		
-		[SerializeField] private RectTransform overrideTarget;
+		[SerializeField] private Transform overrideTarget;
 
-		public void Prepare(RectTransform target)
+		public void Prepare(Transform target)
 		{
 			PrepareInternal(GetFinalTarget(target));
 		}
 
-		public Task Animate(RectTransform target)
+		public Task Animate(Transform target)
 		{
 			return AnimateInternal(GetFinalTarget(target));
 		}
 
-		public void Cleanup(RectTransform target)
+		public void Cleanup(Transform target)
 		{
 			CleanupInternal(GetFinalTarget(target));
 		}
 
-		protected abstract void PrepareInternal(RectTransform target);
+		protected abstract void PrepareInternal(Transform target);
 
-		protected abstract Task AnimateInternal(RectTransform target);
+		protected abstract Task AnimateInternal(Transform target);
 
-		protected abstract void CleanupInternal(RectTransform target);
+		protected abstract void CleanupInternal(Transform target);
 
-		private RectTransform GetFinalTarget(RectTransform target)
+		private Transform GetFinalTarget(Transform target)
 		{
 			return overrideTarget ? overrideTarget : target;
 		}

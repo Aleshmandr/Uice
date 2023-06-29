@@ -17,13 +17,13 @@ namespace Uice
 			timeBinding?.Unbind();
 		}
 
-		protected override void PrepareInternal(RectTransform target)
+		protected override void PrepareInternal(Transform target)
 		{
 			EnsureBinding();
 			timeBinding.Bind();
 		}
 
-		protected override async Task AnimateInternal(RectTransform target)
+		protected override async Task AnimateInternal(Transform target)
 		{
 			var initialAnimationTime = DateTime.UtcNow;
 
@@ -33,7 +33,7 @@ namespace Uice
 			}
 		}
 
-		protected override void CleanupInternal(RectTransform target)
+		protected override void CleanupInternal(Transform target)
 		{
 			timeBinding.Unbind();
 		}

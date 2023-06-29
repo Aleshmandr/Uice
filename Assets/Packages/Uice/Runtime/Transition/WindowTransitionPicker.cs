@@ -37,7 +37,7 @@ namespace Uice
 			return this;
 		}
 
-		protected override void PrepareInternal(RectTransform target)
+		protected override void PrepareInternal(Transform target)
 		{
 			if (CurrentTransition != null)
 			{
@@ -45,7 +45,7 @@ namespace Uice
 			}
 		}
 
-		protected override async Task AnimateInternal(RectTransform target)
+		protected override async Task AnimateInternal(Transform target)
 		{
 			if (CurrentTransition != null)
 			{
@@ -53,7 +53,7 @@ namespace Uice
 			}
 		}
 
-		protected override void CleanupInternal(RectTransform target)
+		protected override void CleanupInternal(Transform target)
 		{
 			if (CurrentTransition != null)
 			{

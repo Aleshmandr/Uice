@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Uice
 {
-	[RequireComponent(typeof(RectTransform))]
 	[RequireComponent(typeof(ContextComponent))]
 	[RequireComponent(typeof(InteractionBlockingTracker))]
 	public abstract class View<T> : Widget, IView, IContextInjector, IContextProvider<T> where T : IContext

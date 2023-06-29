@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Uice
 {
-	public class FadeTransition : ComponentTransition
+	public class FadeCanvasGroupTransition : ComponentTransition
 	{
 		public enum FadeType
 		{
@@ -19,7 +19,7 @@ namespace Uice
 		[SerializeField] private float duration = 0.3f;
 		[SerializeField] private Ease ease = Ease.InOutSine;
 
-		protected override void PrepareInternal(RectTransform target)
+		protected override void PrepareInternal(Transform target)
 		{
 			CanvasGroup canvasGroup = target.GetOrAddComponent<CanvasGroup>();
 			Tween.Kill(canvasGroup);
@@ -34,7 +34,7 @@ namespace Uice
 			}
 		}
 
-		protected override async Task AnimateInternal(RectTransform target)
+		protected override async Task AnimateInternal(Transform target)
 		{
 			float valueTarget = fadeType == FadeType.In ? 1 : 0;
 			CanvasGroup canvasGroup = target.GetOrAddComponent<CanvasGroup>();
@@ -50,7 +50,7 @@ namespace Uice
 			}
 		}
 
-		protected override void CleanupInternal(RectTransform target)
+		protected override void CleanupInternal(Transform target)
 		{
 			
 		}

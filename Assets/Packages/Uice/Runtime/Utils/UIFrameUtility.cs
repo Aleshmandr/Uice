@@ -108,10 +108,10 @@ namespace Uice
 		{
 			WindowParaLayer result = CreateUIObject<WindowParaLayer>("Priority Window Layer");
 			Widget backgroundWidget = CreateUIObject<Widget>("Background Widget");
-			FadeTransition inTransition = backgroundWidget.gameObject.AddComponent<FadeTransition>();
-			inTransition.FadeTypeInternal = FadeTransition.FadeType.In;
-			FadeTransition outTransition = backgroundWidget.gameObject.AddComponent<FadeTransition>();
-			outTransition.FadeTypeInternal = FadeTransition.FadeType.Out;
+			FadeCanvasGroupTransition inTransition = backgroundWidget.gameObject.AddComponent<FadeCanvasGroupTransition>();
+			inTransition.FadeTypeInternal = FadeCanvasGroupTransition.FadeType.In;
+			FadeCanvasGroupTransition outTransition = backgroundWidget.gameObject.AddComponent<FadeCanvasGroupTransition>();
+			outTransition.FadeTypeInternal = FadeCanvasGroupTransition.FadeType.Out;
 			backgroundWidget.ShowTransition = inTransition;
 			backgroundWidget.HideTransition = outTransition;
 			Image backgroundImage = backgroundWidget.gameObject.AddComponent<Image>();

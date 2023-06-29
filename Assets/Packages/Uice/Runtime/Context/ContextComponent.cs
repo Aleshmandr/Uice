@@ -7,6 +7,10 @@ namespace Uice
 {
 	public abstract class ContextComponent<T> : MonoBehaviour, IContextProvider<T> where T : IContext
 	{
+		[TypeConstraint(typeof(IContext), true)]
+		[SerializeField, HideInInspector] protected SerializableType expectedType;
+		[SerializeField, DisableAtRuntime] private string id;
+		
 		public event ContextChangeEventHandler<T> ContextChanged;
 
 		public virtual Type ExpectedType => expectedType.Type;
@@ -25,10 +29,6 @@ namespace Uice
 		}
 
 		public string Id => id;
-
-		[TypeConstraint(typeof(IContext))]
-		[SerializeField, HideInInspector] protected SerializableType expectedType;
-		[SerializeField, DisableAtRuntime] private string id;
 
 		private T context;
 

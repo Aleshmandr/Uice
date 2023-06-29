@@ -3,26 +3,20 @@ using UnityEngine;
 
 namespace Uice
 {
-	public static class Transition
-	{
-		private class NullTransition : ITransition
-		{
-			public void Prepare(RectTransform target)
-			{
+    public static class Transition
+    {
+        private class NullTransition : ITransition
+        {
+            public void Prepare(Transform target) { }
 
-			}
+            public Task Animate(Transform target)
+            {
+                return Task.CompletedTask;
+            }
 
-			public Task Animate(RectTransform target)
-			{
-				return Task.CompletedTask;
-			}
+            public void Cleanup(Transform target) { }
+        }
 
-			public void Cleanup(RectTransform target)
-			{
-
-			}
-		}
-
-		public static readonly ITransition Null = new NullTransition();
-	}
+        public static readonly ITransition Null = new NullTransition();
+    }
 }
