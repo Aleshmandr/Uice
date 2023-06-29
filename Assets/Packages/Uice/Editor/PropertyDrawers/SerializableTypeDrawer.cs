@@ -46,7 +46,7 @@ namespace Uice.Editor
 		{
 			if (GUI.Button(position, cache.CurrentSelection, EditorStyles.popup))
 			{
-				SerializableTypeEditorWindow.Show(
+				SerializableTypeTreeEditorWindow.Show(
 					position,
 					cache.TypeMapByType.Values.Prepend("None"),
 					(type) => OnTypeSelected(property, type));
