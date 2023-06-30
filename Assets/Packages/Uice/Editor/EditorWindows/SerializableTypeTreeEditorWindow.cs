@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -19,10 +20,10 @@ namespace Uice.Editor
 
         private string searchTerm;
 
-        public static void Show(Rect buttonRect, IEnumerable<string> options, Action<string> selectionCallback)
+        public static void Show(Rect buttonRect, IReadOnlyDictionary<Type, string> values, Action<string> selectionCallback)
         {
             var window = CreateInstance<SerializableTypeTreeEditorWindow>();
-            window.InitOptionsTree(options);
+            window.InitOptionsTree(values);
             window.selectionCallback = selectionCallback;
 
             Rect windowRect = buttonRect;
@@ -35,10 +36,10 @@ namespace Uice.Editor
             window.ShowAsDropDown(windowRect, windowSize);
         }
 
-        private void InitOptionsTree(IEnumerable<string> options)
+        private void InitOptionsTree(IReadOnlyDictionary<Type, string> values)
         {
             var treeViewState = new TreeViewState();
-            treeView = new SerializableTypeTreeView(treeViewState, options);
+            treeView = new SerializableTypeTreeView(treeViewState, values);
         }
 
         private void Update()
@@ -68,12 +69,11 @@ namespace Uice.Editor
                 selection = treeView.GetSelectedItem();
             }
 
-            if (string.IsNullOrEmpty(selection))
+            if (!treeView.IsSelectableValue(selection))
             {
                 return;
             }
 
-            Debug.Log($"Selected in tree: {selection}");
             selectionCallback?.Invoke(selection);
             Close();
         }

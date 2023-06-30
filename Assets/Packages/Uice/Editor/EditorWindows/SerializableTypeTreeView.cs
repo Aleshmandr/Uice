@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 namespace Uice.Editor
 {
     public class SerializableTypeTreeView : TreeView
     {
-        private readonly IEnumerable<string> options;
+        private readonly IReadOnlyDictionary<Type, string> values;
 
-        public SerializableTypeTreeView(TreeViewState state, IEnumerable<string> options) : base(state)
+        public SerializableTypeTreeView(TreeViewState state, IReadOnlyDictionary<Type, string> values) : base(state)
         {
-            this.options = options;
+            this.values = values;
             Reload();
         }
 
@@ -18,13 +21,26 @@ namespace Uice.Editor
             var root = new TreeViewItem { id = 0, depth = -1, displayName = "Root" };
             var items = new List<TreeViewItem>();
 
-            if (options != null)
+            if (values != null)
             {
                 int optionId = 1; // 0 is Root
-                foreach (string option in options)
+                foreach (var pair in values)
                 {
-                    items.Add(new TreeViewItem(id: optionId, depth: 0, displayName: option));
-                    optionId++;
+                    var pathAttribute = (PathAttribute)Attribute.GetCustomAttribute(pair.Key, typeof(PathAttribute));
+                    var fullPath = pathAttribute == null ? pair.Value : pathAttribute.Path + '/' + pair.Value;
+
+                    var splitPath = fullPath.Split('/');
+                    int depth = -1;
+                    foreach (string pathTreeLeaf in splitPath)
+                    {
+                        depth++;
+                        if (items.Any(item => item.displayName == pathTreeLeaf && item.depth == depth))
+                        {
+                            continue;
+                        }
+                        items.Add(new TreeViewItem(id: optionId, depth: depth, displayName: pathTreeLeaf));
+                        optionId++;
+                    }
                 }
             }
 
@@ -36,6 +52,11 @@ namespace Uice.Editor
         {
             var selectionItems = GetSelection();
             return selectionItems.Count > 0 ? FindItem(selectionItems[0], rootItem).displayName : string.Empty;
+        }
+        
+        public bool IsSelectableValue(string selection)
+        {
+            return values.Values.Any(s => s == selection);
         }
     }
 }

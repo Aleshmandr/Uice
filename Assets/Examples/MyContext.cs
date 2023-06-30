@@ -1,5 +1,6 @@
 ﻿namespace Uice.Examples
 {
+    [Path("aTest/Test2")]
     public class MyContext : Context
     {
         public ObservableVariable<string> Header { get; set; }

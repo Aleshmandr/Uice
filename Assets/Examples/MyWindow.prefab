@@ -137,6 +137,9 @@ GameObject:
   - component: {fileID: 3919504147311595377}
   - component: {fileID: 5704703042375122063}
   - component: {fileID: 3541647119656925903}
+  - component: {fileID: 6625400038498595319}
+  - component: {fileID: 4682985869616942416}
+  - component: {fileID: -7786489556236197445}
   m_Layer: 5
   m_Name: MyWindow
   m_TagString: Untagged
@@ -209,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46da2937788519543a537bbbabc011a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTransition: {fileID: 0}
+  showTransition: {fileID: -7786489556236197445}
   hideTransition: {fileID: 0}
   transitionEvents:
     OnShowing:
@@ -237,6 +240,55 @@ MonoBehaviour:
     OnFocusLost:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &6625400038498595319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140325965278482088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75b3fe10f6144909c724833f677c3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideTarget: {fileID: 0}
+  fadeType: 0
+  duration: 1
+  ease: 3
+--- !u!114 &4682985869616942416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140325965278482088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f418ff9887884c35ae57ccf4440f8620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideTarget: {fileID: 0}
+  anchoredOrigin: {x: 500, y: 0}
+  anchoredDestiny: {x: 0, y: 0}
+  duration: 1
+  ease: 3
+--- !u!114 &-7786489556236197445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140325965278482088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609465a1e3374d21a21b263551fbcc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideTarget: {fileID: 0}
+  transitions:
+  - {fileID: 6625400038498595319}
+  - {fileID: 4682985869616942416}
 --- !u!1 &6927433119843608235
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,9 +629,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5358541390750158994, guid: 2238516201ded674791be4946b388eb3,
         type: 3}
+      propertyPath: bindingInfo.path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358541390750158994, guid: 2238516201ded674791be4946b388eb3,
+        type: 3}
       propertyPath: bindingInfo.contextContainer
       value: 
-      objectReference: {fileID: 3919504147311595377}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358541390750158994, guid: 2238516201ded674791be4946b388eb3,
+        type: 3}
+      propertyPath: bindingInfo.type.typeReference
+      value: Uice.IReadOnlyObservableVariable`1[[Uice.NullContext, Uice.Runtime,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Uice.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358541390750158994, guid: 2238516201ded674791be4946b388eb3,
+        type: 3}
+      propertyPath: expectedContextType.typeReference
+      value: Uice.NullContext, Uice.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
     - target: {fileID: 6568579888436158389, guid: 2238516201ded674791be4946b388eb3,
         type: 3}
       propertyPath: m_Pivot.x
