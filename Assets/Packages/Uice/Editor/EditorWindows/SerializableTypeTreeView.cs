@@ -34,12 +34,13 @@ namespace Uice.Editor
                     foreach (string pathTreeLeaf in splitPath)
                     {
                         depth++;
-                        if (items.Any(item => item.displayName == pathTreeLeaf && item.depth == depth))
+                        int hash = fullPath.GetHashCode();
+                        if (items.Any(item => item.id == hash))
                         {
                             continue;
                         }
                         items.Add(new TreeViewItem(id: optionId, depth: depth, displayName: pathTreeLeaf));
-                        optionId++;
+                        optionId = hash;
                     }
                 }
             }
@@ -53,7 +54,7 @@ namespace Uice.Editor
             var selectionItems = GetSelection();
             return selectionItems.Count > 0 ? FindItem(selectionItems[0], rootItem).displayName : string.Empty;
         }
-        
+
         public bool IsSelectableValue(string selection)
         {
             return values.Values.Any(s => s == selection);
