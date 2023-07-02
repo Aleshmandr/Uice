@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEditor.IMGUI.Controls;
-using UnityEngine;
 
 namespace Uice.Editor
 {
@@ -20,10 +20,10 @@ namespace Uice.Editor
         {
             var root = new TreeViewItem { id = 0, depth = -1, displayName = "Root" };
             var items = new List<TreeViewItem>();
+            StringBuilder leafPath = new StringBuilder();
 
             if (values != null)
             {
-                int optionId = 1; // 0 is Root
                 foreach (var pair in values)
                 {
                     var pathAttribute = (PathAttribute)Attribute.GetCustomAttribute(pair.Key, typeof(PathAttribute));
@@ -31,22 +31,36 @@ namespace Uice.Editor
 
                     var splitPath = fullPath.Split('/');
                     int depth = -1;
+                    leafPath.Clear();
                     foreach (string pathTreeLeaf in splitPath)
                     {
+                        leafPath.Append(pathTreeLeaf);
+                        
                         depth++;
-                        int hash = fullPath.GetHashCode();
+                        int hash = leafPath.ToString().GetHashCode();
                         if (items.Any(item => item.id == hash))
                         {
                             continue;
                         }
-                        items.Add(new TreeViewItem(id: optionId, depth: depth, displayName: pathTreeLeaf));
-                        optionId = hash;
+                        items.Add(new TreeViewItem(id: hash, depth: depth, displayName: pathTreeLeaf));
                     }
                 }
             }
 
             SetupParentsAndChildrenFromDepths(root, items);
             return root;
+        }
+
+        protected override bool CanMultiSelect(TreeViewItem item)
+        {
+            return false;
+        }
+
+        protected override void SelectionChanged(IList<int> selectedIds)
+        {
+            base.SelectionChanged(selectedIds);
+            int selectedId = selectedIds[0];
+            SetExpanded(selectedId, !IsExpanded(selectedId));
         }
 
         public string GetSelectedItem()
