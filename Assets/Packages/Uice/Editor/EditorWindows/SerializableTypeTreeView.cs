@@ -12,7 +12,7 @@ namespace Uice.Editor
 
         public SerializableTypeTreeView(TreeViewState state, IReadOnlyDictionary<Type, string> values) : base(state)
         {
-            this.values = values;
+            this.values = values.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);;
             Reload();
         }
 
