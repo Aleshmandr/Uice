@@ -63,6 +63,11 @@ namespace Uice.Editor
             SetExpanded(selectedId, !IsExpanded(selectedId));
         }
 
+        protected override bool DoesItemMatchSearch(TreeViewItem item, string search)
+        {
+            return base.DoesItemMatchSearch(item, search) && IsSelectableValue(item.displayName);
+        }
+
         public string GetSelectedItem()
         {
             var selectionItems = GetSelection();
