@@ -3,11 +3,10 @@
     [Path("aTest/Test2")]
     public class MyContext : Context
     {
-        public ObservableVariable<string> Header { get; set; }
-        public ObservableVariable<string> Text { get; set; }
-        public ObservableVariable<MyItemContext> TestItem { get; set; }
-        
-        public ObservableCollection<MyItemContext> Items { get; set; }
+        public ObservableVariable<string> Header { get; set; } = new();
+        public ObservableVariable<string> Text { get; set; } = new();
+        public ObservableVariable<MyItemContext> TestItem { get; set; } = new();
+        public ObservableCollection<MyItemContext> Items { get; set; } = new();
     }
 
 }

@@ -20,7 +20,7 @@ namespace Uice
 
 			set
 			{
-				if (!HasValue || Compare(value, this.value) == false)
+				if (!HasValue || !Compare(value, this.value))
 				{
 					SetValue(value);
 					OnChanged(value);
@@ -48,11 +48,6 @@ namespace Uice
 			return value.Value;
 		}
 
-		public static implicit operator ObservableVariable<T>(T value)
-		{
-			return new ObservableVariable<T> { Value = value };
-		}
-		
 		public void Clear()
 		{
 			value = default;

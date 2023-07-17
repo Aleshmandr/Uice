@@ -13,10 +13,19 @@ namespace Uice.Examples
 
             var myContext = new MyContext
             {
-                Header = "Window Header",
-                Text = "Window Text",
-                Items = new ObservableCollection<MyItemContext>(new []{new MyItemContext("Item 1"), new MyItemContext("Item 2")}),
-                TestItem = new MyItemContext("Item Panel")
+                Header =
+                {
+                    Value = "Window Header"
+                },
+                Text =
+                {
+                    Value = "Window Text"
+                },
+                Items = new ObservableCollection<MyItemContext>(new[] { new MyItemContext("Item 1"), new MyItemContext("Item 2") }),
+                TestItem =
+                {
+                    Value = new MyItemContext("Item Panel")
+                }
             };
             uiFrame.ShowWindow<MyWindow>().WithContext(myContext).Execute();
         }

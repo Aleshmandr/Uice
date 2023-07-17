@@ -10,7 +10,10 @@ namespace Uice.Examples
         {
             var context = new MySecondContext
             {
-                Text = "Text Text"
+                Text =
+                {
+                    Value = "Text Text"
+                }
             };
             contextComponent.Context = context;
         }
