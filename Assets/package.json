@@ -1,7 +1,7 @@
 {
   "name": "com.aleshmandr.uice",
   "version": "1.0.0",
-  "displayName": "UIce",
+  "displayName": "Uice",
   "description": "A MVVM UI framework for Unity",
   "unity": "2019.4",
   "author": "Miguel Criado, Alexander Papchikhin",
@@ -10,6 +10,6 @@
   {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/Aleshmandr/com.aleshmandr.uice.git"
+    "url": "https://github.com/Aleshmandr/Uice.git"
   }
 }
