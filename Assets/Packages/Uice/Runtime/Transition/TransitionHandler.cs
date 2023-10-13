@@ -6,19 +6,19 @@ namespace Uice
 {
 	public class TransitionHandler
 	{
-		public async Task Show(RectTransform target, ITransition transition)
+		public async Task Show(Transform target, ITransition transition)
 		{
 			await AnimateTransition(target, transition,true);
 		}
 
-		public async Task Hide(RectTransform target, ITransition transition)
+		public async Task Hide(Transform target, ITransition transition)
 		{
 			await AnimateTransition(target, transition, false);
 
 			target.gameObject.SetActive(false);
 		}
 
-		private async Task AnimateTransition(RectTransform target, ITransition transition, bool isVisible)
+		private async Task AnimateTransition(Transform target, ITransition transition, bool isVisible)
 		{
 			if (transition == null)
 			{
