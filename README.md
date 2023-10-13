@@ -1,5 +1,5 @@
 # Uice
-This is a fork from [Uice project](https://github.com/MiguelCriado/Uice) by [Miguel Criado](https://github.com/MiguelCriado)
+This is a fork from [jUIce project](https://github.com/MiguelCriado/Uice) by [Miguel Criado](https://github.com/MiguelCriado)
 
 Uice is a MVVM UI framework built on top of [Unity's uGui](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/index.html) solution. It provides a series of systems and guidelines to boost your runtime UI development within Unity.
 

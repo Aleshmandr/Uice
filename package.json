@@ -8,6 +8,13 @@
   "license": "MIT",
   "dependencies":
   {},
+  "samples": [
+    {
+      "displayName": "Uice Samples",
+      "description": "Contains various samples",
+      "path": "Samples/Samples"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Aleshmandr/Uice.git"
