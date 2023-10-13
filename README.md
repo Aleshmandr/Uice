@@ -1,7 +1,9 @@
-# jUIce
-jUIce is a MVVM UI framework built on top of [Unity's uGui](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/index.html) solution. It provides a series of systems and guidelines to boost your runtime UI development within Unity.
+# Uice
+This is a fork from [Uice project](https://github.com/MiguelCriado/Uice) by [Miguel Criado](https://github.com/MiguelCriado)
 
-It aims to split the UI workflow into two distinct phases: technical and stylistic. This means that programmers and designers can cooperate together to achieve the final version of the UI. What this also means is that jUIce requires some technical insight to be used; you'll need to code your ViewModels.
+Uice is a MVVM UI framework built on top of [Unity's uGui](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/index.html) solution. It provides a series of systems and guidelines to boost your runtime UI development within Unity.
+
+It aims to split the UI workflow into two distinct phases: technical and stylistic. This means that programmers and designers can cooperate together to achieve the final version of the UI. What this also means is that Uice requires some technical insight to be used; you'll need to code your ViewModels.
 
 This project is inspired by the amazing [deVoid UI Framework](https://github.com/yankooliveira/uiframework) by Yanko Oliveira. 
 
@@ -16,13 +18,15 @@ The framework encourages a [Model-View-ViewModel](https://en.wikipedia.org/wiki/
 
 * The **viewmodel** is an intermediary class that retrieves data from the model and formats it for display in the view. It also reacts to user events in the view and updates the model.
 
-jUIce contains some base classes and systems that implement this pattern to let you focus on your game's concrete needs.
+Uice contains some base classes and systems that implement this pattern to let you focus on your game's concrete needs.
+
+TODO: Update documentation
 
 ## UIFrame
-jUIce's view hierarchy is organized below a root element called the UIFrame. It contains a series of layers to sort your views based in certain rules and acts as the service to handle the views' visibility. Before opening any view, it needs to be registered in the UIFrame.
+Uice's view hierarchy is organized below a root element called the UIFrame. It contains a series of layers to sort your views based in certain rules and acts as the service to handle the views' visibility. Before opening any view, it needs to be registered in the UIFrame.
 
 ```csharp
-using Juice;
+using Uice;
 using UnityEngine;
 
 public class ViewController : MonoBehaviour
@@ -55,7 +59,7 @@ public class ViewController : MonoBehaviour
 
 Your typical UiFrame will contain a set of layers that will define the order in which your views will be sorted. 
 
-The default layer stack that jUIce can automatically build for you would be something like this:
+The default layer stack that Uice can automatically build for you would be something like this:
 1. **Panel Layer** (Panels with no priority, usually HUD elements)
 2. **Window Layer** (Regular windows)
 3. **Priority Panel Layer** (Panels set to `Prioritary`, shown on top of regular windows)
@@ -67,7 +71,7 @@ The default layer stack that jUIce can automatically build for you would be some
 Keep in mind that this is the default hierarchy. It should be enough for most of the games but you are free to arrange it in some other order or even create your custom layers to fit your game needs.
 
 ## View
-There are two kinds of views in jUIce: Windows and Panels. The main reason for this distinction is their overall behavior and conceptual meaning; windows are the focal element of information for the user and there can only be one of them focused at any given moment, whereas any number of panels can be open at the same time and alongside the current window so they work as containers for complementary info.
+There are two kinds of views in Uice: Windows and Panels. The main reason for this distinction is their overall behavior and conceptual meaning; windows are the focal element of information for the user and there can only be one of them focused at any given moment, whereas any number of panels can be open at the same time and alongside the current window so they work as containers for complementary info.
 
 ### Window
 A window is the focal element of UI information at any given time (if any). They usually take up all the space available in the screen and, therefore, only one of them can be focused in a particular moment. They are stored in the history stack and will be automatically shown again with the same ViewModel when the next window in the stack is closed.
@@ -88,10 +92,10 @@ A UI without subtle animations is like a muffin without topping. You'll want you
 
 Transitions are `Component`s that can be attached to any `View` in order to define how will it behave when a `Show` or `Hide` operation is requested on it. `ShowTransition` and `HideTransition` are independent fields in the `View`'s editor, so you can set different behaviors based on the direction of the transition. If no transition is set for a particular operation, the View's GameObject will be just activated/deactivated when requested.  
 
-There is a set of common transitions already included in jUIce's codebase, but you can create your own if there's none that satisfy your UI/UX requirements.
+There is a set of common transitions already included in Uice's codebase, but you can create your own if there's none that satisfy your UI/UX requirements.
 
 ## Observables
-The observable family is the bread and butter of jUIce. They act as the glue that keeps everything interconnected.
+The observable family is the bread and butter of Uice. They act as the glue that keeps everything interconnected.
 
 The View and the ViewModel communicate with each other through observable objects. These classes have mechanisms to automatically notify observers about changes in their internal state.
 
@@ -122,12 +126,12 @@ The `ViewModel` is some sort of _translator_ between your business model and the
 
 For that matter, it exposes Observable objects and keeps them up to date according to changes in the business model. Included in those observable objects, there could be `ObservableCommand`s, which are the way the View is able to communicate user driven events to the ViewModel so it can process them and update the model accordingly.
 
-The ViewModel is **not** a `MonoBehaviour`, meaning that it can be passed away between classes in the jUIce system and it doesn't necessarily live on a concrete `GameObject`. 
+The ViewModel is **not** a `MonoBehaviour`, meaning that it can be passed away between classes in the Uice system and it doesn't necessarily live on a concrete `GameObject`. 
 
 Creating a new ViewModel is pretty straightforward. You can extend the `ViewModel` class, which already handles a couple of mechanism for you and allows your code to be easily attached to the game's update loop or react to some events during the ViewModel's lifecycle. 
 
 ```csharp
-using Juice;
+using Uice;
 
 public class MyViewModel : ViewModel
 {
@@ -196,12 +200,12 @@ There are matching binders for every member of the observable family and some ot
 ### Binders
 Binders are the actual components (`MonoBehaviour`s) that operate over a Unity `Component` so the View can reflect the internal state of the ViewModel.
 
-jUIce includes many binders for uGui's components as well as some other collections that let your UI objects react to changes on the ViewModel.
+Uice includes many binders for uGui's components as well as some other collections that let your UI objects react to changes on the ViewModel.
 
 ### OperatorBinders
 These are a special kind of binders. Binders that can process one or more values from the ViewModel and expose a derived value based on its input. 
 
-This mechanism grants jUIce an important expressive power, allowing the designers and UI artists to mix and match properties to create their own to fit the requirements of the View. Remember that the View can (and will) constantly change as the project grows and evolves, and having a clear and strict separation between the ViewModel (the data to be displayed) and the View (how is that data displayed) is a guarantee for a more agile development process.
+This mechanism grants Uice an important expressive power, allowing the designers and UI artists to mix and match properties to create their own to fit the requirements of the View. Remember that the View can (and will) constantly change as the project grows and evolves, and having a clear and strict separation between the ViewModel (the data to be displayed) and the View (how is that data displayed) is a guarantee for a more agile development process.
 
 OperatorBinders are heavily inspired by [ReactiveX](http://reactivex.io/documentation/operators.html) operators, so you can expect to find many of the most valuable operations from that library. 
 
