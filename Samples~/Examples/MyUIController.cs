@@ -5,12 +5,9 @@ namespace Uice.Examples
     public class MyUIController : MonoBehaviour
     {
         [SerializeField] private UIFrame uiFrame;
-        [SerializeField] private MyWindow myWindowPrefab;
 
         private void Start()
         {
-            uiFrame.RegisterView(Instantiate(myWindowPrefab));
-
             var myContext = new MyContext
             {
                 Header =
@@ -27,6 +24,7 @@ namespace Uice.Examples
                     Value = new MyItemContext("Item Panel")
                 }
             };
+
             uiFrame.ShowWindow<MyWindow>().WithContext(myContext).Execute();
         }
     }

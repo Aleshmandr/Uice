@@ -82,7 +82,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4140325965278482088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46da2937788519543a537bbbabc011a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eeea7f86cf053a4ebb658394de7e116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showTransition: {fileID: -7786489556236197445}
@@ -100,8 +100,8 @@ MonoBehaviour:
     OnHidden:
       m_PersistentCalls:
         m_Calls: []
-  targetComponent: {fileID: 3919504147311595377}
-  blockingTracker: {fileID: 5704703042375122063}
+  targetComponent: {fileID: 0}
+  blockingTracker: {fileID: 0}
   isPopup: 0
   windowQueuePriority: 0
   hideOnForegroundLost: 1
