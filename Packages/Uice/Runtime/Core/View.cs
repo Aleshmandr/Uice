@@ -63,6 +63,11 @@ namespace Uice
 			CloseRequested?.Invoke(this);
 		}
 
+		public void Destroy()
+		{
+			Destroy(gameObject);
+		}
+		
 		protected override void Initialize()
 		{
 			base.Initialize();

@@ -10,5 +10,6 @@
 		bool IsInteractable { get; set; }
 
 		void SetContext(IContext context);
+		void Destroy();
 	}
 }

@@ -98,7 +98,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogError($"View view already registered for type {viewType}");
+				Debug.LogError($"View {view} already registered for type {viewType}");
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogError($"View view not registered for type {viewType}");
+				Debug.LogError($"View {view} not registered for type {viewType}");
 			}
 		}
 

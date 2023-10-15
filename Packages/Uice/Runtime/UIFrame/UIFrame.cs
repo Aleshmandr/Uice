@@ -252,6 +252,23 @@ namespace Uice
 		{
 			return registeredViews.TryGetValue(view.GetType(), out IView registeredView) && ReferenceEquals(view,  registeredView);
 		}
+		
+		public bool TryFindRegisteredView<T>(out T view) where T : IView
+		{
+			Type type = typeof(T);
+			view = default;
+			bool result = registeredViews.TryGetValue(type, out IView foundedView);
+			view = (T)foundedView;
+			return result;
+		}
+		
+		public void DestroyView<T>() where T : IView
+		{
+			if (TryFindRegisteredView<T>(out T view))
+			{
+				view.Destroy();
+			}
+		}
 
 		public void BlockInteraction(object requester)
 		{
