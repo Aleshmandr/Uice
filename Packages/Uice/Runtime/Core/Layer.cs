@@ -13,7 +13,6 @@ namespace Uice
 		protected readonly Dictionary<Type, TView> registeredViews = new Dictionary<Type, TView>();
 
 		protected UIFrame uiFrame;
-		[SerializeField] private ViewRegistry[] registries;
 
 		public virtual void Initialize(UIFrame uiFrame)
 		{
@@ -28,32 +27,7 @@ namespace Uice
 			}
 			else
 			{
-				if (registries == null)
-				{
-					Debug.LogError($"View with type {settings.ViewType} not registered to this layer and registry is missing!");
-					return;
-				}
-
-				bool isLoaded = false;
-				foreach (var registry in registries)
-				{
-					var result = await registry.Load(settings.ViewType);
-					if (result.IsLoaded)
-					{
-						view = (TView) result.Prefab;
-						uiFrame.RegisterView(view);
-						isLoaded = true;
-						break;
-					}
-				}
-
-				if (!isLoaded)
-				{
-					Debug.LogError($"View with type {settings.ViewType} not registered to this layer and missing in registry!");
-					return;
-				}
-				
-				await ShowView(view, settings);
+				Debug.LogError($"View with type {settings.ViewType} not registered to this layer!");
 			}
 		}
 
