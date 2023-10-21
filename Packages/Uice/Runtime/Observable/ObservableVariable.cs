@@ -31,10 +31,12 @@ namespace Uice
 		public ObservableVariable()
 		{
 			equalityComparer = EqualityComparer<T>.Default;
+			SetValue(default);
 		}
 		
-		public ObservableVariable(T initialValue) : this()
+		public ObservableVariable(T initialValue)
 		{
+			equalityComparer = EqualityComparer<T>.Default;
 			SetValue(initialValue);
 		}
 
