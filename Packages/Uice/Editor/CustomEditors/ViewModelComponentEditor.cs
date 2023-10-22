@@ -211,6 +211,7 @@ namespace Uice.Editor
                 if (current.Target == ViewModelComponent && current.InjectionType != ViewModelComponent.ExpectedType)
                 {
                     expectedTypeProperty.GetValue<SerializableType>().Type = current.InjectionType;
+                    EditorUtility.SetDirty(ViewModelComponent);
                 }
             }
         }
