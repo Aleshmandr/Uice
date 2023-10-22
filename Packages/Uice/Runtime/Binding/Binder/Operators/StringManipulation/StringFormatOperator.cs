@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Uice
 {
-	public class StringFormatOperator : ContextComponent, IContextInjector
+	public class StringFormatOperator : ViewModelComponent, IViewModelInjector
 	{
-		public Type InjectionType => typeof(OperatorVariableContext<string>);
-		public ContextComponent Target => this;
+		public Type InjectionType => typeof(OperatorVariableViewModel<string>);
+		public ViewModelComponent Target => this;
 
 		[SerializeField] private ConstantBindingInfo<string> format = new ConstantBindingInfo<string>();
 		[SerializeField] private BindingInfoList parameters = new BindingInfoList(typeof(IReadOnlyObservableVariable<object>));
@@ -21,7 +21,7 @@ namespace Uice
 			base.Awake();
 
 			exposedProperty = new ObservableVariable<string>();
-			Context = new OperatorVariableContext<string>(exposedProperty);
+			ViewModel = new OperatorVariableViewModel<string>(exposedProperty);
 
 			formatBinding = new VariableBinding<string>(format, this);
 			formatBinding.Property.Changed += OnFormatChanged;

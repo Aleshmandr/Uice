@@ -7,8 +7,8 @@ namespace Uice
 		private readonly int skipAmount;
 		private int valueReceivedCount;
 		
-		public SkipCommandBindingProcessor(BindingInfo bindingInfo, Component context, int skipAmount)
-			: base(bindingInfo, context)
+		public SkipCommandBindingProcessor(BindingInfo bindingInfo, Component viewModel, int skipAmount)
+			: base(bindingInfo, viewModel)
 		{
 			this.skipAmount = skipAmount;
 			valueReceivedCount = 0;

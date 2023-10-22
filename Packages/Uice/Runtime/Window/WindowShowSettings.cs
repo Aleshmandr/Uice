@@ -6,7 +6,7 @@ namespace Uice
 	public class WindowShowSettings : IViewShowSettings
 	{
 		public Type ViewType { get; }
-		public IContext Context { get; set; }
+		public IViewModel ViewModel { get; set; }
 		public Dictionary<string, object> Payload { get; }
 		public ITransition ShowTransition { get; }
 		public ITransition HideTransition { get; }
@@ -16,7 +16,7 @@ namespace Uice
 
 		public WindowShowSettings(
 			Type windowType,
-			IContext context,
+			IViewModel viewModel,
 			Dictionary<string, object> payload,
 			ITransition showTransition,
 			ITransition hideTransition,
@@ -25,7 +25,7 @@ namespace Uice
 			Type stubViewType)
 		{
 			ViewType = windowType;
-			Context = context;
+			ViewModel = viewModel;
 			Payload = payload;
 			ShowTransition = showTransition;
 			HideTransition = hideTransition;

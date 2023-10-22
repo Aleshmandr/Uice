@@ -13,7 +13,7 @@ namespace Uice.Editor
 		private class BindingEntry
 		{
 			public readonly int Index;
-			public readonly ContextComponent Component;
+			public readonly ViewModelComponent Component;
 			public readonly string PropertyName;
 			public readonly Type ObservableType;
 			public readonly Type ArgumentType;
@@ -21,7 +21,7 @@ namespace Uice.Editor
 
 			public BindingEntry(
 				int index,
-				ContextComponent component,
+				ViewModelComponent component,
 				string propertyName,
 				Type observableType,
 				Type argumentType,
@@ -46,7 +46,7 @@ namespace Uice.Editor
 			public int CurrentIndex;
 		}
 
-		private const string ContextContainerId = "contextContainer";
+		private const string ViewModelContainerId = "viewModelContainer";
 		private const string PropertyPathId = "path";
 		private const string ForceDynamicBindingId = "forceDynamicBinding";
 
@@ -153,20 +153,20 @@ namespace Uice.Editor
 			return position;
 		}
 
-		private static void SetBinding(SerializedProperty property, ContextComponent contextComponent, string propertyName)
+		private static void SetBinding(SerializedProperty property, ViewModelComponent viewModelComponent, string propertyName)
 		{
-			SetContextContainer(property, contextComponent);
+			SetViewModelContainer(property, viewModelComponent);
 			SetPropertyName(property, propertyName);
 		}
 
-		private static ContextComponent GetContextContainer(SerializedProperty bindingInfoProperty)
+		private static ViewModelComponent GetViewModelContainer(SerializedProperty bindingInfoProperty)
 		{
-			return bindingInfoProperty.FindPropertyRelative(ContextContainerId).objectReferenceValue as ContextComponent;
+			return bindingInfoProperty.FindPropertyRelative(ViewModelContainerId).objectReferenceValue as ViewModelComponent;
 		}
 
-		private static void SetContextContainer(SerializedProperty bindingInfoProperty, ContextComponent value)
+		private static void SetViewModelContainer(SerializedProperty bindingInfoProperty, ViewModelComponent value)
 		{
-			bindingInfoProperty.FindPropertyRelative(ContextContainerId).objectReferenceValue = value;
+			bindingInfoProperty.FindPropertyRelative(ViewModelContainerId).objectReferenceValue = value;
 		}
 
 		private static string GetPropertyName(SerializedProperty bindingInfoProperty)
@@ -189,7 +189,7 @@ namespace Uice.Editor
 			bindingInfoProperty.FindPropertyRelative(ForceDynamicBindingId).boolValue = value;
 		}
 
-		private static string GenerateBindingId(ContextComponent component, string propertyName)
+		private static string GenerateBindingId(ViewModelComponent component, string propertyName)
 		{
 			return $"{component.gameObject.name}.{component.Id}/{propertyName}";
 		}
@@ -241,12 +241,12 @@ namespace Uice.Editor
 
 			foreach (Uice.BindingEntry current in BindingUtils.GetBindings(cache.BaseComponent.transform, ResolveTarget(property).Type))
 			{
-				if (current.ContextComponent != cache.BaseComponent)
+				if (current.ViewModelComponent != cache.BaseComponent)
 				{
-					string id = GenerateBindingId(current.ContextComponent, current.PropertyName);
+					string id = GenerateBindingId(current.ViewModelComponent, current.PropertyName);
 					BindingEntry entry = new BindingEntry(
 						optionIds.Count,
-						current.ContextComponent,
+						current.ViewModelComponent,
 						current.PropertyName,
 						current.ObservableType,
 						current.GenericArgument,
@@ -268,9 +268,9 @@ namespace Uice.Editor
 
 		private void RefreshCurrentIndex(SerializedProperty property)
 		{
-			if (GetContextContainer(property) && string.IsNullOrEmpty(GetPropertyName(property)) == false)
+			if (GetViewModelContainer(property) && string.IsNullOrEmpty(GetPropertyName(property)) == false)
 			{
-				string bindingId = GenerateBindingId(GetContextContainer(property), GetPropertyName(property));
+				string bindingId = GenerateBindingId(GetViewModelContainer(property), GetPropertyName(property));
 
 				if (cache.BindingMap.TryGetValue(bindingId, out BindingEntry entry))
 				{

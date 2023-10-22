@@ -6,7 +6,7 @@ namespace Uice
 {
 	public class CollectionBinder : ComponentBinder
 	{
-		public IReadOnlyList<ContextComponent> Items => currentItems;
+		public IReadOnlyList<ViewModelComponent> Items => currentItems;
 
 		[SerializeField] private BindingInfo collection = BindingInfo.Collection<object>();
 		[SerializeField] private Transform itemsContainer = default;
@@ -15,7 +15,7 @@ namespace Uice
 
 		private Transform Container => itemsContainer ? itemsContainer : transform;
 
-		private readonly List<ContextComponent> currentItems = new();
+		private readonly List<ViewModelComponent> currentItems = new();
 
 		protected virtual void OnValidate()
 		{
@@ -31,7 +31,7 @@ namespace Uice
 
 			Assert.IsNotNull(itemPicker, $"A {nameof(CollectionBinder)} needs an {nameof(ItemPicker)} to work.");
 
-			RegisterCollection<IContext>(collection)
+			RegisterCollection<IViewModel>(collection)
 				.OnReset(OnCollectionReset)
 				.OnItemAdded(OnCollectionItemAdded)
 				.OnItemMoved(OnCollectionItemMoved)
@@ -44,22 +44,22 @@ namespace Uice
 			ClearItems();
 		}
 
-		protected virtual void OnCollectionItemAdded(int index, IContext value)
+		protected virtual void OnCollectionItemAdded(int index, IViewModel value)
 		{
 			InsertItem(index, value);
 		}
 
-		protected virtual void OnCollectionItemMoved(int oldIndex, int newIndex, IContext value)
+		protected virtual void OnCollectionItemMoved(int oldIndex, int newIndex, IViewModel value)
 		{
 			MoveItem(oldIndex, newIndex);
 		}
 
-		protected virtual void OnCollectionItemRemoved(int index, IContext value)
+		protected virtual void OnCollectionItemRemoved(int index, IViewModel value)
 		{
 			RemoveItem(index);
 		}
 
-		protected virtual void OnCollectionItemReplaced(int index, IContext oldValue, IContext newValue)
+		protected virtual void OnCollectionItemReplaced(int index, IViewModel oldValue, IViewModel newValue)
 		{
 			currentItems[index] = itemPicker.ReplaceItem(
 				index,
@@ -79,22 +79,22 @@ namespace Uice
 
 		private void RemoveItem(int index)
 		{
-			ContextComponent item = currentItems[index];
+			ViewModelComponent item = currentItems[index];
 			currentItems.RemoveAt(index);
 			itemPicker.DisposeItem(index, item);
 		}
 
-		private void InsertItem(int index, IContext value)
+		private void InsertItem(int index, IViewModel value)
 		{
-			ContextComponent newItem = itemPicker.SpawnItem(index, value, Container);
+			ViewModelComponent newItem = itemPicker.SpawnItem(index, value, Container);
 			currentItems.Insert(index, newItem);
 			newItem.transform.SetSiblingIndex(index);
-			newItem.Context = value;
+			newItem.ViewModel = value;
 		}
 
 		private void MoveItem(int oldIndex, int newIndex)
 		{
-			ContextComponent item = currentItems[oldIndex];
+			ViewModelComponent item = currentItems[oldIndex];
 			currentItems.RemoveAt(oldIndex);
 			currentItems.Insert(newIndex, item);
 			item.transform.SetSiblingIndex(newIndex);

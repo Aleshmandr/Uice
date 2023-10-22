@@ -4,15 +4,15 @@ namespace Uice
 {
 	public abstract class CommandBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly CommandBinding<TTo> commandBinding;
 
-		protected CommandBindingProcessor(BindingInfo bindingInfo, Component context)
+		protected CommandBindingProcessor(BindingInfo bindingInfo, Component viewModel)
 		{
-			commandBinding = new CommandBinding<TTo>(bindingInfo, context);
+			commandBinding = new CommandBinding<TTo>(bindingInfo, viewModel);
 			ObservableCommand<TFrom> convertedCommand = new ObservableCommand<TFrom>(commandBinding.Property.CanExecute);
-			Context = new OperatorCommandContext<TFrom>(convertedCommand);
+			ViewModel = new OperatorCommandViewModel<TFrom>(convertedCommand);
 			convertedCommand.ExecuteRequested += ProcessedCommandExecuteRequestedHandler;
 		}
 

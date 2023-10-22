@@ -7,8 +7,8 @@ namespace Uice
 	{
 		private readonly Func<TFrom, TTo> processFunction;
 
-		public ToVariableBindingProcessor(BindingInfo bindingInfo, Component context, Func<TFrom, TTo> processFunction)
-			: base(bindingInfo, context)
+		public ToVariableBindingProcessor(BindingInfo bindingInfo, Component viewModel, Func<TFrom, TTo> processFunction)
+			: base(bindingInfo, viewModel)
 		{
 			this.processFunction = processFunction;
 		}

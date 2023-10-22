@@ -60,7 +60,7 @@ namespace Uice
 				WindowHistoryEntry entry = new WindowHistoryEntry(current.Window, current.Settings);
 				current.Window.Hide(Transition.Null);
 				current.Window.SetPayload(default);
-				current.Window.SetContext(default);
+				current.Window.SetViewModel(default);
 				windowQueue.Enqueue(entry);
 			}
 
@@ -72,14 +72,14 @@ namespace Uice
 				if (current.IsVisible)
 				{
 					current.Window.SetPayload(current.Settings.Payload);
-					current.Window.SetContext(current.Settings.Context);
+					current.Window.SetViewModel(current.Settings.ViewModel);
 					current.Window.Show(Transition.Null);
 				}
 				else
 				{
 					current.Window.Hide(Transition.Null);
 					current.Window.SetPayload(default);
-					current.Window.SetContext(default);
+					current.Window.SetViewModel(default);
 				}
 			}
 
@@ -462,7 +462,7 @@ namespace Uice
 
 			windowHistory.Push(windowEntry);
 			windowEntry.View.SetPayload(windowEntry.Settings.Payload);
-			windowEntry.View.SetContext(ResolveContext(windowEntry));
+			windowEntry.View.SetViewModel(ResolveViewModel(windowEntry));
 			SetCurrentWindow(windowEntry.View, fromBack);
 			
 			ITransition transition = overrideTransition ?? windowEntry.Settings.ShowTransition;
@@ -470,14 +470,14 @@ namespace Uice
 			await windowEntry.View.Show(transition);
 		}
 		
-		private IContext ResolveContext(WindowHistoryEntry windowEntry)
+		private IViewModel ResolveViewModel(WindowHistoryEntry windowEntry)
 		{
-			IContext result = windowEntry.Settings.Context;
+			IViewModel result = windowEntry.Settings.ViewModel;
 
-			if (windowEntry.Settings.Context == null)
+			if (windowEntry.Settings.ViewModel == null)
 			{
-				result = windowEntry.View.GetNewContext();
-				windowEntry.Settings.Context = result;
+				result = windowEntry.View.GetNewViewModel();
+				windowEntry.Settings.ViewModel = result;
 			}
 
 			return result;

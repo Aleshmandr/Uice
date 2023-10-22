@@ -11,7 +11,7 @@ namespace Uice
 		private readonly Func<WindowShowSettings, Task> showCallback;
 		private readonly Dictionary<string, object> payload;
 
-		private IContext context;
+		private IViewModel viewModel;
 		private ITransition showTransition;
 		private ITransition hideTransition;
 		private WindowPriority? priority;
@@ -25,9 +25,9 @@ namespace Uice
 			payload = new Dictionary<string, object>();
 		}
 
-		public IWindowShowLauncher WithContext(IContext context)
+		public IWindowShowLauncher WithViewModel(IViewModel viewModel)
 		{
-			this.context = context;
+			this.viewModel = viewModel;
 			return this;
 		}
 		
@@ -99,7 +99,7 @@ namespace Uice
 		{
 			return new WindowShowSettings(
 				windowType,
-				context,
+				viewModel,
 				payload,
 				showTransition,
 				hideTransition,

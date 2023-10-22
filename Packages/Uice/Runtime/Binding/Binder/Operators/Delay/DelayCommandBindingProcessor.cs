@@ -9,8 +9,8 @@ namespace Uice
 		private readonly Queue<ActionCommand> actionQueue;
 		private readonly float delay;
 		
-		public DelayCommandBindingProcessor(BindingInfo bindingInfo, Component context, float delay)
-			: base(bindingInfo, context)
+		public DelayCommandBindingProcessor(BindingInfo bindingInfo, Component viewModel, float delay)
+			: base(bindingInfo, viewModel)
 		{
 			actionQueue = new Queue<ActionCommand>();
 			this.delay = delay;

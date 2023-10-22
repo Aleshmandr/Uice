@@ -17,7 +17,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorCollectionContext<T>);
+			return typeof(OperatorCollectionViewModel<T>);
 		}
 
 		protected override void Awake()
@@ -25,7 +25,7 @@ namespace Uice
 			base.Awake();
 
 			exposedVariable = new ObservableCollection<T>();
-			Context = new OperatorCollectionContext<T>(exposedVariable);
+			ViewModel = new OperatorCollectionViewModel<T>(exposedVariable);
 
 			collectionBinding = RegisterCollection<T>(collection)
 				.OnChanged(OnCollectionChanged)

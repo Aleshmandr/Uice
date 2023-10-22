@@ -11,8 +11,8 @@ namespace Uice
 
 		private Tweener lastTweener;
 		
-		public TweenCollectionBindingProcessor(BindingInfo bindingInfo, Component context, BuildTweener tweenBuilder)
-			: base(bindingInfo, context)
+		public TweenCollectionBindingProcessor(BindingInfo bindingInfo, Component viewModel, BuildTweener tweenBuilder)
+			: base(bindingInfo, viewModel)
 		{
 			this.tweenBuilder = tweenBuilder;
 		}

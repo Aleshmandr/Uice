@@ -2,10 +2,10 @@
 
 namespace Uice
 {
-	public abstract class Operator : ContextComponent, IContextInjector
+	public abstract class Operator : ViewModelComponent, IViewModelInjector
 	{
 		public Type InjectionType => GetInjectionType();
-		public ContextComponent Target => this;
+		public ViewModelComponent Target => this;
 
 		protected abstract Type GetInjectionType();
 

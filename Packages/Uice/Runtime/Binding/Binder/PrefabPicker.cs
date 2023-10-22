@@ -4,9 +4,9 @@ using UnityEngine.Assertions;
 
 namespace Uice
 {
-	public class PrefabPicker<T> where T : ContextComponent
+	public class PrefabPicker<T> where T : ViewModelComponent
 	{
-		private static readonly Type ExpectedContextType = typeof(IContext);
+		private static readonly Type ExpectedViewModelType = typeof(IViewModel);
 
 		private List<T> prefabs;
 		private readonly Dictionary<Type, T> prefabResolutionCache;
@@ -24,7 +24,7 @@ namespace Uice
 
 		public void SetPrefabs(List<T> prefabs)
 		{
-			prefabs?.ForEach(x => Assert.IsNotNull(x.ExpectedType, $"{x.name}'s expected type is not valid. It must derive {ExpectedContextType}."));
+			prefabs?.ForEach(x => Assert.IsNotNull(x.ExpectedType, $"{x.name}'s expected type is not valid. It must derive {ExpectedViewModelType}."));
 
 			this.prefabs = prefabs;
 			prefabResolutionCache.Clear();

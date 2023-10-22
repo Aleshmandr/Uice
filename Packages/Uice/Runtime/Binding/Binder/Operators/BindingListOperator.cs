@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Uice
 {
-	public abstract class BindingListOperator<TFrom, TTo> : ContextComponent, IContextInjector
+	public abstract class BindingListOperator<TFrom, TTo> : ViewModelComponent, IViewModelInjector
 	{
-		public Type InjectionType => typeof(OperatorVariableContext<TTo>);
+		public Type InjectionType => typeof(OperatorVariableViewModel<TTo>);
 
-		public ContextComponent Target => this;
+		public ViewModelComponent Target => this;
 
 		[SerializeField] private BindingInfoList fromBinding = new BindingInfoList(typeof(IReadOnlyObservableVariable<TFrom>));
 
@@ -20,7 +20,7 @@ namespace Uice
 			base.Awake();
 
 			exposedProperty = new ObservableVariable<TTo>();
-			Context = new OperatorVariableContext<TTo>(exposedProperty);
+			ViewModel = new OperatorVariableViewModel<TTo>(exposedProperty);
 
 			bindingList = new BindingList<TFrom>(this, fromBinding);
 			bindingList.VariableChanged += BindingListVariableChangedHandler;

@@ -9,7 +9,7 @@
 
 		bool IsInteractable { get; set; }
 
-		void SetContext(IContext context);
+		void SetViewModel(IViewModel viewModel);
 		void Destroy();
 	}
 }

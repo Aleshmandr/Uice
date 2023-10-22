@@ -4,93 +4,92 @@ using UnityEngine;
 
 namespace Uice
 {
-	public abstract class Binding : IBinding
-	{
-		public abstract bool IsBound { get; }
+    public abstract class Binding : IBinding
+    {
+        public abstract bool IsBound { get; }
 
-		protected readonly BindingInfo bindingInfo;
-		protected readonly Component context;
+        protected readonly BindingInfo bindingInfo;
+        protected readonly Component viewModel;
 
-		public Binding(BindingInfo bindingInfo, Component context)
-		{
-			this.bindingInfo = bindingInfo;
-			this.context = context;
-		}
+        public Binding(BindingInfo bindingInfo, Component viewModel)
+        {
+            this.bindingInfo = bindingInfo;
+            this.viewModel = viewModel;
+        }
 
-		public void Bind()
-		{
-			if (bindingInfo is ConstantBindingInfo constant && constant.UseConstant)
-			{
-				BindConstant(bindingInfo);
-			}
-			else
-			{
-				BindProperty();
-			}
-		}
+        public void Bind()
+        {
+            if (bindingInfo is ConstantBindingInfo constant && constant.UseConstant)
+            {
+                BindConstant(bindingInfo);
+            }
+            else
+            {
+                BindProperty();
+            }
+        }
 
-		public void Unbind()
-		{
-			UnbindProperty();
+        public void Unbind()
+        {
+            UnbindProperty();
 
-			if (bindingInfo.ContextContainer)
-			{
-				bindingInfo.ContextContainer.ContextChanged -= OnContextChanged;
-			}
-		}
+            if (bindingInfo.ViewModelContainer)
+            {
+                bindingInfo.ViewModelContainer.ViewModelChanged -= OnViewModelChanged;
+            }
+        }
 
-		protected abstract Type GetBindingType();
+        protected abstract Type GetBindingType();
 
-		protected abstract void BindProperty(object property);
+        protected abstract void BindProperty(object property);
 
-		protected abstract void UnbindProperty();
+        protected abstract void UnbindProperty();
 
-		protected virtual void BindConstant(BindingInfo info)
-		{
+        protected virtual void BindConstant(BindingInfo info)
+        {
+        }
 
-		}
+        protected static string GetViewModelPath(Component context)
+        {
+            return $"{context.transform.PathToString()}@{context.GetType().Name}";
+        }
 
-		protected static string GetContextPath(Component context)
-		{
-			return $"{context.transform.PathToString()}@{context.GetType().Name}";
-		}
+        private void BindProperty()
+        {
+            if (HasToBeDynamicallyBound())
+            {
+                bindingInfo.ViewModelContainer = ViewModelComponentTree.FindBindableComponent(bindingInfo.Path, GetBindingType(), viewModel.transform);
+            }
 
-		private void BindProperty()
-		{
-			if (HasToBeDynamicallyBound())
-			{
-				bindingInfo.ContextContainer = ContextComponentTree.FindBindableComponent(bindingInfo.Path, GetBindingType(), context.transform);
-			}
+            if (bindingInfo.ViewModelContainer)
+            {
+                if (bindingInfo.ViewModelContainer.ViewModel != null)
+                {
+                    object value = ViewModelComponentTree.Bind(bindingInfo.Path, bindingInfo.ViewModelContainer);
 
-			if (bindingInfo.ContextContainer)
-			{
-				if (bindingInfo.ContextContainer.Context != null)
-				{
-					object value = ContextComponentTree.Bind(bindingInfo.Path, bindingInfo.ContextContainer);
+                    if (value != null)
+                    {
+                        BindProperty(value);
+                    }
+                    else
+                    {
+                        Debug.LogError($"Property \"{bindingInfo.Path}\" not found in {bindingInfo.ViewModelContainer.ViewModel.GetType()} class.", viewModel);
+                    }
+                }
 
-					if (value != null)
-					{
-						BindProperty(value);
-					}
-					else
-					{
-						Debug.LogError($"Property \"{bindingInfo.Path}\" not found in {bindingInfo.ContextContainer.Context.GetType()} class.", context);
-					}
-				}
+                bindingInfo.ViewModelContainer.ViewModelChanged += OnViewModelChanged;
+            }
+        }
 
-				bindingInfo.ContextContainer.ContextChanged += OnContextChanged;
-			}
-		}
+        private bool HasToBeDynamicallyBound()
+        {
+            return (bindingInfo.ForceDynamicBinding || !bindingInfo.ViewModelContainer) && !string.IsNullOrEmpty(bindingInfo.Path);
+        }
 
-		private bool HasToBeDynamicallyBound()
-		{
-			return (bindingInfo.ForceDynamicBinding || !bindingInfo.ContextContainer) && !string.IsNullOrEmpty(bindingInfo.Path);
-		}
-
-		private void OnContextChanged(object sender, IContext lastContext, IContext newContext)
-		{
-			Unbind();
-			Bind();
-		}
-	}
+        private void OnViewModelChanged(object sender, IViewModel lastViewModel, IViewModel newViewModel)
+        {
+            Unbind();
+            Bind();
+        }
+    }
 }

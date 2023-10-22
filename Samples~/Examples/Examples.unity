@@ -209,8 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5683f7aaea16d444da5be4b9ccca87fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registries:
-  - {fileID: 125176857}
   priorityParaLayer: {fileID: 741518921}
 --- !u!114 &125176857
 MonoBehaviour:
@@ -224,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999509b9eca24d84bf2c2237af6c4aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourcesPath: Windows
 --- !u!1 &552212223
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405f0c40bb81a2e44a2446203fc333bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registries: []
   priorityLayers:
     paralayers:
     - priority: 1
@@ -736,8 +732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f422628eb065842ba070207380c74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windowPrefab: {fileID: 3541647119656925903, guid: 07920dff4e1b4f24fabdfbc4b2464e16,
+    type: 3}
   uiFrame: {fileID: 1430952822}
-  myWindowPrefab: {fileID: 0}
 --- !u!1 &1534902510
 GameObject:
   m_ObjectHideFlags: 0

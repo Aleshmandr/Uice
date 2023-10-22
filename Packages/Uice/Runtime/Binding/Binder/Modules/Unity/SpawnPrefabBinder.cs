@@ -11,12 +11,12 @@ namespace Uice
 		private Transform Parent => parent ? parent : transform;
 
 		[SerializeField] private BindingInfo objectToInstantiate = BindingInfo.Variable<object>();
-		[SerializeField] private List<BindableContextComponent> prefabs;
+		[SerializeField] private List<BindableViewModelComponent> prefabs;
 		[SerializeField] private Transform parent;
 		[SerializeField] private ObjectPool pool;
 
-		private PrefabPicker<BindableContextComponent> prefabPicker;
-		private BindableContextComponent currentItem;
+		private PrefabPicker<BindableViewModelComponent> prefabPicker;
+		private BindableViewModelComponent currentItem;
 
 		protected void Reset()
 		{
@@ -39,7 +39,7 @@ namespace Uice
 				.OnChanged(OnObjectChanged)
 				.OnCleared(OnObjectCleared);
 
-			prefabPicker = new PrefabPicker<BindableContextComponent>(prefabs);
+			prefabPicker = new PrefabPicker<BindableViewModelComponent>(prefabs);
 			currentItem = null;
 
 			if (!pool)
@@ -47,7 +47,7 @@ namespace Uice
 				pool = this.GetOrAddComponent<ObjectPool>();
 			}
 
-			foreach (BindableContextComponent prefab in prefabs)
+			foreach (BindableViewModelComponent prefab in prefabs)
 			{
 				pool.CreatePool(prefab, 1);
 			}
@@ -55,7 +55,7 @@ namespace Uice
 
 		private void OnObjectChanged(object value)
 		{
-			BindableContextComponent bestPrefab = prefabPicker.FindBestPrefab(value);
+			BindableViewModelComponent bestPrefab = prefabPicker.FindBestPrefab(value);
 
 			if (bestPrefab)
 			{
@@ -79,7 +79,7 @@ namespace Uice
 			Clear();
 		}
 
-		private BindableContextComponent SpawnItem(BindableContextComponent prefab, Transform parent)
+		private BindableViewModelComponent SpawnItem(BindableViewModelComponent prefab, Transform parent)
 		{
 			Clear();
 

@@ -8,17 +8,17 @@ namespace Uice
     {
         public Type Type => type.Type;
 
-        public ContextComponent ContextContainer
+        public ViewModelComponent ViewModelContainer
         {
-            get => contextContainer;
-            set => contextContainer = value;
+            get => viewModelContainer;
+            set => viewModelContainer = value;
         }
 
         public string Path => path;
         public bool ForceDynamicBinding => forceDynamicBinding;
 
         [SerializeField] protected SerializableType type;
-        [SerializeField] private ContextComponent contextContainer;
+        [SerializeField] private ViewModelComponent viewModelContainer;
         [SerializeField] private string path;
         [SerializeField] private bool forceDynamicBinding;
 

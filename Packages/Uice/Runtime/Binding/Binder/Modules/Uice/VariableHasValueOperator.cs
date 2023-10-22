@@ -15,7 +15,7 @@ namespace Uice
 			base.Awake();
 
 			exposedVariable = new ObservableVariable<bool>();
-			Context = new OperatorVariableContext<bool>(exposedVariable);
+			ViewModel = new OperatorVariableViewModel<bool>(exposedVariable);
 
 			variableBinding = RegisterVariable<object>(variable)
 				.OnChanged(OnVariableChanged)
@@ -32,7 +32,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableContext<bool>);
+			return typeof(OperatorVariableViewModel<bool>);
 		}
 
 		private void OnVariableChanged(object newValue)

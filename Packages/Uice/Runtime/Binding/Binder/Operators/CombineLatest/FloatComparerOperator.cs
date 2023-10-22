@@ -21,7 +21,7 @@ namespace Uice
 			base.Awake();
 
 			result = new ObservableVariable<bool>();
-			Context = new OperatorVariableContext<bool>(result);
+			ViewModel = new OperatorVariableViewModel<bool>(result);
 
 			operandABinding = RegisterVariable<float>(operandA).OnChanged(OnOperandChanged).GetBinding();
 			operandBBinding = RegisterVariable<float>(operandB).OnChanged(OnOperandChanged).GetBinding();
@@ -29,7 +29,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableContext<bool>);
+			return typeof(OperatorVariableViewModel<bool>);
 		}
 
 		private void OnOperandChanged(float newValue)

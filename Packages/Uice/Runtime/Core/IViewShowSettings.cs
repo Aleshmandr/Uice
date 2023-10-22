@@ -5,7 +5,7 @@ namespace Uice
 	public interface IViewShowSettings
 	{
 		Type ViewType { get; }
-		IContext Context { get; }
+		IViewModel ViewModel { get; }
 		ITransition ShowTransition { get; }
 		ITransition HideTransition { get; }
 	}

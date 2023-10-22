@@ -15,7 +15,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableContext<T>);
+			return typeof(OperatorVariableViewModel<T>);
 		}
 
 		protected override void Awake()
@@ -23,7 +23,7 @@ namespace Uice
 			base.Awake();
 
 			exposedVariable = new ObservableVariable<T>();
-			Context = new OperatorVariableContext<T>(exposedVariable);
+			ViewModel = new OperatorVariableViewModel<T>(exposedVariable);
 
 			indexBinding = RegisterVariable<int>(index)
 				.OnChanged(OnIndexChanged)

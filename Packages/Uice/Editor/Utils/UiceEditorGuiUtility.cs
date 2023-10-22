@@ -38,7 +38,7 @@ namespace Uice.Editor
 			}
 		}
 
-		public class ContentIcons
+		public static class ContentIcons
 		{
 			public static GUIContent Unlink => new GUIContent(Icons.Unlink);
 		}

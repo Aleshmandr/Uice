@@ -2,9 +2,9 @@
 
 namespace Uice
 {
-    public abstract class Panel : Panel<NullContext> { }
+    public abstract class Panel : Panel<NullViewModel> { }
 
-    public abstract class Panel<T> : View<T>, IPanel where T : IContext
+    public abstract class Panel<T> : View<T>, IPanel where T : IViewModel
     {
         public PanelPriority Priority => priority;
 

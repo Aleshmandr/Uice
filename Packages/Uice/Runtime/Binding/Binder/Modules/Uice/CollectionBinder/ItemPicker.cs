@@ -4,8 +4,8 @@ namespace Uice
 {
 	public abstract class ItemPicker : MonoBehaviour
 	{
-		public abstract ContextComponent SpawnItem(int index, IContext value, Transform parent);
-		public abstract ContextComponent ReplaceItem(int index, IContext oldValue, IContext newValue, ContextComponent currentItem, Transform parent);
-		public abstract void DisposeItem(int index, ContextComponent item);
+		public abstract ViewModelComponent SpawnItem(int index, IViewModel value, Transform parent);
+		public abstract ViewModelComponent ReplaceItem(int index, IViewModel oldValue, IViewModel newValue, ViewModelComponent currentItem, Transform parent);
+		public abstract void DisposeItem(int index, ViewModelComponent item);
 	}
 }

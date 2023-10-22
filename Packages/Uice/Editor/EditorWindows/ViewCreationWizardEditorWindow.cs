@@ -19,14 +19,14 @@ namespace Uice.Editor
 
 		[SerializeField] private string @namespace;
 		[SerializeField] [TypeConstraint(typeof(IView))] private SerializableType supertype;
-		[SerializeField] [TypeConstraint(typeof(IContext))] private SerializableType contextType;
+		[SerializeField] [TypeConstraint(typeof(IViewModel))] private SerializableType viewModelType;
 		[SerializeField] private string className;
 		[SerializeField] private string uri;
 
 		private SerializedObject serializedObject;
 		private SerializedProperty namespaceProp;
 		private SerializedProperty supertypeProp;
-		private SerializedProperty contextTypeProp;
+		private SerializedProperty viewModelTypeProp;
 		private SerializedProperty classNameProp;
 		private SerializedProperty uriProp;
 
@@ -35,7 +35,7 @@ namespace Uice.Editor
 			serializedObject = new SerializedObject(this);
 			namespaceProp = serializedObject.FindProperty(nameof(@namespace));
 			supertypeProp = serializedObject.FindProperty(nameof(supertype));
-			contextTypeProp = serializedObject.FindProperty(nameof(contextType));
+			viewModelTypeProp = serializedObject.FindProperty(nameof(viewModelType));
 			classNameProp = serializedObject.FindProperty(nameof(className));
 			uriProp = serializedObject.FindProperty(nameof(uri));
 		}
@@ -64,7 +64,7 @@ namespace Uice.Editor
 
 			window.SetupNamespace();
 			window.SetupSupertype(supertype);
-			window.SetupContextType(typeof(IContext));
+			window.SetupViewModelType(typeof(IViewModel));
 			window.SetupClassName(DefaultViewName);
 			window.SetupUri(saveDirectory);
 
@@ -88,7 +88,7 @@ namespace Uice.Editor
 
 			DrawNamespace();
 			DrawSuperType();
-			DrawContextType();
+			DrawViewModelType();
 			DrawName();
 			DrawUri();
 			DrawCreateButton();
@@ -111,9 +111,9 @@ namespace Uice.Editor
 			supertype.Type = targetType;
 		}
 
-		private void SetupContextType(Type targetType)
+		private void SetupViewModelType(Type targetType)
 		{
-			contextType.Type = targetType;
+			viewModelType.Type = targetType;
 		}
 
 		private void SetupClassName(string value)
@@ -136,9 +136,9 @@ namespace Uice.Editor
 			EditorGUILayout.PropertyField(supertypeProp);
 		}
 
-		private void DrawContextType()
+		private void DrawViewModelType()
 		{
-			EditorGUILayout.PropertyField(contextTypeProp);
+			EditorGUILayout.PropertyField(viewModelTypeProp);
 		}
 
 		private void DrawName()
@@ -186,10 +186,10 @@ namespace Uice.Editor
 				ClassFileWriter.ClassDefinition classDefinition = new ClassFileWriter.ClassDefinition
 				{
 					Namespace = @namespace,
-					Imports = new List<string> (new HashSet<string> {contextType.Type.Namespace, supertype.Type.Namespace}),
+					Imports = new List<string> (new HashSet<string> {viewModelType.Type.Namespace, supertype.Type.Namespace}),
 					Name = className,
 					Superclass = supertype.Type.Name,
-					SuperclassGenerics = new List<string> {contextType.Type.Name}
+					SuperclassGenerics = new List<string> {viewModelType.Type.Name}
 				};
 
 				ClassFileWriter.WriteClassFile(fileInfo, classDefinition);

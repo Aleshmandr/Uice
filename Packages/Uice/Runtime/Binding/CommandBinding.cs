@@ -13,7 +13,7 @@ namespace Uice
 		private readonly ObservableCommand exposedProperty;
 		private IObservableCommand boundProperty;
 
-		public CommandBinding(BindingInfo bindingInfo, Component context) : base(bindingInfo, context)
+		public CommandBinding(BindingInfo bindingInfo, Component viewModel) : base(bindingInfo, viewModel)
 		{
 			canExecuteSource = new ObservableVariable<bool>(false);
 			exposedProperty = new ObservableCommand(canExecuteSource, OnExecuteRequested);
@@ -36,7 +36,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogError($"Property type ({property.GetType()}) different from expected type {typeof(IObservableCommand)}", context);
+				Debug.LogError($"Property type ({property.GetType()}) different from expected type {typeof(IObservableCommand)}", viewModel);
 			}
 		}
 
@@ -88,7 +88,7 @@ namespace Uice
 		private readonly ObservableCommand<T> exposedProperty;
 		private IObservableCommand<T> boundProperty;
 
-		public CommandBinding(BindingInfo bindingInfo, Component context) : base(bindingInfo, context)
+		public CommandBinding(BindingInfo bindingInfo, Component viewModel) : base(bindingInfo, viewModel)
 		{
 			canExecuteSource = new ObservableVariable<bool>(false);
 			exposedProperty = new ObservableCommand<T>(canExecuteSource, OnExecuteRequested);
@@ -105,7 +105,7 @@ namespace Uice
 
 			if (boundProperty == null)
 			{
-				boundProperty = BoxCommand(property, context);
+				boundProperty = BoxCommand(property, viewModel);
 			}
 
 			if (boundProperty != null)
@@ -116,7 +116,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogError($"Property type ({property.GetType()}) cannot be bound as {typeof(IObservableCommand<T>)}", context);
+				Debug.LogError($"Property type ({property.GetType()}) cannot be bound as {typeof(IObservableCommand<T>)}", viewModel);
 			}
 		}
 
@@ -154,7 +154,7 @@ namespace Uice
 					               $"You must force the compiler to generate a CommandBoxer by using " +
 					               $"\"{nameof(AotHelper)}.{nameof(AotHelper.EnsureType)}<{typeof(T).GetPrettifiedName()}>();\" " +
 					               $"anywhere in your code.\n" +
-					               $"Context: {GetContextPath(context)}", context);
+					               $"ViewModel: {GetViewModelPath(context)}", context);
 				}
 			}
 

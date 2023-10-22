@@ -114,7 +114,7 @@ namespace Uice
 		{
 			Checker.TargetType = targetType;
 
-			foreach (var contextComponent in GetComponentsInParents<ContextComponent>(context, true))
+			foreach (var contextComponent in GetComponentsInParents<ViewModelComponent>(context, true))
 			{
 				Type contextType = contextComponent.ExpectedType;
 
@@ -138,7 +138,7 @@ namespace Uice
 			}
 		}
 
-		public static IEnumerable<BindingEntry> GetAllBindings(Type contextType, ContextComponent contextComponent = null)
+		public static IEnumerable<BindingEntry> GetAllBindings(Type contextType, ViewModelComponent viewModelComponent = null)
 		{
 			foreach (PropertyInfo propertyInfo in contextType.GetProperties(PropertyBindingFlags))
 			{
@@ -149,7 +149,7 @@ namespace Uice
 					bool needsToBeBoxed = Checker.NeedsToBeBoxed(propertyInfo.PropertyType);
 
 					yield return new BindingEntry(
-						contextComponent,
+						viewModelComponent,
 						propertyInfo.Name,
 						needsToBeBoxed,
 						Checker.LastObservableType,

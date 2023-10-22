@@ -2,7 +2,7 @@
 {
 	public interface IBindingProcessor
 	{
-		IContext Context { get; }
+		IViewModel ViewModel { get; }
 
 		void Bind();
 		void Unbind();

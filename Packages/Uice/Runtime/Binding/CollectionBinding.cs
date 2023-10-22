@@ -12,7 +12,7 @@ namespace Uice
 		private readonly ObservableCollection<T> exposedProperty;
 		private IReadOnlyObservableCollection<T> boundProperty;
 
-		public CollectionBinding(BindingInfo bindingInfo, Component context) : base(bindingInfo, context)
+		public CollectionBinding(BindingInfo bindingInfo, Component viewModel) : base(bindingInfo, viewModel)
 		{
 			exposedProperty = new ObservableCollection<T>();
 		}
@@ -28,7 +28,7 @@ namespace Uice
 
 			if (boundProperty == null)
 			{
-				boundProperty = BoxCollection(property, context);
+				boundProperty = BoxCollection(property, viewModel);
 			}
 
 			if (boundProperty != null)
@@ -44,7 +44,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogError($"Property type ({property.GetType()}) cannot be bound as {typeof(IReadOnlyObservableCollection<T>)}", context);
+				Debug.LogError($"Property type ({property.GetType()}) cannot be bound as {typeof(IReadOnlyObservableCollection<T>)}", viewModel);
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace Uice
 					               $"You must force the compiler to generate a CollectionBoxer by using " +
 					               $"\"{nameof(AotHelper)}.{nameof(AotHelper.EnsureType)}<{typeof(T).GetPrettifiedName()}>();\" " +
 					               $"anywhere in your code.\n" +
-					               $"Context: {GetContextPath(context)}", context);
+					               $"ViewModel: {GetViewModelPath(context)}", context);
 				}
 			}
 

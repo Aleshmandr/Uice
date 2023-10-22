@@ -9,7 +9,7 @@ namespace Uice
 		private readonly Type panelType;
 		private readonly Func<PanelShowSettings, Task> showCallback;
 
-		private IContext context;
+		private IViewModel viewModel;
 		private PanelPriority? priority;
 		private ITransition showTransition;
 		private ITransition hideTransition;
@@ -20,9 +20,9 @@ namespace Uice
 			this.panelType = panelType;
 		}
 
-		public IPanelShowLauncher WithContext(IContext context)
+		public IPanelShowLauncher WithViewModel(IViewModel viewModel)
 		{
-			this.context = context;
+			this.viewModel = viewModel;
 			return this;
 		}
 
@@ -58,7 +58,7 @@ namespace Uice
 		{
 			return new PanelShowSettings(
 				panelType,
-				context,
+				viewModel,
 				priority,
 				showTransition,
 				hideTransition);

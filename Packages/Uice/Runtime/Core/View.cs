@@ -3,111 +3,108 @@ using UnityEngine;
 
 namespace Uice
 {
-	[RequireComponent(typeof(ContextComponent))]
-	[RequireComponent(typeof(InteractionBlockingTracker))]
-	public abstract class View<T> : Widget, IView, IContextInjector, IContextProvider<T> where T : IContext
-	{
-		public event ViewEventHandler CloseRequested;
-		public event ViewEventHandler ViewDestroyed;
-		public event ContextChangeEventHandler<T> ContextChanged;
+    [RequireComponent(typeof(ViewModelComponent))]
+    [RequireComponent(typeof(InteractionBlockingTracker))]
+    public abstract class View<T> : Widget, IView, IViewModelInjector, IViewModelProvider<T> where T : IViewModel
+    {
+        public event ViewEventHandler CloseRequested;
+        public event ViewEventHandler ViewDestroyed;
+        public event ViewModelChangeEventHandler<T> ViewModelChanged;
 
-		public bool IsInteractable
-		{
-			get
-			{
-				EnsureInitialState();
-				return blockingTracker.IsInteractable;
-			}
+        public bool IsInteractable
+        {
+            get
+            {
+                EnsureInitialState();
+                return blockingTracker.IsInteractable;
+            }
+            set
+            {
+                EnsureInitialState();
+                blockingTracker.IsInteractable = value;
+            }
+        }
 
-			set
-			{
-				EnsureInitialState();
-				blockingTracker.IsInteractable = value;
-			}
-		}
+        public Type InjectionType => typeof(T);
+        public ViewModelComponent Target => targetComponent;
+        public T ViewModel => (T)(Target ? Target.ViewModel : default);
 
-		public Type InjectionType => typeof(T);
-		public ContextComponent Target => targetComponent;
-		public T Context => (T)(Target ? Target.Context : default);
+        [SerializeField, HideInInspector] private ViewModelComponent targetComponent;
+        [SerializeField, HideInInspector] private InteractionBlockingTracker blockingTracker;
 
-		[SerializeField, HideInInspector] private ContextComponent targetComponent;
-		[SerializeField, HideInInspector] private InteractionBlockingTracker blockingTracker;
+        protected virtual void Reset()
+        {
+            RetrieveRequiredComponents();
+        }
 
-		protected virtual void Reset()
-		{
-			RetrieveRequiredComponents();
-		}
+        protected virtual void OnDestroy()
+        {
+            ViewDestroyed?.Invoke(this);
+        }
 
-		protected virtual void OnDestroy()
-		{
-			ViewDestroyed?.Invoke(this);
-		}
+        public virtual void SetViewModel(IViewModel viewModel)
+        {
+            if (viewModel != null)
+            {
+                if (viewModel is T typedViewModel)
+                {
+                    SetViewModel(typedViewModel);
+                }
+                else
+                {
+                    Debug.LogError($"ViewModel passed have wrong type! ({viewModel.GetType()} instead of {typeof(T)})", this);
+                }
+            }
+        }
 
-		public virtual void SetContext(IContext context)
-		{
-			if (context != null)
-			{
-				if (context is T typedContext)
-				{
-					SetContext(typedContext);
-				}
-				else
-				{
-					Debug.LogError($"Context passed have wrong type! ({context.GetType()} instead of {typeof(T)})", this);
-				}
-			}
-		}
+        public void Close()
+        {
+            CloseRequested?.Invoke(this);
+        }
 
-		public void Close()
-		{
-			CloseRequested?.Invoke(this);
-		}
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
 
-		public void Destroy()
-		{
-			Destroy(gameObject);
-		}
-		
-		protected override void Initialize()
-		{
-			base.Initialize();
+        protected override void Initialize()
+        {
+            base.Initialize();
+            RetrieveRequiredComponents();
+            Target.ViewModelChanged += OnTargetViewModelChanged;
+        }
 
-			RetrieveRequiredComponents();
+        protected virtual void SetViewModel(T context)
+        {
+            EnsureInitialState();
 
-			Target.ContextChanged += OnTargetComponentContextChanged;
-		}
+            if (targetComponent)
+            {
+                targetComponent.ViewModel = context;
+            }
+        }
 
-		protected virtual void SetContext(T context)
-		{
-			EnsureInitialState();
+        protected virtual void OnViewModelChanged(T lastViewModel, T newViewModel)
+        {
+            ViewModelChanged?.Invoke(this, lastViewModel, newViewModel);
+        }
 
-			if (targetComponent)
-			{
-				targetComponent.Context = context;
-			}
-		}
+        private void RetrieveRequiredComponents()
+        {
+            if (!targetComponent)
+            {
+                targetComponent = GetComponent<ViewModelComponent>();
+            }
 
-		protected virtual void OnContextChanged(T lastContext, T newContext)
-		{
-			ContextChanged?.Invoke(this, lastContext, newContext);
-		}
+            if (!blockingTracker)
+            {
+                blockingTracker = GetComponent<InteractionBlockingTracker>();
+            }
+        }
 
-		private void RetrieveRequiredComponents()
-		{
-			if (!targetComponent)
-			{
-				targetComponent = GetComponent<ContextComponent>();
-			}
-
-			if (!blockingTracker)
-			{
-				blockingTracker = GetComponent<InteractionBlockingTracker>();
-			}
-		}
-
-		private void OnTargetComponentContextChanged(IContextProvider<IContext> source, IContext lastContext, IContext newContext)
-		{
-			OnContextChanged((T)lastContext, (T)newContext);
-		}
-	}
+        private void OnTargetViewModelChanged(IViewModelProvider<IViewModel> source, IViewModel lastViewModel, IViewModel newViewModel)
+        {
+            OnViewModelChanged((T)lastViewModel, (T)newViewModel);
+        }
+    }
 }

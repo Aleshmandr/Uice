@@ -5,7 +5,7 @@ namespace Uice
 {
 	public abstract class VariableBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly VariableBinding<TFrom> variableBinding;
 		protected readonly ObservableVariable<TTo> processedVariable;
@@ -13,7 +13,7 @@ namespace Uice
 		protected VariableBindingAsyncProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedVariable = new ObservableVariable<TTo>();
-			Context = new OperatorVariableContext<TTo>(processedVariable);
+			ViewModel = new OperatorVariableViewModel<TTo>(processedVariable);
 			variableBinding = new VariableBinding<TFrom>(bindingInfo, context);
 			variableBinding.Property.Changed += BoundVariableChangedHandler;
 		}

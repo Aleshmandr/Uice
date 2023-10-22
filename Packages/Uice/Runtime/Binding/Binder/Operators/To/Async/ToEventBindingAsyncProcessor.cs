@@ -8,8 +8,8 @@ namespace Uice
 	{
 		private readonly Func<TFrom, Task<TTo>> processFunction;
 
-		public ToEventBindingAsyncProcessor(BindingInfo bindingInfo, Component context, Func<TFrom, Task<TTo>> processFunction)
-			: base(bindingInfo, context)
+		public ToEventBindingAsyncProcessor(BindingInfo bindingInfo, Component viewModel, Func<TFrom, Task<TTo>> processFunction)
+			: base(bindingInfo, viewModel)
 		{
 			this.processFunction = processFunction;
 		}

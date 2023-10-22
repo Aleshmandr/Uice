@@ -7,8 +7,8 @@ namespace Uice
 		private readonly int takeAmount;
 		private int valueReceivedCount;
 		
-		public TakeEventBindingProcessor(BindingInfo bindingInfo, Component context, int takeAmount)
-			: base(bindingInfo, context)
+		public TakeEventBindingProcessor(BindingInfo bindingInfo, Component viewModel, int takeAmount)
+			: base(bindingInfo, viewModel)
 		{
 			this.takeAmount = takeAmount;
 			valueReceivedCount = 0;

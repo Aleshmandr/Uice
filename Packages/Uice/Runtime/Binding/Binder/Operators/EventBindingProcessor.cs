@@ -4,16 +4,16 @@ namespace Uice
 {
 	public abstract class EventBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly EventBinding<TFrom> eventBinding;
 		protected readonly ObservableEvent<TTo> processedEvent;
 		
-		public EventBindingProcessor(BindingInfo bindingInfo, Component context)
+		public EventBindingProcessor(BindingInfo bindingInfo, Component viewModel)
 		{
 			processedEvent = new ObservableEvent<TTo>();
-			Context = new OperatorEventContext<TTo>(processedEvent);
-			eventBinding = new EventBinding<TFrom>(bindingInfo, context);
+			ViewModel = new OperatorEventViewModel<TTo>(processedEvent);
+			eventBinding = new EventBinding<TFrom>(bindingInfo, viewModel);
 			eventBinding.Property.Raised += BoundEventRaisedHandler; 
 		}
 

@@ -10,10 +10,10 @@ namespace Uice
 
 		public ScanVariableBindingProcessor(
 			BindingInfo bindingInfo,
-			Component context,
+			Component viewModel,
 			Func<T, T, T> scanFunction,
 			Func<T> initialAccumulatedValueGetter)
-			: base(bindingInfo, context)
+			: base(bindingInfo, viewModel)
 		{
 			this.scanFunction = scanFunction;
 			this.initialAccumulatedValueGetter = initialAccumulatedValueGetter;

@@ -4,16 +4,16 @@ namespace Uice
 {
 	public abstract class VariableBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly VariableBinding<TFrom> variableBinding;
 		protected readonly ObservableVariable<TTo> processedVariable;
 
-		protected VariableBindingProcessor(BindingInfo bindingInfo, Component context)
+		protected VariableBindingProcessor(BindingInfo bindingInfo, Component viewModel)
 		{
 			processedVariable = new ObservableVariable<TTo>();
-			Context = new OperatorVariableContext<TTo>(processedVariable);
-			variableBinding = new VariableBinding<TFrom>(bindingInfo, context);
+			ViewModel = new OperatorVariableViewModel<TTo>(processedVariable);
+			variableBinding = new VariableBinding<TFrom>(bindingInfo, viewModel);
 			variableBinding.Property.Changed += OnBoundVariableChanged;
 		}
 

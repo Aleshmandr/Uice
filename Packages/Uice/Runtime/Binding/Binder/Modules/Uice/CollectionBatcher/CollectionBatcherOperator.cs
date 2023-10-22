@@ -80,7 +80,7 @@ namespace Uice
 			base.Awake();
 
 			exposedCollection = new ObservableCollection<T>();
-			Context = new OperatorCollectionContext<T>(exposedCollection);
+			ViewModel = new OperatorCollectionViewModel<T>(exposedCollection);
 
 			batchThresholdBinding = RegisterVariable<float>(batchThreshold).GetBinding();
 			timeBetweenItemsBinding = RegisterVariable<float>(timeBetweenItems).GetBinding();
@@ -118,7 +118,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorCollectionContext<T>);
+			return typeof(OperatorCollectionViewModel<T>);
 		}
 
 		private void OnItemAdded(int index, T value)

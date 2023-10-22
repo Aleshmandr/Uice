@@ -5,7 +5,7 @@ namespace Uice
 {
 	public abstract class CommandBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly CommandBinding<TTo> commandBinding;
 
@@ -13,7 +13,7 @@ namespace Uice
 		{
 			commandBinding = new CommandBinding<TTo>(bindingInfo, context);
 			ObservableCommand<TFrom> convertedCommand = new ObservableCommand<TFrom>(commandBinding.Property.CanExecute);
-			Context = new OperatorCommandContext<TFrom>(convertedCommand);
+			ViewModel = new OperatorCommandViewModel<TFrom>(convertedCommand);
 			convertedCommand.ExecuteRequested += ProcessedCommandExecuteRequestedHandler;
 		}
 

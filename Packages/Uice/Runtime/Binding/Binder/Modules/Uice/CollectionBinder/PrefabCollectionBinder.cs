@@ -2,7 +2,7 @@
 
 namespace Uice
 {
-	[RequireComponent(typeof(CollectionItemContextComponentPicker))]
+	[RequireComponent(typeof(CollectionItemViewModelComponentPicker))]
 	public class PrefabCollectionBinder : CollectionBinder
 	{
 		protected virtual void Reset()
@@ -19,7 +19,7 @@ namespace Uice
 
 		private void RetrieveItemHandlers()
 		{
-			itemPicker = GetComponent<CollectionItemContextComponentPicker>();
+			itemPicker = GetComponent<CollectionItemViewModelComponentPicker>();
 		}
 	}
 }

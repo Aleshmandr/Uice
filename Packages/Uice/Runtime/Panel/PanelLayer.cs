@@ -28,7 +28,7 @@ namespace Uice
 			{
 				visiblePanels[current.GetType()] = current;
 				visiblePanelsSet.Add(current.Panel);
-				current.Panel.SetContext(current.Settings.Context);
+				current.Panel.SetViewModel(current.Settings.ViewModel);
 			}
 
 			foreach (var kvp in registeredViews)
@@ -40,7 +40,7 @@ namespace Uice
 				else
 				{
 					kvp.Value.Hide(Transition.Null);
-					kvp.Value.SetContext(default);
+					kvp.Value.SetViewModel(default);
 				}
 			}
 		}
@@ -74,7 +74,7 @@ namespace Uice
 			visiblePanels[view.GetType()] = new PanelStateEntry(view, settings);
 			PanelPriority finalPriority = settings.Priority ?? view.Priority;
 			ReparentToParaLayer(finalPriority, ((Component)view).transform);
-			view.SetContext(settings.Context);
+			view.SetViewModel(settings.ViewModel);
 
 			await view.Show(settings.ShowTransition);
 		}
@@ -85,7 +85,7 @@ namespace Uice
 
 			await view.Hide(settings?.HideTransition);
 
-			view.SetContext(default);
+			view.SetViewModel(default);
 		}
 
 		private void ReparentToParaLayer(PanelPriority priority, Transform viewTransform)

@@ -4,16 +4,16 @@ namespace Uice
 {
 	public abstract class CollectionBindingProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly CollectionBinding<TFrom> collectionBinding;
 		protected readonly ObservableCollection<TTo> processedCollection;
 
-		protected CollectionBindingProcessor(BindingInfo bindingInfo, Component context)
+		protected CollectionBindingProcessor(BindingInfo bindingInfo, Component viewModel)
 		{
 			processedCollection = new ObservableCollection<TTo>();
-			Context = new OperatorCollectionContext<TTo>(processedCollection);
-			collectionBinding = new CollectionBinding<TFrom>(bindingInfo, context);
+			ViewModel = new OperatorCollectionViewModel<TTo>(processedCollection);
+			collectionBinding = new CollectionBinding<TFrom>(bindingInfo, viewModel);
 			collectionBinding.Property.Reset += OnBoundCollectionReset;
 			collectionBinding.Property.ItemAdded += OnBoundCollectionItemAdded;
 			collectionBinding.Property.ItemReplaced += OnBoundCollectionItemReplaced;

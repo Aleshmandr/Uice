@@ -29,7 +29,7 @@ namespace Uice
 
 			bindingType = BindingType.Variable;
 			fromBinding = BindingInfo.Variable<TFrom>();
-			expectedType = new SerializableType(typeof(OperatorVariableContext<TTo>));
+			expectedType = new SerializableType(typeof(OperatorVariableViewModel<TTo>));
 		}
 
 		protected override void OnValidate()
@@ -67,10 +67,10 @@ namespace Uice
 			switch (bindingType)
 			{
 				default:
-				case BindingType.Variable : return typeof(OperatorVariableContext<TTo>);
-				case BindingType.Collection: return typeof(OperatorCollectionContext<TTo>);
-				case BindingType.Command: return typeof(OperatorCommandContext<TFrom>);
-				case BindingType.Event: return typeof(OperatorEventContext<TTo>);
+				case BindingType.Variable : return typeof(OperatorVariableViewModel<TTo>);
+				case BindingType.Collection: return typeof(OperatorCollectionViewModel<TTo>);
+				case BindingType.Command: return typeof(OperatorCommandViewModel<TFrom>);
+				case BindingType.Event: return typeof(OperatorEventViewModel<TTo>);
 			}
 		}
 
@@ -81,28 +81,28 @@ namespace Uice
 			if (bindingType == BindingType.Variable && fromBinding.Type != typeof(IReadOnlyObservableVariable<TFrom>))
 			{
 				fromBinding = BindingInfo.Variable<TFrom>();
-				expectedType = new SerializableType(typeof(OperatorVariableContext<TTo>));
+				expectedType = new SerializableType(typeof(OperatorVariableViewModel<TTo>));
 				didTypeChange = true;
 			}
 
 			if (bindingType == BindingType.Collection && fromBinding.Type != typeof(IReadOnlyObservableCollection<TFrom>))
 			{
 				fromBinding = BindingInfo.Collection<TFrom>();
-				expectedType = new SerializableType(typeof(OperatorCollectionContext<TTo>));
+				expectedType = new SerializableType(typeof(OperatorCollectionViewModel<TTo>));
 				didTypeChange = true;
 			}
 
 			if (bindingType == BindingType.Command && fromBinding.Type != typeof(IObservableCommand<TTo>))
 			{
 				fromBinding = BindingInfo.Command<TTo>();
-				expectedType = new SerializableType(typeof(OperatorCommandContext<TFrom>));
+				expectedType = new SerializableType(typeof(OperatorCommandViewModel<TFrom>));
 				didTypeChange = true;
 			}
 
 			if (bindingType == BindingType.Event && fromBinding.Type != typeof(IObservableEvent<TFrom>))
 			{
 				fromBinding = BindingInfo.Event<TFrom>();
-				expectedType = new SerializableType(typeof(OperatorEventContext<TTo>));
+				expectedType = new SerializableType(typeof(OperatorEventViewModel<TTo>));
 				didTypeChange = true;
 			}
 
@@ -115,7 +115,7 @@ namespace Uice
 		private void Initialize()
 		{
 			bindingProcessor = GetBindingProcessor(bindingType, fromBinding);
-			Context = bindingProcessor.Context;
+			ViewModel = bindingProcessor.ViewModel;
 		}
 	}
 }

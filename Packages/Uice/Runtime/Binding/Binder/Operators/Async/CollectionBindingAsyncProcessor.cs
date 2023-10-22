@@ -7,7 +7,7 @@ namespace Uice
 {
 	public abstract class CollectionBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly CollectionBinding<TFrom> collectionBinding;
 		protected readonly ObservableCollection<TTo> processedCollection;
@@ -18,7 +18,7 @@ namespace Uice
 		protected CollectionBindingAsyncProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedCollection = new ObservableCollection<TTo>();
-			Context = new OperatorCollectionContext<TTo>(processedCollection);
+			ViewModel = new OperatorCollectionViewModel<TTo>(processedCollection);
 			collectionBinding = new CollectionBinding<TFrom>(bindingInfo, context);
 			collectionBinding.Property.Reset += OnReset;
 			collectionBinding.Property.ItemAdded += OnItemAdded;

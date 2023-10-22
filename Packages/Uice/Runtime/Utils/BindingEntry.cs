@@ -5,20 +5,20 @@ namespace Uice
 {
     public struct BindingEntry
     {
-        public ContextComponent ContextComponent { get; }
+        public ViewModelComponent ViewModelComponent { get; }
         public string PropertyName { get; }
         public bool NeedsToBeBoxed { get; }
         public Type ObservableType { get; }
         public Type GenericArgument { get; }
 
         public BindingEntry(
-            ContextComponent contextComponent,
+            ViewModelComponent viewModelComponent,
             string propertyName,
             bool needsToBeBoxed,
             Type observableType,
             Type genericArgument)
         {
-            ContextComponent = contextComponent;
+            ViewModelComponent = viewModelComponent;
             PropertyName = propertyName;
             NeedsToBeBoxed = needsToBeBoxed;
             ObservableType = observableType;

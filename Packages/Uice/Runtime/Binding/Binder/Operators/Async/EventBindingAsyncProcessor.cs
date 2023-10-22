@@ -5,7 +5,7 @@ namespace Uice
 {
 	public abstract class EventBindingAsyncProcessor<TFrom, TTo> : IBindingProcessor
 	{
-		public IContext Context { get; }
+		public IViewModel ViewModel { get; }
 
 		protected readonly EventBinding<TFrom> eventBinding;
 		protected readonly ObservableEvent<TTo> processedEvent;
@@ -13,7 +13,7 @@ namespace Uice
 		public EventBindingAsyncProcessor(BindingInfo bindingInfo, Component context)
 		{
 			processedEvent = new ObservableEvent<TTo>();
-			Context = new OperatorEventContext<TTo>(processedEvent);
+			ViewModel = new OperatorEventViewModel<TTo>(processedEvent);
 			eventBinding = new EventBinding<TFrom>(bindingInfo, context);
 			eventBinding.Property.Raised += BoundEventRaisedHandler;
 		}

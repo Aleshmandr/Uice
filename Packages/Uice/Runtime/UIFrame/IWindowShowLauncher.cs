@@ -5,7 +5,7 @@ namespace Uice
 {
 	public interface IWindowShowLauncher
 	{
-		IWindowShowLauncher WithContext(IContext context);
+		IWindowShowLauncher WithViewModel(IViewModel viewModel);
 		IWindowShowLauncher AddPayload(string key, object value);
 		IWindowShowLauncher WithShowTransition(ITransition transition);
 		IWindowShowLauncher WithHideTransition(ITransition transition);

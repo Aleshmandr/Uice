@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Uice
 {
-	public abstract class Window : Window<NullContext>
+	public abstract class Window : Window<NullViewModel>
 	{
 
 	}
@@ -18,7 +18,7 @@ namespace Uice
 		public UnityEvent OnFocusLost = new UnityEvent();
 	}
 
-	public abstract class Window<T> : View<T>, IWindow where T : IContext, new()
+	public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
 	{
 		public delegate void FocusEventHandler(IWindow window);
 
@@ -56,13 +56,13 @@ namespace Uice
 			}
 		}
 
-		public override void SetContext(IContext context)
+		public override void SetViewModel(IViewModel viewModel)
 		{
-			base.SetContext(context);
+			base.SetViewModel(viewModel);
 
-			if (context == null)
+			if (viewModel == null)
 			{
-				SetContext(new T());
+				SetViewModel(new T());
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace Uice
 			currentLayer = layer;
 		}
 		
-		public IContext GetNewContext()
+		public IViewModel GetNewViewModel()
 		{
 			return new T();
 		}
@@ -120,7 +120,6 @@ namespace Uice
 		public override Task Show(ITransition overrideTransition = null)
 		{
 			transform.SetAsLastSibling();
-
 			return base.Show(overrideTransition);
 		}
 

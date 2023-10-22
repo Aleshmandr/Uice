@@ -22,7 +22,7 @@ namespace Uice
 			initialBinding = new VariableBinding<T>(initialValue, this);
 			
 			exposedProperty = new ObservableVariable<T>();
-			Context = new OperatorVariableContext<T>(exposedProperty);
+			ViewModel = new OperatorVariableViewModel<T>(exposedProperty);
 		}
 
 		protected override void OnEnable()
@@ -46,7 +46,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(OperatorVariableContext<T>);
+			return typeof(OperatorVariableViewModel<T>);
 		}
 
 		private void OnBoundPropertyChanged(T newValue)

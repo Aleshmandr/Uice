@@ -18,7 +18,7 @@ namespace Uice
 
 			exposedCommand = new ObservableCommand();
 			exposedCommand.ExecuteRequested += OnExposedCommandExecuteRequested;
-			Context = new CommandContext(exposedCommand);
+			ViewModel = new CommandViewModel(exposedCommand);
 
 			commandBinding = RegisterCommand<T>(command).OnCanExecuteChanged(OnCommandCanExecuteChanged).GetBinding();
 			decorationBinding = RegisterVariable<T>(decoration).GetBinding();
@@ -40,7 +40,7 @@ namespace Uice
 
 		protected override Type GetInjectionType()
 		{
-			return typeof(CommandContext);
+			return typeof(CommandViewModel);
 		}
 
 		private void OnExposedCommandExecuteRequested()
