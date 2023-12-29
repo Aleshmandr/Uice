@@ -195,9 +195,12 @@ It's worth mentioning that the ViewModel is the entry point for everything that'
 ## Bindings
 Bindings are the last link the framework chain. They are responsible of providing updated information about changes in the ViewModel to the Unity Components that use them.
 
+![image](https://github.com/Aleshmandr/Uice/assets/11294931/e2144732-e6aa-4be0-95b5-aa29a6f0b6e8)
+
 There are matching binders for every member of the observable family and some other elements to ease development and displaying the information in the Editor.
 
 ### Binders
+
 Binders are the actual components (`MonoBehaviour`s) that operate over a Unity `Component` so the View can reflect the internal state of the ViewModel.
 
 Uice includes many binders for uGui's components as well as some other collections that let your UI objects react to changes on the ViewModel.
