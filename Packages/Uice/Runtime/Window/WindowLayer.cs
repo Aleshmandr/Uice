@@ -211,7 +211,7 @@ namespace Uice
 				IWindow windowToOpen = nextWindowEntry.View;
 
 				ITransition hideTransition = settings.HideTransition ?? windowToClose.GetHideTransition(new WindowTransitionData(windowToOpen));
-				ITransition showTransition = settings.ShowTransition ?? windowToOpen?.GetHideTransition(new WindowTransitionData(windowToClose));
+				ITransition showTransition = settings.ShowTransition ?? windowToOpen?.GetShowTransition(new WindowTransitionData(windowToClose));
 				
 				if (windowToClose == windowToOpen)
 				{
