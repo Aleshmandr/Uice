@@ -55,9 +55,7 @@ namespace Uice
 
 		private void RefreshExposedValue()
 		{
-			if (formatBinding.IsBound
-			    && formatBinding.Property.HasValue
-			    && string.IsNullOrEmpty(formatBinding.Property.Value) == false)
+			if (formatBinding.IsBound && formatBinding.Property.HasValue && !string.IsNullOrEmpty(formatBinding.Property.Value))
 			{
 				exposedProperty.Value = string.Format(formatBinding.Property.Value, parametersBindingList.Values.ToArray());
 			}
