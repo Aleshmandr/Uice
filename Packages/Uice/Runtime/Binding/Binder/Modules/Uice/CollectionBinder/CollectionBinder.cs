@@ -9,9 +9,9 @@ namespace Uice
 		public IReadOnlyList<ViewModelComponent> Items => currentItems;
 
 		[SerializeField] private BindingInfo collection = BindingInfo.Collection<object>();
-		[SerializeField] private Transform itemsContainer = default;
+		[SerializeField] private Transform itemsContainer;
 		[Header("Dependencies")]
-		[SerializeField] protected ItemPicker itemPicker = default;
+		[SerializeField] protected ItemPicker itemPicker;
 
 		private Transform Container => itemsContainer ? itemsContainer : transform;
 

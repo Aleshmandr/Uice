@@ -142,7 +142,7 @@ namespace Uice.Pooling
 
 		private void InitializePools()
 		{
-			if (isInitialized == false && poolPrefabs != null)
+			if (!isInitialized && poolPrefabs != null)
 			{
 				isInitialized = true;
 				

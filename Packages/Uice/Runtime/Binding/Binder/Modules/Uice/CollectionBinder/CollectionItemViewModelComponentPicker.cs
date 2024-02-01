@@ -82,6 +82,7 @@ namespace Uice
 			else
 			{
 				result = Instantiate(bestPrefab, parent);
+				result.gameObject.SetActive(true);
 			}
 
 			return result;
