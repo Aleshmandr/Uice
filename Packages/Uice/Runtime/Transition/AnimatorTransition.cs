@@ -6,16 +6,19 @@ namespace Uice
     public class AnimatorTransition : ComponentTransition
     {
         [SerializeField] private string stateName;
-        
-        protected override void PrepareInternal(Transform target)
-        {
-            
-        }
+        [SerializeField] private bool rebindOnPlay;
+
+        protected override void PrepareInternal(Transform target) { }
 
         protected override async Task AnimateInternal(Transform target)
         {
             if (target.TryGetComponent(out Animator animator))
             {
+                if (rebindOnPlay)
+                {
+                    animator.Rebind();
+                }
+
                 animator.Play(stateName);
 
                 while (true)
@@ -36,9 +39,6 @@ namespace Uice
             }
         }
 
-        protected override void CleanupInternal(Transform target)
-        {
-            
-        }
+        protected override void CleanupInternal(Transform target) { }
     }
 }
