@@ -80,5 +80,10 @@ namespace Uice
 			value = newValue;
 			HasValue = true;
 		}
+
+		public override string ToString()
+		{
+			return value.ToString();
+		}
 	}
 }
