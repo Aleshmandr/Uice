@@ -20,16 +20,17 @@ namespace Uice
         {
             base.Awake();
             binding = new VariableBinding<object>(bindingInfo, this);
-            binding.Property.Changed += SetData;
         }
 
         protected virtual void OnEnable()
         {
+            binding.Property.Changed += SetData;
             binding.Bind();
         }
 
         protected virtual void OnDisable()
         {
+            binding.Property.Changed -= SetData;
             binding.Unbind();
         }
 
