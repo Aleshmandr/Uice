@@ -8,6 +8,13 @@ It aims to split the UI workflow into two distinct phases: technical and stylist
 
 This project is inspired by the amazing [deVoid UI Framework](https://github.com/yankooliveira/uiframework) by Yanko Oliveira. 
 
+## Installation
+
+Unity currently does not support Git dependencies for packages; therefore, you first need to install the [Mace package](https://github.com/Aleshmandr/Mace) manually.
+Add these two Git packages via Unity package manager:
+- https://github.com/Aleshmandr/Mace.git
+- https://github.com/Aleshmandr/Uice.git
+
 ## UIFrame
 Uice's view hierarchy is organized below a root element called the UIFrame. It contains a series of layers to sort your views based in certain rules and acts as the service to handle the views' visibility. Before opening any view, it needs to be registered in the UIFrame.
 
