@@ -1,157 +1,162 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mace;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Uice
 {
-	public abstract class Window : Window<NullViewModel>
-	{
+    public abstract class Window : Window<NullViewModel>
+    {
+    }
 
-	}
+    [Serializable]
+    public class WindowEvents
+    {
+        public UnityEvent OnFocusGained = new UnityEvent();
+        public UnityEvent OnFocusLost = new UnityEvent();
+    }
 
-	[Serializable]
-	public class WindowEvents
-	{
-		public UnityEvent OnFocusGained = new UnityEvent();
-		public UnityEvent OnFocusLost = new UnityEvent();
-	}
+    public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
+    {
+        public delegate void FocusEventHandler(IWindow window);
 
-	public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
-	{
-		public delegate void FocusEventHandler(IWindow window);
+        public event FocusEventHandler FocusGained;
+        public event FocusEventHandler FocusLost;
 
-		public event FocusEventHandler FocusGained;
-		public event FocusEventHandler FocusLost;
+        public bool HasFocus { get; private set; }
+        public WindowPriority WindowPriority => windowQueuePriority;
+        public bool HideOnForegroundLost => hideOnForegroundLost;
 
-		public bool HasFocus { get; private set; }
-		public WindowPriority WindowPriority => windowQueuePriority;
-		public bool HideOnForegroundLost => hideOnForegroundLost;
-		public bool IsPopup
-		{
-			get => isPopup;
-			set => isPopup = value;
-		}
-		public bool CloseOnShadowClick => closeOnShadowClick;
+        public bool IsPopup
+        {
+            get => isPopup;
+            set => isPopup = value;
+        }
 
-		[Header("Window Properties")]
-		[SerializeField] private bool isPopup;
-		[SerializeField] private WindowPriority windowQueuePriority = WindowPriority.ForceForeground;
-		[SerializeField] private bool hideOnForegroundLost = true;
-		[DrawIf(nameof(isPopup), true)]
-		[SerializeField] private bool closeOnShadowClick = true;
-		[SerializeField] private WindowEvents windowEvents = new WindowEvents();
+        public bool CloseOnShadowClick => closeOnShadowClick;
 
-		private WindowLayer currentLayer;
-		private Dictionary<string, object> payload;
+        [Header("Window Properties")] [SerializeField]
+        private bool isPopup;
 
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
+        [SerializeField] private WindowPriority windowQueuePriority = WindowPriority.ForceForeground;
+        [SerializeField] private bool hideOnForegroundLost = true;
 
-			if (currentLayer)
-			{
-				currentLayer.CurrentWindowChanged -= OnLayerWindowChanged;
-			}
-		}
+        [DrawIf(nameof(isPopup), true)] [SerializeField]
+        private bool closeOnShadowClick = true;
 
-		public override void SetViewModel(IViewModel viewModel)
-		{
-			base.SetViewModel(viewModel);
+        [SerializeField] private WindowEvents windowEvents = new WindowEvents();
 
-			if (viewModel == null)
-			{
-				SetViewModel(new T());
-			}
-		}
+        private WindowLayer currentLayer;
+        private Dictionary<string, object> payload;
 
-		public void SetLayer(WindowLayer layer)
-		{
-			if (currentLayer)
-			{
-				currentLayer.CurrentWindowChanged -= OnLayerWindowChanged;
-			}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
 
-			if (layer)
-			{
-				layer.CurrentWindowChanged += OnLayerWindowChanged;
-			}
+            if (currentLayer)
+            {
+                currentLayer.CurrentWindowChanged -= OnLayerWindowChanged;
+            }
+        }
 
-			currentLayer = layer;
-		}
-		
-		public IViewModel GetNewViewModel()
-		{
-			return new T();
-		}
-		
-		public void SetPayload(Dictionary<string, object> payload)
-		{
-			this.payload = payload;
-		}
+        public override void SetViewModel(IViewModel viewModel)
+        {
+            base.SetViewModel(viewModel);
 
-		public bool GetFromPayload<TValue>(string key, out TValue value)
-		{
-			bool found = false;
-			value = default;
+            if (viewModel == null)
+            {
+                SetViewModel(new T());
+            }
+        }
 
-			if (payload != null && payload.TryGetValue(key, out object rawValue))
-			{
-				value = (TValue) rawValue;
-				found = true;
-			}
+        public void SetLayer(WindowLayer layer)
+        {
+            if (currentLayer)
+            {
+                currentLayer.CurrentWindowChanged -= OnLayerWindowChanged;
+            }
 
-			return found;
-		}
+            if (layer)
+            {
+                layer.CurrentWindowChanged += OnLayerWindowChanged;
+            }
 
-		public bool RemoveFromPayload(string key)
-		{
-			bool removed = false;
+            currentLayer = layer;
+        }
 
-			if (payload != null)
-			{
-				removed = payload.Remove(key);
-			}
+        public IViewModel GetNewViewModel()
+        {
+            return new T();
+        }
 
-			return removed;
-		}
+        public void SetPayload(Dictionary<string, object> payload)
+        {
+            this.payload = payload;
+        }
 
-		public override Task Show(ITransition overrideTransition = null)
-		{
-			transform.SetAsLastSibling();
-			return base.Show(overrideTransition);
-		}
+        public bool GetFromPayload<TValue>(string key, out TValue value)
+        {
+            bool found = false;
+            value = default;
 
-		protected virtual void OnFocusGained()
-		{
-			FocusGained?.Invoke(this);
-			windowEvents.OnFocusGained.Invoke();
-		}
+            if (payload != null && payload.TryGetValue(key, out object rawValue))
+            {
+                value = (TValue)rawValue;
+                found = true;
+            }
 
-		protected virtual void OnFocusLost()
-		{
-			FocusLost?.Invoke(this);
-			windowEvents.OnFocusLost.Invoke();
-		}
+            return found;
+        }
 
-		private void OnLayerWindowChanged(IWindow oldWindow, IWindow newWindow, bool fromBack)
-		{
-			HasFocus = ReferenceEquals(newWindow, this);
+        public bool RemoveFromPayload(string key)
+        {
+            bool removed = false;
 
-			if (oldWindow == newWindow)
-			{
-				return;
-			}
-			
-			if (ReferenceEquals(oldWindow, this))
-			{
-				OnFocusLost();
-			}
-			else if (ReferenceEquals(newWindow, this))
-			{
-				OnFocusGained();
-			}
-		}
-	}
+            if (payload != null)
+            {
+                removed = payload.Remove(key);
+            }
+
+            return removed;
+        }
+
+        public override Task Show(ITransition overrideTransition = null)
+        {
+            transform.SetAsLastSibling();
+            return base.Show(overrideTransition);
+        }
+
+        protected virtual void OnFocusGained()
+        {
+            FocusGained?.Invoke(this);
+            windowEvents.OnFocusGained.Invoke();
+        }
+
+        protected virtual void OnFocusLost()
+        {
+            FocusLost?.Invoke(this);
+            windowEvents.OnFocusLost.Invoke();
+        }
+
+        private void OnLayerWindowChanged(IWindow oldWindow, IWindow newWindow, bool fromBack)
+        {
+            HasFocus = ReferenceEquals(newWindow, this);
+
+            if (oldWindow == newWindow)
+            {
+                return;
+            }
+
+            if (ReferenceEquals(oldWindow, this))
+            {
+                OnFocusLost();
+            }
+            else if (ReferenceEquals(newWindow, this))
+            {
+                OnFocusGained();
+            }
+        }
+    }
 }

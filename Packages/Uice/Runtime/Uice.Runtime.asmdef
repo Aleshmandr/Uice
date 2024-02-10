@@ -2,7 +2,8 @@
     "name": "Uice.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:b8e4f011c99fa3841a5743c348791967"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

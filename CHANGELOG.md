@@ -4,10 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0]
+### Changed
+- MVVM classes has been moved to separate package [Mace](https://github.com/Aleshmandr/Mace)
+
+###Removed
+- SignalBus
+
+## [1.0.2]
 This version changes radically the way the framework works and how is it used. 
 
 ### Added
+- Project name from "Juice" to "Uice".
 - A MVVM system.
 - Binding mechanisms. 
 - Operator Binder base class.
@@ -27,6 +35,9 @@ This version changes radically the way the framework works and how is it used.
 - Built-in transitions. 
 - Tweening library.
 - GameObject pooling library. 
+- View model path property
+- GameObject binder
+- Animator
 
 ### Changed
 - Project name from "Maui" to "Juice".

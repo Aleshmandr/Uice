@@ -1,4 +1,6 @@
-﻿namespace Uice
+﻿using Mace;
+
+namespace Uice
 {
 	public static class ReadOnlyObservableVariableExtensions
 	{
