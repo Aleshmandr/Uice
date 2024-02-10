@@ -1,7 +1,7 @@
 # Uice
 This project was originally a fork of the [jUIce project](https://github.com/MiguelCriado/jUice) by [Miguel Criado](https://github.com/MiguelCriado) with some fixes and improvements.
 
-Uice is a MVVM UI framework built on top of [Unity's uGui](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/index.html) solution with [Mace MVVM framework] (https://github.com/Aleshmandr/Mace).
+Uice is a MVVM UI framework built on top of [Unity's uGui](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/index.html) solution with [Mace MVVM framework](https://github.com/Aleshmandr/Mace).
 It provides a series of systems and guidelines to boost your runtime UI development within Unity.
 
 It aims to split the UI workflow into two distinct phases: technical and stylistic. This means that programmers and designers can cooperate together to achieve the final version of the UI. What this also means is that Uice requires some technical insight to be used; you'll need to code your ViewModels.
