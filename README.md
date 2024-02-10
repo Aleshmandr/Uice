@@ -215,8 +215,5 @@ OperatorBinders are heavily inspired by [ReactiveX](http://reactivex.io/document
 ## Additional Goodies
 The framework also include a couple of subsystems that could be used in your non UI modules. 
 
-### Signals
-`SignalBus` is a lightweight event dispatcher that lets you have independent signal channels to be shared between objects as well as a default bus that can be accessed globally.
-
 ### Tweening
-There's also a simple tween library designed to mimic the amazing [DOTween](http://dotween.demigiant.com/) plugin, which is used to add many tweening features in the framework.
+There's also a simple tween library designed to mimic [DOTween](http://dotween.demigiant.com/) plugin, which is used to add many tweening features in the framework.
