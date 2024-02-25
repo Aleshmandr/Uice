@@ -14,12 +14,13 @@ namespace Uice
         {
             if (target.TryGetComponent(out Animator animator))
             {
-                if (rebindOnPlay)
-                {
-                    animator.Rebind();
-                }
-
                 animator.Play(stateName);
+                
+                 if (rebindOnPlay)
+                 {
+                     await Task.Yield();
+                     animator.Rebind();
+                 }
 
                 while (true)
                 {
