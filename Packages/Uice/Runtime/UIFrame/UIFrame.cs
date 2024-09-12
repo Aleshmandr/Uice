@@ -227,6 +227,11 @@ namespace Uice
 		{
 			return new WindowHideLauncher(typeof(T), HideWindow);
 		}
+		
+		public IWindowHideLauncher HideWindow(Type type)
+		{
+			return new WindowHideLauncher(type, HideWindow);
+		}
 
 		public IWindowHideLauncher CloseCurrentWindow()
 		{
@@ -236,6 +241,16 @@ namespace Uice
 		public async Task HideAll()
 		{
 			await Task.WhenAll(windowLayer.HideAll(), panelLayer.HideAll());
+		}
+		
+		public async Task HideAllWindows()
+		{
+			await windowLayer.HideAll();
+		}
+		
+		public async Task HideAllPanels()
+		{
+			await panelLayer.HideAll();
 		}
 
 		public bool IsViewRegistered<T>() where T : IView
