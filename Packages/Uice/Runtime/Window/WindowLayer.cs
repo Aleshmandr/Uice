@@ -187,9 +187,7 @@ namespace Uice
 		{
 			if (view == CurrentWindow)
 			{
-				WindowHistoryEntry entry = windowHistory.Pop();
-				
-				if (entry.Settings.BackDestinationType != null || settings.DestinationViewType != null)
+				if (windowHistory.TryPop(out WindowHistoryEntry entry) && entry.Settings.BackDestinationType != null || settings.DestinationViewType != null)
 				{
 					Type destinationType = settings.DestinationViewType ?? entry.Settings.BackDestinationType;
 
