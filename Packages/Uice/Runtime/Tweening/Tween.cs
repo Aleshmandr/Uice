@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Uice.Utils;
+using Mace.Utils.Singleton;
 using UnityEngine;
 
 namespace Uice.Tweening
 {
-	public class Tween : Singleton<Tween>
+	public class Tween : PersistentMonoSingleton<Tween>
 	{
 		private readonly HashSet<Tweener> aliveTweeners = new HashSet<Tweener>();
 		private readonly HashSet<Tweener> tweenersToRemove = new HashSet<Tweener>();
