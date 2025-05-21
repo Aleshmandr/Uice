@@ -14,8 +14,8 @@ namespace Uice
     [Serializable]
     public class WindowEvents
     {
-        public UnityEvent OnFocusGained = new UnityEvent();
-        public UnityEvent OnFocusLost = new UnityEvent();
+        public UnityEvent OnFocusGained;
+        public UnityEvent OnFocusLost;
     }
 
     public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
@@ -131,13 +131,13 @@ namespace Uice
         protected virtual void OnFocusGained()
         {
             FocusGained?.Invoke(this);
-            windowEvents.OnFocusGained.Invoke();
+            windowEvents.OnFocusGained?.Invoke();
         }
 
         protected virtual void OnFocusLost()
         {
             FocusLost?.Invoke(this);
-            windowEvents.OnFocusLost.Invoke();
+            windowEvents.OnFocusLost?.Invoke();
         }
 
         private void OnLayerWindowChanged(IWindow oldWindow, IWindow newWindow, bool fromBack)

@@ -37,21 +37,16 @@ namespace Uice
 
 		public void RefreshBackground()
 		{
-			if (IsBackgroundVisible() != ShouldBackgroundBeVisible())
+			bool shouldShowBackground = ShouldBackgroundBeVisible();
+			if (IsBackgroundVisible() != shouldShowBackground)
 			{
-				ToggleBackground();
-			}
-		}
-
-		public void ToggleBackground()
-		{
-			if (IsBackgroundVisible())
-			{
-				HideBackground();
-			}
-			else
-			{
-				ShowBackground();
+				if (shouldShowBackground)
+				{
+					ShowBackground();
+				} else
+				{
+					HideBackground();
+				}
 			}
 		}
 
@@ -83,29 +78,23 @@ namespace Uice
 
 		private bool IsBackgroundVisible()
 		{
-			return backgroundWidget.IsVisible && isHiding == false;
+			return backgroundWidget.IsVisible && !isHiding;
 		}
 
 		private bool ShouldBackgroundBeVisible()
 		{
-			bool result = false;
-
 			if (backgroundWidget)
 			{
-				int i = 0;
-
-				while (result == false && i < containedViews.Count)
+				for (int i = 0; i < containedViews.Count; i++)
 				{
 					if (containedViews[i] && containedViews[i].activeSelf)
 					{
-						result = true;
+						return !containedViews[i].TryGetComponent(out ITransitionable transitionable) || transitionable.IsVisible;
 					}
-
-					i++;
 				}
 			}
 
-			return result;
+			return false;
 		}
 
 		private void InitializeShadowButton()
