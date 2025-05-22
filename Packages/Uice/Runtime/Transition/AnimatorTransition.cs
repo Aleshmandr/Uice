@@ -16,15 +16,27 @@ namespace Uice
             {
                 animator.Play(stateName);
                 
-                 if (rebindOnPlay)
-                 {
-                     await Task.Yield();
-                     animator.Rebind();
-                 }
+                if (rebindOnPlay)
+                {
+                    await Task.Yield();
+                     
+                    if (animator == null || !animator.isActiveAndEnabled)
+                    {
+                        return;
+                    }
+                     
+                    animator.Rebind();
+                }
 
                 while (true)
                 {
                     await Task.Yield();
+                    
+                    if (animator == null || !animator.isActiveAndEnabled)
+                    {
+                        return;
+                    }
+                    
                     var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
                     if (!stateInfo.IsName(stateName))
