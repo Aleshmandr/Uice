@@ -115,10 +115,9 @@ namespace Uice
 				i++;
 			}
 
-			await Task.WhenAll(tasks);
-
-			priorityParaLayer.RefreshBackground();
 			windowHistory.Clear();
+			await Task.WhenAll(tasks);
+			priorityParaLayer.RefreshBackground();
 		}
 
 		public override void ReparentView(IView view, Transform viewTransform)
