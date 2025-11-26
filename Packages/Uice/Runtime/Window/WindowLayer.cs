@@ -225,7 +225,7 @@ namespace Uice
 			}
 			else
 			{
-				Debug.LogErrorFormat
+				Debug.LogWarningFormat
 				(
 					"Hide requested on Window {0} but that's not the currently open one ({1})! Ignoring request.",
 					view.GetType().Name,
