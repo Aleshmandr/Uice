@@ -7,9 +7,7 @@ using UnityEngine.Events;
 
 namespace Uice
 {
-    public abstract class Window : Window<NullViewModel>
-    {
-    }
+    public abstract class Window : Window<NullViewModel> { }
 
     [Serializable]
     public class WindowEvents
@@ -18,7 +16,7 @@ namespace Uice
         public UnityEvent OnFocusLost;
     }
 
-    public abstract class Window<T> : View<T>, IWindow where T : IViewModel, new()
+    public abstract class Window<T> : View<T>, IWindow where T : IViewModel
     {
         public delegate void FocusEventHandler(IWindow window);
 
@@ -61,16 +59,6 @@ namespace Uice
             }
         }
 
-        public override void SetViewModel(IViewModel viewModel)
-        {
-            base.SetViewModel(viewModel);
-
-            if (viewModel == null)
-            {
-                SetViewModel(new T());
-            }
-        }
-
         public void SetLayer(WindowLayer layer)
         {
             if (currentLayer)
@@ -84,11 +72,6 @@ namespace Uice
             }
 
             currentLayer = layer;
-        }
-
-        public IViewModel GetNewViewModel()
-        {
-            return new T();
         }
 
         public void SetPayload(Dictionary<string, object> payload)

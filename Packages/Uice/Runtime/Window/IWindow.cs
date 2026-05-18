@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Mace;
 
 namespace Uice
 {
@@ -11,7 +10,6 @@ namespace Uice
 		WindowPriority WindowPriority { get; }
 
 		void SetLayer(WindowLayer layer);
-		IViewModel GetNewViewModel();
 		void SetPayload(Dictionary<string, object> payload);
 		bool GetFromPayload<T>(string key, out T value);
 		bool RemoveFromPayload(string key);

@@ -471,13 +471,6 @@ namespace Uice
 		private IViewModel ResolveViewModel(WindowHistoryEntry windowEntry)
 		{
 			IViewModel result = windowEntry.Settings.ViewModel;
-
-			if (windowEntry.Settings.ViewModel == null)
-			{
-				result = windowEntry.View.GetNewViewModel();
-				windowEntry.Settings.ViewModel = result;
-			}
-
 			return result;
 		}
 	}
